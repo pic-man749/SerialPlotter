@@ -404,7 +404,7 @@
             chartArea1.AxisY.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea1.AxisY.MaximumAutoSize = 80F;
+            chartArea1.AxisY.MaximumAutoSize = 100F;
             chartArea1.AxisY.MinorGrid.Enabled = true;
             chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea1.AxisY.MinorTickMark.Enabled = true;

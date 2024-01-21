@@ -11,23 +11,22 @@ using System.IO.Ports;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.IO;
 using System.Xml;
+using System.Timers;
+using System.Threading;
 
 namespace SerialPlotter {
     public partial class SerialPlotter : Form {
 
         private Serial serial = new Serial();
 
-        const char DELIMITER_VALUE_PAIR = ',';
-        const char DELIMITER_KEY_VALUE = ':';
         const char IGNORE_START_CHAR = ';';
         private System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+        private System.Timers.Timer graphRenderTimer = new System.Timers.Timer();
         private Dictionary<string, Series> buffer = new Dictionary<string, Series>();
         private bool isPlotting = false;
         private Stream logFileStream = null;
         private string newLine = String.Empty;
-
-        // window
-        DataTableWindow dtw = new DataTableWindow();
+        private DataManager dataManager = new DataManager();
 
         public SerialPlotter() {
             InitializeComponent();
@@ -57,6 +56,9 @@ namespace SerialPlotter {
 
             // set range value
             LabelPoltPoint.Text = TrackBarPlotPoint.Value.ToString();
+
+            // timer callBack func
+            graphRenderTimer.Elapsed += updateGraph;
         }
         // get COM port name and refresh ListBox
         private void getNowConnectedSerialPorts() {
@@ -68,69 +70,75 @@ namespace SerialPlotter {
                 LbComList.SelectedIndex = 0;
             }
         }
-
+        /// <summary>
+        /// Serial受信コールバック関数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void serialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e) {
-            while(serial.BytesToRead > 0) {
+            // get recved time
+            double recvTime = stopWatch.Elapsed.TotalSeconds;
+            while(serial.IsOpen && serial.BytesToRead > 0) {
                 string data;
-                double recvTime = stopWatch.Elapsed.TotalSeconds;
                 try {
                     data = serial.ReadLine();
                 } catch {
                     return;
                 }
-                if(data != string.Empty && isPlotting) {
-                    if(data[0] != IGNORE_START_CHAR) {
-                        setDataFromString(recvTime, data);
-                    }
-                }
-                if(logFileStream != null && data != string.Empty) {
+
+                // output log file
+                if(logFileStream != null) {
                     if(CbLogWithTime.Checked) {
-                        byte[] logTime = Encoding.GetEncoding("UTF-8").GetBytes("["+recvTime.ToString("0.000000") +"]");
+                        byte[] logTime = Encoding.GetEncoding("UTF-8").GetBytes("[" + recvTime.ToString("0.000000") + "]");
                         logFileStream.Write(logTime, 0, logTime.Length);
                     }
                     byte[] byteData = Encoding.GetEncoding("UTF-8").GetBytes(data + newLine);
                     logFileStream.Write(byteData, 0, byteData.Length);
                     logFileStream.FlushAsync();
                 }
+
+                // if no data or comment, then skip
+                if(data == string.Empty) continue;
+                if(data[0] == IGNORE_START_CHAR) continue;
+
+                // parse
+                DataParser parser = new DataParser();
+                Dictionary<string, double> kvs = parser.parse(data);
+
+                foreach(string key in kvs.Keys) {
+                    // insert new data
+                    dataManager.insertData(recvTime, key, kvs[key]);
+
+                    // plot
+                    if(isPlotting) {
+                        AddSeriesToChart(recvTime, key, kvs[key]);
+                    }
+                }
             }
         }
 
-        private delegate void DelegateAddSeriesToChart(double now, string str);
+        private delegate void DelegateAddSeriesToChart(double now, string key, double value);
 
-        private void setDataFromString(double now, string data) {
+        private void AddSeriesToChart(double now, string key, double value) {
 
             if(this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate { setDataFromString(now, data); });
+                this.Invoke((MethodInvoker)delegate { AddSeriesToChart(now, key, value); });
             } else {
-                // split {key}:{val},{key};{val}, ...
-                string[] valuePair = data.Split(DELIMITER_VALUE_PAIR);
-                foreach(string vp in valuePair) {
-                    // split {key}:{value}
-                    string[] kv = vp.Split(DELIMITER_KEY_VALUE);
-                    if(kv.Length != 2) {
-                        // format error
-                        continue;
-                    }
-                    // get key and value
-                    string key = kv[0];
-                    double value = getValueFromString(kv[1]);
-
-                    // check key existance and set data
-                    if(!buffer.ContainsKey(key)) {
-                        // make new series
-                        buffer[key] = makeNewSeries(key);
-                        // set graph
-                        ChartDefault.Series.Add(buffer[key]);
-                    }
-                    DataPoint dp = new DataPoint(now, value);
-                    if(TrackBarPlotPoint.Value <= buffer[key].Points.Count) {
-                        while(TrackBarPlotPoint.Value <= buffer[key].Points.Count) {
-                            buffer[key].Points.RemoveAt(0);
-                        }
-                        ChartDefault.ResetAutoValues();
-                    }
-                    buffer[key].Points.Add(dp);
+                // check key existance and set data
+                if(!buffer.ContainsKey(key)) {
+                    // make new series
+                    buffer[key] = makeNewSeries(key);
+                    // set graph
+                    ChartDefault.Series.Add(buffer[key]);
                 }
+                DataPoint dp = new DataPoint(now, value);
+                if(TrackBarPlotPoint.Value <= buffer[key].Points.Count) {
+                    while(TrackBarPlotPoint.Value <= buffer[key].Points.Count) {
+                        buffer[key].Points.RemoveAt(0);
+                    }
+                    ChartDefault.ResetAutoValues();
+                }
+                buffer[key].Points.Add(dp);
             }
         }
 
@@ -189,12 +197,12 @@ namespace SerialPlotter {
                 BtnPlotStart_Click(sender, e);
                 BtnConnect.Text = "close";
             } else if(BtnConnect.Text == "close") {
-                serial.Close();
                 if(isPlotting) {
                     // stop plot
                     BtnPlotStart_Click(sender, e);
                 }
                 BtnConnect.Text = "connect";
+                serial.Close();
                 stopTimer();
                 resetTimer();
             }
@@ -286,6 +294,10 @@ namespace SerialPlotter {
             return true;
         }
 
+        private void updateGraph(Object sender, ElapsedEventArgs e) {
+
+        }
+
         private void BtnPlotReset_Click(object sender, EventArgs e) {
             ChartDefault.Series.Clear();
             buffer.Clear();
@@ -362,7 +374,10 @@ namespace SerialPlotter {
                 );
         }
 
+
+        DataTableWindow dtw;
         private void dataTableToolStripMenuItem_Click(object sender, EventArgs e) {
+            dtw = new DataTableWindow(dataManager.getDataSource());
             dtw.Show();
         }
     }

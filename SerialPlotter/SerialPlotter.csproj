@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataManager.cs" />
+    <Compile Include="DataParser.cs" />
     <Compile Include="DataTable.cs">
       <SubType>Form</SubType>
     </Compile>
