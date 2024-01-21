@@ -29,6 +29,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.書式SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
             this.LabelPoltPoint = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -57,8 +59,6 @@
             this.LbComList = new System.Windows.Forms.ListBox();
             this.ChartDefault = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
-            this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotPoint)).BeginInit();
@@ -90,6 +90,21 @@
             this.書式SToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.書式SToolStripMenuItem.Text = "書式(&S)";
             this.書式SToolStripMenuItem.Click += new System.EventHandler(this.書式SToolStripMenuItem_Click);
+            // 
+            // ウィンドウToolStripMenuItem
+            // 
+            this.ウィンドウToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dataTableToolStripMenuItem});
+            this.ウィンドウToolStripMenuItem.Name = "ウィンドウToolStripMenuItem";
+            this.ウィンドウToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.ウィンドウToolStripMenuItem.Text = "ウィンドウ(&W)";
+            // 
+            // dataTableToolStripMenuItem
+            // 
+            this.dataTableToolStripMenuItem.Name = "dataTableToolStripMenuItem";
+            this.dataTableToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.dataTableToolStripMenuItem.Text = "DataTable(&D)";
+            this.dataTableToolStripMenuItem.Click += new System.EventHandler(this.dataTableToolStripMenuItem_Click);
             // 
             // GBPlotSettings
             // 
@@ -384,8 +399,10 @@
             chartArea1.AxisX.MinorGrid.Enabled = true;
             chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea1.AxisX.MinorTickMark.Enabled = true;
+            chartArea1.AxisY.IsLabelAutoFit = false;
             chartArea1.AxisY.IsStartedFromZero = false;
             chartArea1.AxisY.LabelAutoFitMinFontSize = 10;
+            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
             chartArea1.AxisY.MaximumAutoSize = 80F;
             chartArea1.AxisY.MinorGrid.Enabled = true;
@@ -416,21 +433,6 @@
             this.SfdLogging.DefaultExt = "txt";
             this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
-            // 
-            // ウィンドウToolStripMenuItem
-            // 
-            this.ウィンドウToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dataTableToolStripMenuItem});
-            this.ウィンドウToolStripMenuItem.Name = "ウィンドウToolStripMenuItem";
-            this.ウィンドウToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
-            this.ウィンドウToolStripMenuItem.Text = "ウィンドウ(&W)";
-            // 
-            // dataTableToolStripMenuItem
-            // 
-            this.dataTableToolStripMenuItem.Name = "dataTableToolStripMenuItem";
-            this.dataTableToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.dataTableToolStripMenuItem.Text = "DataTable(&D)";
-            this.dataTableToolStripMenuItem.Click += new System.EventHandler(this.dataTableToolStripMenuItem_Click);
             // 
             // SerialPlotter
             // 
