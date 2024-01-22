@@ -306,6 +306,11 @@ namespace SerialPlotter {
 
         private void TrackBarPlotPoint_ValueChanged(object sender, EventArgs e) {
             LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
+            double now = stopWatch.Elapsed.TotalSeconds;
+            for(int cnt = 0; cnt < this.ChartDefault.ChartAreas.Count; ++cnt) {
+                this.ChartDefault.ChartAreas[cnt].AxisX.Maximum = now;
+                this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
+            }
         }
 
         private void CbLoggingFlag_CheckedChanged(object sender, EventArgs e) {
