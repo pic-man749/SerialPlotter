@@ -34,7 +34,7 @@
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
             this.LabelPoltPoint = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.TrackBarPlotPoint = new System.Windows.Forms.TrackBar();
+            this.TrackBarPlotTime = new System.Windows.Forms.TrackBar();
             this.BtnPlotReset = new System.Windows.Forms.Button();
             this.BtnPlotStart = new System.Windows.Forms.Button();
             this.GBSerialSettings = new System.Windows.Forms.GroupBox();
@@ -61,7 +61,7 @@
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotPoint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartDefault)).BeginInit();
             this.SuspendLayout();
@@ -112,7 +112,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GBPlotSettings.Controls.Add(this.LabelPoltPoint);
             this.GBPlotSettings.Controls.Add(this.label6);
-            this.GBPlotSettings.Controls.Add(this.TrackBarPlotPoint);
+            this.GBPlotSettings.Controls.Add(this.TrackBarPlotTime);
             this.GBPlotSettings.Controls.Add(this.BtnPlotReset);
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
             this.GBPlotSettings.Location = new System.Drawing.Point(13, 201);
@@ -137,21 +137,20 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(132, 23);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 12);
+            this.label6.Size = new System.Drawing.Size(52, 12);
             this.label6.TabIndex = 55;
-            this.label6.Text = "plot point:";
+            this.label6.Text = "plot time:";
             // 
-            // TrackBarPlotPoint
+            // TrackBarPlotTime
             // 
-            this.TrackBarPlotPoint.Location = new System.Drawing.Point(193, 18);
-            this.TrackBarPlotPoint.Maximum = 200;
-            this.TrackBarPlotPoint.Minimum = 10;
-            this.TrackBarPlotPoint.Name = "TrackBarPlotPoint";
-            this.TrackBarPlotPoint.Size = new System.Drawing.Size(200, 45);
-            this.TrackBarPlotPoint.TabIndex = 57;
-            this.TrackBarPlotPoint.TickFrequency = 10;
-            this.TrackBarPlotPoint.Value = 50;
-            this.TrackBarPlotPoint.ValueChanged += new System.EventHandler(this.TrackBarPlotPoint_ValueChanged);
+            this.TrackBarPlotTime.Location = new System.Drawing.Point(193, 18);
+            this.TrackBarPlotTime.Maximum = 20;
+            this.TrackBarPlotTime.Minimum = 1;
+            this.TrackBarPlotTime.Name = "TrackBarPlotTime";
+            this.TrackBarPlotTime.Size = new System.Drawing.Size(200, 45);
+            this.TrackBarPlotTime.TabIndex = 57;
+            this.TrackBarPlotTime.Value = 10;
+            this.TrackBarPlotTime.ValueChanged += new System.EventHandler(this.TrackBarPlotPoint_ValueChanged);
             // 
             // BtnPlotReset
             // 
@@ -391,14 +390,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.IsMarginVisible = false;
+            chartArea1.AxisX.IsStartedFromZero = false;
             chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
+            chartArea1.AxisX.Maximum = 0D;
             chartArea1.AxisX.MaximumAutoSize = 100F;
+            chartArea1.AxisX.Minimum = -10D;
             chartArea1.AxisX.MinorGrid.Enabled = true;
             chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea1.AxisX.MinorTickMark.Enabled = true;
+            chartArea1.AxisX.Title = "[s]";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisY.IsLabelAutoFit = false;
             chartArea1.AxisY.IsStartedFromZero = false;
             chartArea1.AxisY.LabelAutoFitMinFontSize = 10;
@@ -409,6 +412,11 @@
             chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea1.AxisY.MinorTickMark.Enabled = true;
             chartArea1.BackColor = System.Drawing.Color.White;
+            chartArea1.InnerPlotPosition.Auto = false;
+            chartArea1.InnerPlotPosition.Height = 85F;
+            chartArea1.InnerPlotPosition.Width = 90F;
+            chartArea1.InnerPlotPosition.X = 10F;
+            chartArea1.InnerPlotPosition.Y = 2F;
             chartArea1.IsSameFontSizeForAllAxes = true;
             chartArea1.Name = "ChartAreaDefault";
             this.ChartDefault.ChartAreas.Add(chartArea1);
@@ -455,7 +463,7 @@
             this.menuStrip1.PerformLayout();
             this.GBPlotSettings.ResumeLayout(false);
             this.GBPlotSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotPoint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartDefault)).EndInit();
@@ -484,7 +492,7 @@
         private System.Windows.Forms.Button BtnConnect;
         private System.Windows.Forms.ListBox LbComList;
         private System.Windows.Forms.Button BtnPlotReset;
-        private System.Windows.Forms.TrackBar TrackBarPlotPoint;
+        private System.Windows.Forms.TrackBar TrackBarPlotTime;
         private System.Windows.Forms.Label LabelPoltPoint;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartDefault;

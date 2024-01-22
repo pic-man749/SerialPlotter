@@ -55,7 +55,7 @@ namespace SerialPlotter {
             newLine = "\n";
 
             // set range value
-            LabelPoltPoint.Text = TrackBarPlotPoint.Value.ToString();
+            LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
 
             // timer callBack func
             graphRenderTimer.Elapsed += updateGraph;
@@ -132,21 +132,12 @@ namespace SerialPlotter {
                     ChartDefault.Series.Add(buffer[key]);
                 }
                 DataPoint dp = new DataPoint(now, value);
-                if(TrackBarPlotPoint.Value <= buffer[key].Points.Count) {
-                    while(TrackBarPlotPoint.Value <= buffer[key].Points.Count) {
-                        buffer[key].Points.RemoveAt(0);
-                    }
-                    ChartDefault.ResetAutoValues();
-                }
                 buffer[key].Points.Add(dp);
-            }
-        }
-
-        private void addSeriesToChart(string str) {
-            if(this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate { addSeriesToChart(str); });
-            } else {
-                ChartDefault.Series.Add(buffer[str]);
+                for(int cnt=0; cnt< this.ChartDefault.ChartAreas.Count; ++cnt) {
+                    this.ChartDefault.ChartAreas[cnt].AxisX.Maximum = now;
+                    this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
+                }
+                ChartDefault.ResetAutoValues();
             }
         }
 
@@ -254,16 +245,6 @@ namespace SerialPlotter {
             }
         }
 
-        private double getValueFromString(string str) {
-            double val = 0.0;
-            try {
-                val = Convert.ToDouble(str);
-            } catch {
-                ;
-            }
-            return val;
-        }
-
         private Series makeNewSeries(string name) {
             Series seriesLine = new Series();
             seriesLine.ChartType = SeriesChartType.Line;
@@ -324,7 +305,7 @@ namespace SerialPlotter {
         }
 
         private void TrackBarPlotPoint_ValueChanged(object sender, EventArgs e) {
-            LabelPoltPoint.Text = TrackBarPlotPoint.Value.ToString();
+            LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
         }
 
         private void CbLoggingFlag_CheckedChanged(object sender, EventArgs e) {
