@@ -58,9 +58,9 @@ namespace SerialPlotter {
             this.NewLine = nl;
         }
 
-        public IDictionary<string, string> getComPorts() {
+        public Dictionary<string, string> getComPorts() {
 
-            IDictionary<string, string> comPorts = new Dictionary<string, string>();
+            Dictionary<string, string> comPorts = new Dictionary<string, string>();
 
             // get COMs with device name
             ManagementClass mcW32SerPort = new ManagementClass("Win32_SerialPort");
