@@ -122,7 +122,7 @@ namespace SerialPlotter {
         private void AddSeriesToChart(double now, string key, double value) {
 
             if(this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate { AddSeriesToChart(now, key, value); });
+                this.BeginInvoke((MethodInvoker)delegate { AddSeriesToChart(now, key, value); });
             } else {
                 // check key existance and set data
                 if(!buffer.ContainsKey(key)) {
