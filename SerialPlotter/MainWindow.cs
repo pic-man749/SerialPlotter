@@ -21,7 +21,6 @@ namespace SerialPlotter {
 
         const char IGNORE_START_CHAR = ';';
         private System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
-        private System.Timers.Timer graphRenderTimer = new System.Timers.Timer();
         private Dictionary<string, Series> buffer = new Dictionary<string, Series>();
         private bool isPlotting = false;
         private Stream logFileStream = null;
@@ -56,9 +55,6 @@ namespace SerialPlotter {
 
             // set range value
             LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
-
-            // timer callBack func
-            graphRenderTimer.Elapsed += updateGraph;
         }
         // get COM port name and refresh ListBox
         private void getNowConnectedSerialPorts() {
@@ -137,7 +133,20 @@ namespace SerialPlotter {
                     this.ChartDefault.ChartAreas[cnt].AxisX.Maximum = now;
                     this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
                 }
-                ChartDefault.ResetAutoValues();
+
+                // delete old point data
+                foreach(string k in buffer.Keys) {
+                    while(true) {
+                        if(buffer[k].Points.Count <= 0) {
+                            break;
+                        }
+                        if(buffer[k].Points[0].XValue >= (now - this.TrackBarPlotTime.Maximum)) {
+                            break;
+                        }
+                        buffer[k].Points.RemoveAt(0);
+                        ChartDefault.ResetAutoValues();
+                    }
+                }
             }
         }
 
@@ -177,6 +186,10 @@ namespace SerialPlotter {
                 serial.StopBits = (System.IO.Ports.StopBits)CbStopBit.SelectedIndex;
                 serial.Handshake = (System.IO.Ports.Handshake)CbHandshake.SelectedIndex;
 
+                ChartDefault.Series.Clear();
+                buffer.Clear();
+                dataManager.clearDataTable();
+
                 try {
                     serial.Open();
                 } catch {
@@ -187,12 +200,14 @@ namespace SerialPlotter {
                 // start plot
                 BtnPlotStart_Click(sender, e);
                 BtnConnect.Text = "close";
+                dataTableToolStripMenuItem.Enabled = false;
             } else if(BtnConnect.Text == "close") {
                 if(isPlotting) {
                     // stop plot
                     BtnPlotStart_Click(sender, e);
                 }
                 BtnConnect.Text = "connect";
+                dataTableToolStripMenuItem.Enabled = true;
                 serial.Close();
                 stopTimer();
                 resetTimer();
@@ -275,13 +290,10 @@ namespace SerialPlotter {
             return true;
         }
 
-        private void updateGraph(Object sender, ElapsedEventArgs e) {
-
-        }
-
         private void BtnPlotReset_Click(object sender, EventArgs e) {
             ChartDefault.Series.Clear();
             buffer.Clear();
+            dataManager.clearDataTable();
         }
 
         // https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
@@ -364,7 +376,6 @@ namespace SerialPlotter {
         DataTableWindow dtw;
         private void dataTableToolStripMenuItem_Click(object sender, EventArgs e) {
             dtw = new DataTableWindow(dataManager.getDataSource());
-            dtw.Show();
         }
     }
 }
