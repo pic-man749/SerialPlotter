@@ -15,6 +15,7 @@ namespace SerialPlotter {
         public DataTableWindow(DataTable dt) {
             InitializeComponent();
             this.dataGridView1.DataSource = dt;
+            this.Show();
         }
     }
 }
