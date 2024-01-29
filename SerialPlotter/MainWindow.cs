@@ -27,6 +27,8 @@ namespace SerialPlotter {
         private string newLine = String.Empty;
         private DataManager dataManager = new DataManager();
 
+        private System.Timers.Timer chartRefreshTimer = new System.Timers.Timer();
+
         public SerialPlotter() {
             InitializeComponent();
             // init chart area
@@ -55,6 +57,13 @@ namespace SerialPlotter {
 
             // set range value
             LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
+
+            // select chart refresh rate default
+            cbChartRefreshRate.SelectedIndex = 4;   // 30
+            // set chart update timer
+            chartRefreshTimer.Elapsed += UpdateChart;
+            chartRefreshTimer.Interval = getChartRefreshRatePeriod();
+            chartRefreshTimer.Enabled = true;
         }
         // get COM port name and refresh ListBox
         private void getNowConnectedSerialPorts() {
@@ -129,11 +138,19 @@ namespace SerialPlotter {
                 }
                 DataPoint dp = new DataPoint(now, value);
                 buffer[key].Points.Add(dp);
-                for(int cnt=0; cnt< this.ChartDefault.ChartAreas.Count; ++cnt) {
+            }
+        }
+
+        private void UpdateChart(Object source, ElapsedEventArgs e) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { UpdateChart(source, e); });
+            } else {
+                double now = stopWatch.Elapsed.TotalSeconds;
+
+                for(int cnt = 0; cnt < this.ChartDefault.ChartAreas.Count; ++cnt) {
                     this.ChartDefault.ChartAreas[cnt].AxisX.Maximum = now;
                     this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
                 }
-
                 // delete old point data
                 foreach(string k in buffer.Keys) {
                     while(true) {
@@ -230,10 +247,14 @@ namespace SerialPlotter {
 
         private void BtnPlotStart_Click(object sender, EventArgs e) {
             isPlotting = !isPlotting;
+            cbChartRefreshRate.Enabled = !isPlotting;
             if(isPlotting) {
                 BtnPlotStart.Text = "plot stop";
+                chartRefreshTimer.Interval = getChartRefreshRatePeriod();
+                chartRefreshTimer.Start();
             } else {
                 BtnPlotStart.Text = "plot start";
+                chartRefreshTimer.Stop();
             }
         }
 
@@ -376,6 +397,21 @@ namespace SerialPlotter {
         DataTableWindow dtw;
         private void dataTableToolStripMenuItem_Click(object sender, EventArgs e) {
             dtw = new DataTableWindow(dataManager.getDataSource());
+        }
+
+        /// <summary>
+        /// リフレッシュレートを周期(ms)で返す関数
+        /// </summary>
+        /// <returns></returns>
+        private float getChartRefreshRatePeriod() {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { getChartRefreshRatePeriod(); });
+                return 0.0f;    //dummy
+            } else {
+                string hzValStr = cbChartRefreshRate.SelectedItem.ToString();
+                float hzVal = float.Parse(hzValStr);
+                return 1000.0f / hzVal;
+            }
         }
 
         private void cbPlotMarker_CheckedChanged(object sender, EventArgs e) {

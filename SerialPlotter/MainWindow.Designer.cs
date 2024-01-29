@@ -34,8 +34,6 @@
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
             this.cbPlotMarker = new System.Windows.Forms.CheckBox();
             this.LabelPoltPoint = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.TrackBarPlotTime = new System.Windows.Forms.TrackBar();
             this.BtnPlotReset = new System.Windows.Forms.Button();
             this.BtnPlotStart = new System.Windows.Forms.Button();
             this.GBSerialSettings = new System.Windows.Forms.GroupBox();
@@ -60,11 +58,15 @@
             this.LbComList = new System.Windows.Forms.ListBox();
             this.ChartDefault = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TrackBarPlotTime = new System.Windows.Forms.TrackBar();
+            this.cbChartRefreshRate = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartDefault)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -111,6 +113,8 @@
             // 
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GBPlotSettings.Controls.Add(this.label9);
+            this.GBPlotSettings.Controls.Add(this.cbChartRefreshRate);
             this.GBPlotSettings.Controls.Add(this.cbPlotMarker);
             this.GBPlotSettings.Controls.Add(this.LabelPoltPoint);
             this.GBPlotSettings.Controls.Add(this.label6);
@@ -146,26 +150,6 @@
             this.LabelPoltPoint.Size = new System.Drawing.Size(34, 15);
             this.LabelPoltPoint.TabIndex = 58;
             this.LabelPoltPoint.Text = "num";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(132, 23);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 12);
-            this.label6.TabIndex = 55;
-            this.label6.Text = "plot time:";
-            // 
-            // TrackBarPlotTime
-            // 
-            this.TrackBarPlotTime.Location = new System.Drawing.Point(193, 18);
-            this.TrackBarPlotTime.Maximum = 20;
-            this.TrackBarPlotTime.Minimum = 1;
-            this.TrackBarPlotTime.Name = "TrackBarPlotTime";
-            this.TrackBarPlotTime.Size = new System.Drawing.Size(200, 45);
-            this.TrackBarPlotTime.TabIndex = 57;
-            this.TrackBarPlotTime.Value = 10;
-            this.TrackBarPlotTime.ValueChanged += new System.EventHandler(this.TrackBarPlotPoint_ValueChanged);
             // 
             // BtnPlotReset
             // 
@@ -457,6 +441,51 @@
             this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(132, 23);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 12);
+            this.label6.TabIndex = 55;
+            this.label6.Text = "plot time:";
+            // 
+            // TrackBarPlotTime
+            // 
+            this.TrackBarPlotTime.Location = new System.Drawing.Point(193, 18);
+            this.TrackBarPlotTime.Maximum = 20;
+            this.TrackBarPlotTime.Minimum = 1;
+            this.TrackBarPlotTime.Name = "TrackBarPlotTime";
+            this.TrackBarPlotTime.Size = new System.Drawing.Size(200, 45);
+            this.TrackBarPlotTime.TabIndex = 57;
+            this.TrackBarPlotTime.Value = 10;
+            this.TrackBarPlotTime.ValueChanged += new System.EventHandler(this.TrackBarPlotPoint_ValueChanged);
+            // 
+            // cbChartRefreshRate
+            // 
+            this.cbChartRefreshRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbChartRefreshRate.FormattingEnabled = true;
+            this.cbChartRefreshRate.Items.AddRange(new object[] {
+            "1",
+            "5",
+            "10",
+            "20",
+            "30",
+            "60"});
+            this.cbChartRefreshRate.Location = new System.Drawing.Point(548, 49);
+            this.cbChartRefreshRate.Name = "cbChartRefreshRate";
+            this.cbChartRefreshRate.Size = new System.Drawing.Size(97, 20);
+            this.cbChartRefreshRate.TabIndex = 60;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(454, 52);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(88, 12);
+            this.label9.TabIndex = 61;
+            this.label9.Text = "refresh rate(Hz):";
+            // 
             // SerialPlotter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -478,10 +507,10 @@
             this.menuStrip1.PerformLayout();
             this.GBPlotSettings.ResumeLayout(false);
             this.GBPlotSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartDefault)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,9 +536,7 @@
         private System.Windows.Forms.Button BtnConnect;
         private System.Windows.Forms.ListBox LbComList;
         private System.Windows.Forms.Button BtnPlotReset;
-        private System.Windows.Forms.TrackBar TrackBarPlotTime;
         private System.Windows.Forms.Label LabelPoltPoint;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartDefault;
         private System.Windows.Forms.CheckBox CbLoggingFlag;
         private System.Windows.Forms.SaveFileDialog SfdLogging;
@@ -522,6 +549,10 @@
         private System.Windows.Forms.ToolStripMenuItem ウィンドウToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataTableToolStripMenuItem;
         private System.Windows.Forms.CheckBox cbPlotMarker;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cbChartRefreshRate;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TrackBar TrackBarPlotTime;
     }
 }
 
