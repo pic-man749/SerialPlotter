@@ -32,6 +32,7 @@
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.cbPlotMarker = new System.Windows.Forms.CheckBox();
             this.LabelPoltPoint = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.TrackBarPlotTime = new System.Windows.Forms.TrackBar();
@@ -102,7 +103,7 @@
             // dataTableToolStripMenuItem
             // 
             this.dataTableToolStripMenuItem.Name = "dataTableToolStripMenuItem";
-            this.dataTableToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dataTableToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.dataTableToolStripMenuItem.Text = "DataTable(&D)";
             this.dataTableToolStripMenuItem.Click += new System.EventHandler(this.dataTableToolStripMenuItem_Click);
             // 
@@ -110,6 +111,7 @@
             // 
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GBPlotSettings.Controls.Add(this.cbPlotMarker);
             this.GBPlotSettings.Controls.Add(this.LabelPoltPoint);
             this.GBPlotSettings.Controls.Add(this.label6);
             this.GBPlotSettings.Controls.Add(this.TrackBarPlotTime);
@@ -121,6 +123,19 @@
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
+            // 
+            // cbPlotMarker
+            // 
+            this.cbPlotMarker.AutoSize = true;
+            this.cbPlotMarker.Checked = true;
+            this.cbPlotMarker.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbPlotMarker.Location = new System.Drawing.Point(456, 22);
+            this.cbPlotMarker.Name = "cbPlotMarker";
+            this.cbPlotMarker.Size = new System.Drawing.Size(82, 16);
+            this.cbPlotMarker.TabIndex = 59;
+            this.cbPlotMarker.Text = "plot marker";
+            this.cbPlotMarker.UseVisualStyleBackColor = true;
+            this.cbPlotMarker.CheckedChanged += new System.EventHandler(this.cbPlotMarker_CheckedChanged);
             // 
             // LabelPoltPoint
             // 
@@ -506,6 +521,7 @@
         private System.Windows.Forms.CheckBox CbLogWithTime;
         private System.Windows.Forms.ToolStripMenuItem ウィンドウToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataTableToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cbPlotMarker;
     }
 }
 

@@ -377,5 +377,11 @@ namespace SerialPlotter {
         private void dataTableToolStripMenuItem_Click(object sender, EventArgs e) {
             dtw = new DataTableWindow(dataManager.getDataSource());
         }
+
+        private void cbPlotMarker_CheckedChanged(object sender, EventArgs e) {
+            foreach(var s in buffer.Values) {
+                s.MarkerStyle = (cbPlotMarker.Checked)? MarkerStyle.Circle : MarkerStyle.None;
+            }
+        }
     }
 }
