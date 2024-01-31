@@ -13,6 +13,7 @@ using System.IO;
 using System.Xml;
 using System.Timers;
 using System.Threading;
+using System.Drawing.Drawing2D;
 
 namespace SerialPlotter {
     public partial class SerialPlotter : Form {
@@ -244,6 +245,7 @@ namespace SerialPlotter {
             CbNewLine.Enabled = !isComOpen;
             // open -> enable
             BtnPlotStart.Enabled = isComOpen;
+            btnSerialSend.Enabled = isComOpen;
         }
 
         private void BtnPlotStart_Click(object sender, EventArgs e) {
@@ -423,6 +425,29 @@ namespace SerialPlotter {
         private void cbPlotMarker_CheckedChanged(object sender, EventArgs e) {
             foreach(var s in buffer.Values) {
                 s.MarkerStyle = (cbPlotMarker.Checked)? MarkerStyle.Circle : MarkerStyle.None;
+            }
+        }
+
+        private void btnSerialSend_Click(object sender, EventArgs e) {
+            if(!serial.IsOpen) {
+                return;
+            }
+            Byte[] payload;
+            try {
+                payload = General.String2Bytes(tbSerialSend.Text, false, cbSerialSendAddCr.Checked, cbSerialSendAddNl.Checked);
+            } catch(Exception err) {
+                General.ShowErrMsgBox(err.Message);
+                return;
+            }
+            serial.Write(payload, 0, payload.Length);
+        }
+
+        private void tbSerialSend_KeyPress(object sender, KeyPressEventArgs e) {
+            if(e.KeyChar == '\r') {
+                // disable beep
+                e.Handled = true;
+                // call send
+                btnSerialSend_Click(sender, e);
             }
         }
     }

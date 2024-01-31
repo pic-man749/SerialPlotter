@@ -154,5 +154,29 @@ namespace SerialPlotter.Properties {
                 this["settingNewLine"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool settingSerialSendNl {
+            get {
+                return ((bool)(this["settingSerialSendNl"]));
+            }
+            set {
+                this["settingSerialSendNl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool settingSerialSendCr {
+            get {
+                return ((bool)(this["settingSerialSendCr"]));
+            }
+            set {
+                this["settingSerialSendCr"] = value;
+            }
+        }
     }
 }

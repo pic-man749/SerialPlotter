@@ -42,10 +42,15 @@
             this.BtnPlotReset = new System.Windows.Forms.Button();
             this.BtnPlotStart = new System.Windows.Forms.Button();
             this.GBSerialSettings = new System.Windows.Forms.GroupBox();
+            this.cbSerialSendAddNl = new System.Windows.Forms.CheckBox();
+            this.cbSerialSendAddCr = new System.Windows.Forms.CheckBox();
+            this.btnSerialSend = new System.Windows.Forms.Button();
+            this.tbSerialSend = new System.Windows.Forms.TextBox();
             this.CbLogWithTime = new System.Windows.Forms.CheckBox();
             this.CbNewLine = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.TbLogFilePath = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.CbHandshake = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -123,9 +128,9 @@
             this.GBPlotSettings.Controls.Add(this.TrackBarPlotTime);
             this.GBPlotSettings.Controls.Add(this.BtnPlotReset);
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
-            this.GBPlotSettings.Location = new System.Drawing.Point(13, 201);
+            this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
-            this.GBPlotSettings.Size = new System.Drawing.Size(759, 76);
+            this.GBPlotSettings.Size = new System.Drawing.Size(760, 76);
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
@@ -239,10 +244,15 @@
             // 
             this.GBSerialSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GBSerialSettings.Controls.Add(this.cbSerialSendAddNl);
+            this.GBSerialSettings.Controls.Add(this.cbSerialSendAddCr);
+            this.GBSerialSettings.Controls.Add(this.btnSerialSend);
+            this.GBSerialSettings.Controls.Add(this.tbSerialSend);
             this.GBSerialSettings.Controls.Add(this.CbLogWithTime);
             this.GBSerialSettings.Controls.Add(this.CbNewLine);
             this.GBSerialSettings.Controls.Add(this.label7);
             this.GBSerialSettings.Controls.Add(this.TbLogFilePath);
+            this.GBSerialSettings.Controls.Add(this.label10);
             this.GBSerialSettings.Controls.Add(this.label8);
             this.GBSerialSettings.Controls.Add(this.CbHandshake);
             this.GBSerialSettings.Controls.Add(this.label5);
@@ -260,17 +270,60 @@
             this.GBSerialSettings.Controls.Add(this.LbComList);
             this.GBSerialSettings.Location = new System.Drawing.Point(12, 27);
             this.GBSerialSettings.Name = "GBSerialSettings";
-            this.GBSerialSettings.Size = new System.Drawing.Size(760, 168);
+            this.GBSerialSettings.Size = new System.Drawing.Size(760, 171);
             this.GBSerialSettings.TabIndex = 50;
             this.GBSerialSettings.TabStop = false;
             this.GBSerialSettings.Text = "Serial settings";
+            // 
+            // cbSerialSendAddNl
+            // 
+            this.cbSerialSendAddNl.AutoSize = true;
+            this.cbSerialSendAddNl.Checked = global::SerialPlotter.Properties.Settings.Default.settingSerialSendNl;
+            this.cbSerialSendAddNl.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingSerialSendNl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbSerialSendAddNl.Location = new System.Drawing.Point(574, 147);
+            this.cbSerialSendAddNl.Name = "cbSerialSendAddNl";
+            this.cbSerialSendAddNl.Size = new System.Drawing.Size(42, 16);
+            this.cbSerialSendAddNl.TabIndex = 62;
+            this.cbSerialSendAddNl.Text = "+\\n";
+            this.cbSerialSendAddNl.UseVisualStyleBackColor = true;
+            // 
+            // cbSerialSendAddCr
+            // 
+            this.cbSerialSendAddCr.AutoSize = true;
+            this.cbSerialSendAddCr.Checked = global::SerialPlotter.Properties.Settings.Default.settingSerialSendCr;
+            this.cbSerialSendAddCr.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingSerialSendCr", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbSerialSendAddCr.Location = new System.Drawing.Point(528, 147);
+            this.cbSerialSendAddCr.Name = "cbSerialSendAddCr";
+            this.cbSerialSendAddCr.Size = new System.Drawing.Size(40, 16);
+            this.cbSerialSendAddCr.TabIndex = 61;
+            this.cbSerialSendAddCr.Text = "+\\r";
+            this.cbSerialSendAddCr.UseVisualStyleBackColor = true;
+            // 
+            // btnSerialSend
+            // 
+            this.btnSerialSend.Enabled = false;
+            this.btnSerialSend.Location = new System.Drawing.Point(621, 143);
+            this.btnSerialSend.Name = "btnSerialSend";
+            this.btnSerialSend.Size = new System.Drawing.Size(133, 23);
+            this.btnSerialSend.TabIndex = 60;
+            this.btnSerialSend.Text = "send";
+            this.btnSerialSend.UseVisualStyleBackColor = true;
+            this.btnSerialSend.Click += new System.EventHandler(this.btnSerialSend_Click);
+            // 
+            // tbSerialSend
+            // 
+            this.tbSerialSend.Location = new System.Drawing.Point(76, 145);
+            this.tbSerialSend.Name = "tbSerialSend";
+            this.tbSerialSend.Size = new System.Drawing.Size(446, 19);
+            this.tbSerialSend.TabIndex = 59;
+            this.tbSerialSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSerialSend_KeyPress);
             // 
             // CbLogWithTime
             // 
             this.CbLogWithTime.AutoSize = true;
             this.CbLogWithTime.Checked = global::SerialPlotter.Properties.Settings.Default.settingLoggingWithTime;
             this.CbLogWithTime.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingLoggingWithTime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.CbLogWithTime.Location = new System.Drawing.Point(457, 142);
+            this.CbLogWithTime.Location = new System.Drawing.Point(449, 118);
             this.CbLogWithTime.Name = "CbLogWithTime";
             this.CbLogWithTime.Size = new System.Drawing.Size(71, 16);
             this.CbLogWithTime.TabIndex = 58;
@@ -301,20 +354,29 @@
             // 
             // TbLogFilePath
             // 
-            this.TbLogFilePath.Location = new System.Drawing.Point(132, 140);
+            this.TbLogFilePath.Location = new System.Drawing.Point(132, 116);
             this.TbLogFilePath.Name = "TbLogFilePath";
             this.TbLogFilePath.ReadOnly = true;
-            this.TbLogFilePath.Size = new System.Drawing.Size(319, 19);
+            this.TbLogFilePath.Size = new System.Drawing.Size(311, 19);
             this.TbLogFilePath.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 148);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(64, 12);
+            this.label10.TabIndex = 55;
+            this.label10.Text = "Serial send:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(97, 143);
+            this.label8.Location = new System.Drawing.Point(81, 120);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.Size = new System.Drawing.Size(45, 12);
             this.label8.TabIndex = 55;
-            this.label8.Text = "path:";
+            this.label8.Text = "Log file:";
             // 
             // CbHandshake
             // 
@@ -340,7 +402,7 @@
             // CbLoggingFlag
             // 
             this.CbLoggingFlag.AutoSize = true;
-            this.CbLoggingFlag.Location = new System.Drawing.Point(7, 142);
+            this.CbLoggingFlag.Location = new System.Drawing.Point(7, 119);
             this.CbLoggingFlag.Name = "CbLoggingFlag";
             this.CbLoggingFlag.Size = new System.Drawing.Size(63, 16);
             this.CbLoggingFlag.TabIndex = 0;
@@ -414,7 +476,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(132, 117);
+            this.label1.Location = new System.Drawing.Point(132, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 43;
@@ -422,7 +484,7 @@
             // 
             // BtnRefresh
             // 
-            this.BtnRefresh.Location = new System.Drawing.Point(6, 112);
+            this.BtnRefresh.Location = new System.Drawing.Point(6, 88);
             this.BtnRefresh.Name = "BtnRefresh";
             this.BtnRefresh.Size = new System.Drawing.Size(120, 23);
             this.BtnRefresh.TabIndex = 40;
@@ -434,7 +496,7 @@
             // 
             this.CbBoudrateList.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingBaudrate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.CbBoudrateList.FormattingEnabled = true;
-            this.CbBoudrateList.Location = new System.Drawing.Point(191, 114);
+            this.CbBoudrateList.Location = new System.Drawing.Point(191, 90);
             this.CbBoudrateList.Name = "CbBoudrateList";
             this.CbBoudrateList.Size = new System.Drawing.Size(128, 20);
             this.CbBoudrateList.TabIndex = 41;
@@ -442,7 +504,7 @@
             // 
             // BtnConnect
             // 
-            this.BtnConnect.Location = new System.Drawing.Point(325, 112);
+            this.BtnConnect.Location = new System.Drawing.Point(325, 88);
             this.BtnConnect.Name = "BtnConnect";
             this.BtnConnect.Size = new System.Drawing.Size(195, 22);
             this.BtnConnect.TabIndex = 42;
@@ -457,7 +519,7 @@
             this.LbComList.ItemHeight = 12;
             this.LbComList.Location = new System.Drawing.Point(6, 18);
             this.LbComList.Name = "LbComList";
-            this.LbComList.Size = new System.Drawing.Size(514, 88);
+            this.LbComList.Size = new System.Drawing.Size(514, 64);
             this.LbComList.TabIndex = 39;
             // 
             // ChartDefault
@@ -500,14 +562,14 @@
             legend1.IsTextAutoFit = false;
             legend1.Name = "Legend1";
             this.ChartDefault.Legends.Add(legend1);
-            this.ChartDefault.Location = new System.Drawing.Point(13, 283);
+            this.ChartDefault.Location = new System.Drawing.Point(13, 286);
             this.ChartDefault.Name = "ChartDefault";
             series1.ChartArea = "ChartAreaDefault";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.ChartDefault.Series.Add(series1);
-            this.ChartDefault.Size = new System.Drawing.Size(759, 366);
+            this.ChartDefault.Size = new System.Drawing.Size(759, 363);
             this.ChartDefault.TabIndex = 48;
             this.ChartDefault.Text = "chart1";
             this.ChartDefault.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseMove);
@@ -586,6 +648,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar TrackBarPlotTime;
         private System.Windows.Forms.CheckBox cbBufferFullScale;
+        private System.Windows.Forms.Button btnSerialSend;
+        private System.Windows.Forms.TextBox tbSerialSend;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox cbSerialSendAddNl;
+        private System.Windows.Forms.CheckBox cbSerialSendAddCr;
     }
 }
 
