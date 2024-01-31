@@ -64,7 +64,6 @@ namespace SerialPlotter {
             // set chart update timer
             chartRefreshTimer.Elapsed += UpdateChart;
             chartRefreshTimer.Interval = getChartRefreshRatePeriod();
-            chartRefreshTimer.Enabled = true;
         }
         // get COM port name and refresh ListBox
         private void getNowConnectedSerialPorts() {
@@ -322,7 +321,6 @@ namespace SerialPlotter {
         private void BtnPlotReset_Click(object sender, EventArgs e) {
             ChartDefault.Series.Clear();
             buffer.Clear();
-            dataManager.clearDataTable();
         }
 
         // https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
@@ -392,19 +390,11 @@ namespace SerialPlotter {
         }
 
         private void 書式SToolStripMenuItem_Click(object sender, EventArgs e) {
-            General.ShowMsgBox("書式",
-                "シリアルで転送するデータはASCII形式で下記の書式です。" + Environment.NewLine +
-                "空白は無視されません。" + Environment.NewLine +
-                "    {key}:{val},{key};{val},...\\n" + Environment.NewLine +
-                "" + Environment.NewLine +
-                "なお、先頭が「;」の場合はコメント行として無視されます。"
-                );
+            FormatWindow fw = new FormatWindow();
         }
 
-
-        DataTableWindow dtw;
         private void dataTableToolStripMenuItem_Click(object sender, EventArgs e) {
-            dtw = new DataTableWindow(dataManager.getDataSource());
+            DataTableWindow dtw = new DataTableWindow(dataManager.getDataSource());
         }
 
         /// <summary>
