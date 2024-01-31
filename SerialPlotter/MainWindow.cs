@@ -152,18 +152,19 @@ namespace SerialPlotter {
                     this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
                 }
                 // delete old point data
+                double bufferXSize = (cbBufferFullScale.Checked) ? now - this.TrackBarPlotTime.Maximum : ChartDefault.ChartAreas[0].AxisX.Minimum;
                 foreach(string k in buffer.Keys) {
                     while(true) {
                         if(buffer[k].Points.Count <= 0) {
                             break;
                         }
-                        if(buffer[k].Points[0].XValue >= (now - this.TrackBarPlotTime.Maximum)) {
+                        if(buffer[k].Points[0].XValue >= bufferXSize) {
                             break;
                         }
                         buffer[k].Points.RemoveAt(0);
-                        ChartDefault.ResetAutoValues();
                     }
                 }
+                ChartDefault.ResetAutoValues();
             }
         }
 
