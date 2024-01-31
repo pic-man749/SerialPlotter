@@ -279,6 +279,7 @@
             // 
             // CbNewLine
             // 
+            this.CbNewLine.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingNewLine", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.CbNewLine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbNewLine.FormattingEnabled = true;
             this.CbNewLine.Location = new System.Drawing.Point(585, 117);
@@ -286,6 +287,7 @@
             this.CbNewLine.Name = "CbNewLine";
             this.CbNewLine.Size = new System.Drawing.Size(169, 20);
             this.CbNewLine.TabIndex = 57;
+            this.CbNewLine.Text = global::SerialPlotter.Properties.Settings.Default.settingNewLine;
             this.CbNewLine.SelectedIndexChanged += new System.EventHandler(this.CbNewLine_SelectedIndexChanged);
             // 
             // label7
@@ -316,6 +318,7 @@
             // 
             // CbHandshake
             // 
+            this.CbHandshake.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingFlowCtrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.CbHandshake.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbHandshake.FormattingEnabled = true;
             this.CbHandshake.Location = new System.Drawing.Point(585, 91);
@@ -323,6 +326,7 @@
             this.CbHandshake.Name = "CbHandshake";
             this.CbHandshake.Size = new System.Drawing.Size(169, 20);
             this.CbHandshake.TabIndex = 54;
+            this.CbHandshake.Text = global::SerialPlotter.Properties.Settings.Default.settingFlowCtrl;
             // 
             // label5
             // 
@@ -355,6 +359,7 @@
             // 
             // CbStopBit
             // 
+            this.CbStopBit.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingStopBit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.CbStopBit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbStopBit.FormattingEnabled = true;
             this.CbStopBit.Location = new System.Drawing.Point(585, 65);
@@ -362,6 +367,7 @@
             this.CbStopBit.Name = "CbStopBit";
             this.CbStopBit.Size = new System.Drawing.Size(169, 20);
             this.CbStopBit.TabIndex = 51;
+            this.CbStopBit.Text = global::SerialPlotter.Properties.Settings.Default.settingStopBit;
             // 
             // label3
             // 
@@ -374,6 +380,7 @@
             // 
             // CbParity
             // 
+            this.CbParity.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingParity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.CbParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbParity.FormattingEnabled = true;
             this.CbParity.Location = new System.Drawing.Point(585, 39);
@@ -381,6 +388,7 @@
             this.CbParity.Name = "CbParity";
             this.CbParity.Size = new System.Drawing.Size(169, 20);
             this.CbParity.TabIndex = 49;
+            this.CbParity.Text = global::SerialPlotter.Properties.Settings.Default.settingParity;
             // 
             // label2
             // 
@@ -393,6 +401,7 @@
             // 
             // CbDataBits
             // 
+            this.CbDataBits.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingDataBits", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.CbDataBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbDataBits.FormattingEnabled = true;
             this.CbDataBits.Location = new System.Drawing.Point(585, 13);
@@ -400,6 +409,7 @@
             this.CbDataBits.Name = "CbDataBits";
             this.CbDataBits.Size = new System.Drawing.Size(169, 20);
             this.CbDataBits.TabIndex = 47;
+            this.CbDataBits.Text = global::SerialPlotter.Properties.Settings.Default.settingDataBits;
             // 
             // label1
             // 

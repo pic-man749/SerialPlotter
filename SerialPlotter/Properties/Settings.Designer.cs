@@ -94,5 +94,65 @@ namespace SerialPlotter.Properties {
                 this["settingBufferFullScale"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string settingDataBits {
+            get {
+                return ((string)(this["settingDataBits"]));
+            }
+            set {
+                this["settingDataBits"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string settingParity {
+            get {
+                return ((string)(this["settingParity"]));
+            }
+            set {
+                this["settingParity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string settingStopBit {
+            get {
+                return ((string)(this["settingStopBit"]));
+            }
+            set {
+                this["settingStopBit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string settingFlowCtrl {
+            get {
+                return ((string)(this["settingFlowCtrl"]));
+            }
+            set {
+                this["settingFlowCtrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string settingNewLine {
+            get {
+                return ((string)(this["settingNewLine"]));
+            }
+            set {
+                this["settingNewLine"] = value;
+            }
+        }
     }
 }
