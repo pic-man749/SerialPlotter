@@ -23,15 +23,16 @@
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.書式SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.cbBufferFullScale = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cbChartRefreshRate = new System.Windows.Forms.ComboBox();
             this.cbPlotMarker = new System.Windows.Forms.CheckBox();
@@ -62,7 +63,6 @@
             this.LbComList = new System.Windows.Forms.ListBox();
             this.ChartDefault = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
-            this.cbBufferFullScale = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
@@ -130,6 +130,19 @@
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
             // 
+            // cbBufferFullScale
+            // 
+            this.cbBufferFullScale.AutoSize = true;
+            this.cbBufferFullScale.Checked = global::SerialPlotter.Properties.Settings.Default.settingBufferFullScale;
+            this.cbBufferFullScale.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbBufferFullScale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingBufferFullScale", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbBufferFullScale.Location = new System.Drawing.Point(548, 22);
+            this.cbBufferFullScale.Name = "cbBufferFullScale";
+            this.cbBufferFullScale.Size = new System.Drawing.Size(105, 16);
+            this.cbBufferFullScale.TabIndex = 62;
+            this.cbBufferFullScale.Text = "buffer full scale";
+            this.cbBufferFullScale.UseVisualStyleBackColor = true;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -158,8 +171,9 @@
             // cbPlotMarker
             // 
             this.cbPlotMarker.AutoSize = true;
-            this.cbPlotMarker.Checked = true;
+            this.cbPlotMarker.Checked = global::SerialPlotter.Properties.Settings.Default.settingPlotMarker;
             this.cbPlotMarker.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbPlotMarker.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingPlotMarker", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbPlotMarker.Location = new System.Drawing.Point(456, 22);
             this.cbPlotMarker.Name = "cbPlotMarker";
             this.cbPlotMarker.Size = new System.Drawing.Size(82, 16);
@@ -189,6 +203,7 @@
             // 
             // TrackBarPlotTime
             // 
+            this.TrackBarPlotTime.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::SerialPlotter.Properties.Settings.Default, "settingPlotTime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.TrackBarPlotTime.Location = new System.Drawing.Point(193, 18);
             this.TrackBarPlotTime.Maximum = 20;
             this.TrackBarPlotTime.Minimum = 1;
@@ -196,7 +211,7 @@
             this.TrackBarPlotTime.Size = new System.Drawing.Size(200, 45);
             this.TrackBarPlotTime.TabIndex = 57;
             this.TrackBarPlotTime.TickFrequency = 2;
-            this.TrackBarPlotTime.Value = 10;
+            this.TrackBarPlotTime.Value = global::SerialPlotter.Properties.Settings.Default.settingPlotTime;
             this.TrackBarPlotTime.ValueChanged += new System.EventHandler(this.TrackBarPlotPoint_ValueChanged);
             // 
             // BtnPlotReset
@@ -253,6 +268,8 @@
             // CbLogWithTime
             // 
             this.CbLogWithTime.AutoSize = true;
+            this.CbLogWithTime.Checked = global::SerialPlotter.Properties.Settings.Default.settingLoggingWithTime;
+            this.CbLogWithTime.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingLoggingWithTime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.CbLogWithTime.Location = new System.Drawing.Point(457, 142);
             this.CbLogWithTime.Name = "CbLogWithTime";
             this.CbLogWithTime.Size = new System.Drawing.Size(71, 16);
@@ -405,11 +422,13 @@
             // 
             // CbBoudrateList
             // 
+            this.CbBoudrateList.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingBaudrate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.CbBoudrateList.FormattingEnabled = true;
             this.CbBoudrateList.Location = new System.Drawing.Point(191, 114);
             this.CbBoudrateList.Name = "CbBoudrateList";
             this.CbBoudrateList.Size = new System.Drawing.Size(128, 20);
             this.CbBoudrateList.TabIndex = 41;
+            this.CbBoudrateList.Text = global::SerialPlotter.Properties.Settings.Default.settingBaudrate;
             // 
             // BtnConnect
             // 
@@ -436,48 +455,48 @@
             this.ChartDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea5.AxisX.IsLabelAutoFit = false;
-            chartArea5.AxisX.IsStartedFromZero = false;
-            chartArea5.AxisX.LabelAutoFitMinFontSize = 10;
-            chartArea5.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            chartArea5.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea5.AxisX.Maximum = 0D;
-            chartArea5.AxisX.MaximumAutoSize = 100F;
-            chartArea5.AxisX.Minimum = -10D;
-            chartArea5.AxisX.MinorGrid.Enabled = true;
-            chartArea5.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
-            chartArea5.AxisX.MinorTickMark.Enabled = true;
-            chartArea5.AxisX.Title = "[s]";
-            chartArea5.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea5.AxisY.IsLabelAutoFit = false;
-            chartArea5.AxisY.IsStartedFromZero = false;
-            chartArea5.AxisY.LabelAutoFitMinFontSize = 10;
-            chartArea5.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            chartArea5.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea5.AxisY.MaximumAutoSize = 100F;
-            chartArea5.AxisY.MinorGrid.Enabled = true;
-            chartArea5.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
-            chartArea5.AxisY.MinorTickMark.Enabled = true;
-            chartArea5.BackColor = System.Drawing.Color.White;
-            chartArea5.InnerPlotPosition.Auto = false;
-            chartArea5.InnerPlotPosition.Height = 85F;
-            chartArea5.InnerPlotPosition.Width = 90F;
-            chartArea5.InnerPlotPosition.X = 10F;
-            chartArea5.InnerPlotPosition.Y = 2F;
-            chartArea5.IsSameFontSizeForAllAxes = true;
-            chartArea5.Name = "ChartAreaDefault";
-            this.ChartDefault.ChartAreas.Add(chartArea5);
-            legend5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend5.IsTextAutoFit = false;
-            legend5.Name = "Legend1";
-            this.ChartDefault.Legends.Add(legend5);
+            chartArea1.AxisX.IsLabelAutoFit = false;
+            chartArea1.AxisX.IsStartedFromZero = false;
+            chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
+            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
+            chartArea1.AxisX.Maximum = 0D;
+            chartArea1.AxisX.MaximumAutoSize = 100F;
+            chartArea1.AxisX.Minimum = -10D;
+            chartArea1.AxisX.MinorGrid.Enabled = true;
+            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
+            chartArea1.AxisX.MinorTickMark.Enabled = true;
+            chartArea1.AxisX.Title = "[s]";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.IsLabelAutoFit = false;
+            chartArea1.AxisY.IsStartedFromZero = false;
+            chartArea1.AxisY.LabelAutoFitMinFontSize = 10;
+            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
+            chartArea1.AxisY.MaximumAutoSize = 100F;
+            chartArea1.AxisY.MinorGrid.Enabled = true;
+            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
+            chartArea1.AxisY.MinorTickMark.Enabled = true;
+            chartArea1.BackColor = System.Drawing.Color.White;
+            chartArea1.InnerPlotPosition.Auto = false;
+            chartArea1.InnerPlotPosition.Height = 85F;
+            chartArea1.InnerPlotPosition.Width = 90F;
+            chartArea1.InnerPlotPosition.X = 10F;
+            chartArea1.InnerPlotPosition.Y = 2F;
+            chartArea1.IsSameFontSizeForAllAxes = true;
+            chartArea1.Name = "ChartAreaDefault";
+            this.ChartDefault.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            this.ChartDefault.Legends.Add(legend1);
             this.ChartDefault.Location = new System.Drawing.Point(13, 283);
             this.ChartDefault.Name = "ChartDefault";
-            series5.ChartArea = "ChartAreaDefault";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.ChartDefault.Series.Add(series5);
+            series1.ChartArea = "ChartAreaDefault";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.ChartDefault.Series.Add(series1);
             this.ChartDefault.Size = new System.Drawing.Size(759, 366);
             this.ChartDefault.TabIndex = 48;
             this.ChartDefault.Text = "chart1";
@@ -488,18 +507,6 @@
             this.SfdLogging.DefaultExt = "txt";
             this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
-            // 
-            // cbBufferFullScale
-            // 
-            this.cbBufferFullScale.AutoSize = true;
-            this.cbBufferFullScale.Checked = true;
-            this.cbBufferFullScale.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbBufferFullScale.Location = new System.Drawing.Point(548, 22);
-            this.cbBufferFullScale.Name = "cbBufferFullScale";
-            this.cbBufferFullScale.Size = new System.Drawing.Size(105, 16);
-            this.cbBufferFullScale.TabIndex = 62;
-            this.cbBufferFullScale.Text = "buffer full scale";
-            this.cbBufferFullScale.UseVisualStyleBackColor = true;
             // 
             // SerialPlotter
             // 

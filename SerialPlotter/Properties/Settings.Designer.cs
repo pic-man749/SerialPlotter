@@ -37,13 +37,61 @@ namespace SerialPlotter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("800, 600")]
-        public global::System.Drawing.Size WindowSize {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string settingBaudrate {
             get {
-                return ((global::System.Drawing.Size)(this["WindowSize"]));
+                return ((string)(this["settingBaudrate"]));
             }
             set {
-                this["WindowSize"] = value;
+                this["settingBaudrate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool settingLoggingWithTime {
+            get {
+                return ((bool)(this["settingLoggingWithTime"]));
+            }
+            set {
+                this["settingLoggingWithTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int settingPlotTime {
+            get {
+                return ((int)(this["settingPlotTime"]));
+            }
+            set {
+                this["settingPlotTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool settingPlotMarker {
+            get {
+                return ((bool)(this["settingPlotMarker"]));
+            }
+            set {
+                this["settingPlotMarker"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool settingBufferFullScale {
+            get {
+                return ((bool)(this["settingBufferFullScale"]));
+            }
+            set {
+                this["settingBufferFullScale"] = value;
             }
         }
     }
