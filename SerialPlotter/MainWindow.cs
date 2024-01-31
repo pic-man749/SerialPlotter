@@ -213,6 +213,7 @@ namespace SerialPlotter {
                     General.ShowErrMsgBox("Cannot open selected COM port.");
                     return;
                 }
+                resetTimer();
                 startTimer();
                 // start plot
                 BtnPlotStart_Click(sender, e);
@@ -227,7 +228,6 @@ namespace SerialPlotter {
                 dataTableToolStripMenuItem.Enabled = true;
                 serial.Close();
                 stopTimer();
-                resetTimer();
             }
             changeSerialParamUI(serial.IsOpen);
         }
