@@ -260,6 +260,11 @@ namespace SerialPlotter {
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            isPlotting = false;
+            chartRefreshTimer.Stop();
+            if(serial.IsOpen) {
+                serial.Close();
+            }
             if(logFileStream != null) {
                 logFileStream.Close();
             }
