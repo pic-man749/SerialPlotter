@@ -16,12 +16,12 @@ namespace SerialPlotter {
     public partial class GraphWindow : Form {
 
         public readonly int GID;
-        
-        private Dictionary<string, Series> buffer = new Dictionary<string, Series>();
+        private readonly int BUFFER_MAX;
         private int plotRange;
         private bool isMarkerPlot;
         private bool isFullScaleBuffer;
-        private readonly int BUFFER_MAX;
+
+        private Dictionary<string, Series> buffer = new Dictionary<string, Series>();
 
         public GraphWindow(int gid, int range, bool marker, bool fsBuf, int bufMax) {
             GID = gid;
@@ -143,10 +143,17 @@ namespace SerialPlotter {
             seriesLine.ChartType = SeriesChartType.Line;
             seriesLine.LegendText = name;
             seriesLine.BorderWidth = 2;
-            seriesLine.MarkerStyle = MarkerStyle.Circle;
+            seriesLine.MarkerStyle = isMarkerPlot ? MarkerStyle.Circle : MarkerStyle.None;
             seriesLine.MarkerSize = 6;
             seriesLine.ChartArea = "ChartAreaDefault";
             return seriesLine;
+        }
+
+        private void GraphWindow_FormClosing(object sender, FormClosingEventArgs e) {
+            // default graph window, then cancel
+            if(GID == 0) {
+                e.Cancel = true;
+            }
         }
     }
 }
