@@ -344,11 +344,11 @@ namespace SerialPlotter {
         }
 
         private void 書式SToolStripMenuItem_Click(object sender, EventArgs e) {
-            FormatWindow fw = new FormatWindow();
+            FormatWindow _ = new FormatWindow();
         }
 
         private void DataTableToolStripMenuItem_Click(object sender, EventArgs e) {
-            DataTableWindow dtw = new DataTableWindow(dataManager.GetDataSource());
+            DataTableWindow _ = new DataTableWindow(dataManager.GetDataSource());
         }
 
         /// <summary>
