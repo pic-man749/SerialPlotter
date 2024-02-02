@@ -142,6 +142,7 @@
             this.cbBufferFullScale.TabIndex = 62;
             this.cbBufferFullScale.Text = "buffer full scale";
             this.cbBufferFullScale.UseVisualStyleBackColor = true;
+            this.cbBufferFullScale.CheckedChanged += new System.EventHandler(this.CbBufferFullScale_CheckedChanged);
             // 
             // label9
             // 

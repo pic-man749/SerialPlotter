@@ -394,5 +394,11 @@ namespace SerialPlotter {
                 BtnSerialSend_Click(sender, e);
             }
         }
+
+        private void CbBufferFullScale_CheckedChanged(object sender, EventArgs e) {
+            foreach(var g in graph) {
+                g.SetIsFullScaleBuffer(cbBufferFullScale.Checked);
+            }
+        }
     }
 }

@@ -67,6 +67,10 @@ namespace SerialPlotter {
             plotRange = range;
         }
 
+        public void SetIsFullScaleBuffer(bool f) {
+            isFullScaleBuffer = f;
+        }
+
         public void ChangeMarkerStyle(bool f) {
 
             isMarkerPlot = f;
