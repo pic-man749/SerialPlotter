@@ -23,9 +23,6 @@
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.書式SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,13 +63,11 @@
             this.CbBoudrateList = new System.Windows.Forms.ComboBox();
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
-            this.ChartDefault = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartDefault)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -522,58 +517,6 @@
             this.LbComList.Size = new System.Drawing.Size(514, 64);
             this.LbComList.TabIndex = 39;
             // 
-            // ChartDefault
-            // 
-            this.ChartDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.IsStartedFromZero = false;
-            chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
-            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea1.AxisX.Maximum = 0D;
-            chartArea1.AxisX.MaximumAutoSize = 100F;
-            chartArea1.AxisX.Minimum = -10D;
-            chartArea1.AxisX.MinorGrid.Enabled = true;
-            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
-            chartArea1.AxisX.MinorTickMark.Enabled = true;
-            chartArea1.AxisX.Title = "[s]";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.IsLabelAutoFit = false;
-            chartArea1.AxisY.IsStartedFromZero = false;
-            chartArea1.AxisY.LabelAutoFitMinFontSize = 10;
-            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea1.AxisY.MaximumAutoSize = 100F;
-            chartArea1.AxisY.MinorGrid.Enabled = true;
-            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
-            chartArea1.AxisY.MinorTickMark.Enabled = true;
-            chartArea1.BackColor = System.Drawing.Color.White;
-            chartArea1.InnerPlotPosition.Auto = false;
-            chartArea1.InnerPlotPosition.Height = 85F;
-            chartArea1.InnerPlotPosition.Width = 90F;
-            chartArea1.InnerPlotPosition.X = 10F;
-            chartArea1.InnerPlotPosition.Y = 2F;
-            chartArea1.IsSameFontSizeForAllAxes = true;
-            chartArea1.Name = "ChartAreaDefault";
-            this.ChartDefault.ChartAreas.Add(chartArea1);
-            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            this.ChartDefault.Legends.Add(legend1);
-            this.ChartDefault.Location = new System.Drawing.Point(13, 286);
-            this.ChartDefault.Name = "ChartDefault";
-            series1.ChartArea = "ChartAreaDefault";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.ChartDefault.Series.Add(series1);
-            this.ChartDefault.Size = new System.Drawing.Size(759, 363);
-            this.ChartDefault.TabIndex = 48;
-            this.ChartDefault.Text = "chart1";
-            this.ChartDefault.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseMove);
-            // 
             // SfdLogging
             // 
             this.SfdLogging.DefaultExt = "txt";
@@ -584,10 +527,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
-            this.Controls.Add(this.ChartDefault);
             this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialPlotter.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::SerialPlotter.Properties.Settings.Default.WindowLocation;
@@ -604,7 +546,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartDefault)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -631,7 +572,6 @@
         private System.Windows.Forms.ListBox LbComList;
         private System.Windows.Forms.Button BtnPlotReset;
         private System.Windows.Forms.Label LabelPoltPoint;
-        private System.Windows.Forms.DataVisualization.Charting.Chart ChartDefault;
         private System.Windows.Forms.CheckBox CbLoggingFlag;
         private System.Windows.Forms.SaveFileDialog SfdLogging;
         private System.Windows.Forms.TextBox TbLogFilePath;

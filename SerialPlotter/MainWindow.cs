@@ -22,7 +22,6 @@ namespace SerialPlotter {
 
         const char IGNORE_START_CHAR = ';';
         private System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
-        private Dictionary<string, Series> buffer = new Dictionary<string, Series>();
         private bool isPlotting = false;
         private Stream logFileStream = null;
         private string newLine = String.Empty;
@@ -30,10 +29,11 @@ namespace SerialPlotter {
 
         private System.Timers.Timer chartRefreshTimer = new System.Timers.Timer();
 
+        private List<GraphWindow> graph = new List<GraphWindow>();
+        private int graphCounte = 0;
+
         public SerialPlotter() {
             InitializeComponent();
-            // init chart area
-            ChartDefault.Series.Clear();
             // show Serial Ports
             getNowConnectedSerialPorts();
             // set combBoxes
@@ -64,6 +64,13 @@ namespace SerialPlotter {
             // set chart update timer
             chartRefreshTimer.Elapsed += UpdateChart;
             chartRefreshTimer.Interval = getChartRefreshRatePeriod();
+
+            // init chart area
+            graph.Add(new GraphWindow(graphCounte++,
+                                    TrackBarPlotTime.Value,
+                                    cbPlotMarker.Checked,
+                                    cbBufferFullScale.Checked,
+                                    TrackBarPlotTime.Maximum ));
         }
         // get COM port name and refresh ListBox
         private void getNowConnectedSerialPorts() {
@@ -115,8 +122,11 @@ namespace SerialPlotter {
                     dataManager.insertData(recvTime, key, kvs[key]);
 
                     // plot
-                    if(isPlotting) {
-                        AddSeriesToChart(recvTime, key, kvs[key]);
+                    if(!isPlotting) {
+                        return;
+                    }
+                    foreach(var g in graph) {
+                        g.AddSeriesToChart(recvTime, key, kvs[key]);
                     }
                 }
             }
@@ -124,47 +134,21 @@ namespace SerialPlotter {
 
         private delegate void DelegateAddSeriesToChart(double now, string key, double value);
 
-        private void AddSeriesToChart(double now, string key, double value) {
-
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { AddSeriesToChart(now, key, value); });
-            } else {
-                // check key existance and set data
-                if(!buffer.ContainsKey(key)) {
-                    // make new series
-                    buffer[key] = makeNewSeries(key);
-                    // set graph
-                    ChartDefault.Series.Add(buffer[key]);
-                }
-                DataPoint dp = new DataPoint(now, value);
-                buffer[key].Points.Add(dp);
+        private void UpdateChart(Object source, ElapsedEventArgs e) {
+            double now = stopWatch.Elapsed.TotalSeconds;
+            int range = GetTrackBarPlotTime();
+            foreach(var g in graph) {
+                g.UpdateChart(now);
             }
         }
 
-        private void UpdateChart(Object source, ElapsedEventArgs e) {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { UpdateChart(source, e); });
-            } else {
-                double now = stopWatch.Elapsed.TotalSeconds;
+        private int GetTrackBarPlotTime() {
 
-                for(int cnt = 0; cnt < this.ChartDefault.ChartAreas.Count; ++cnt) {
-                    this.ChartDefault.ChartAreas[cnt].AxisX.Maximum = now;
-                    this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
-                }
-                // delete old point data
-                double bufferXSize = (cbBufferFullScale.Checked) ? now - this.TrackBarPlotTime.Maximum : ChartDefault.ChartAreas[0].AxisX.Minimum;
-                foreach(string k in buffer.Keys) {
-                    while(true) {
-                        if(buffer[k].Points.Count <= 0) {
-                            break;
-                        }
-                        if(buffer[k].Points[0].XValue >= bufferXSize) {
-                            break;
-                        }
-                        buffer[k].Points.RemoveAt(0);
-                    }
-                }
-                ChartDefault.ResetAutoValues();
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { GetTrackBarPlotTime(); });
+                return 10;
+            } else {
+                return TrackBarPlotTime.Value;
             }
         }
 
@@ -204,8 +188,9 @@ namespace SerialPlotter {
                 serial.StopBits = (System.IO.Ports.StopBits)CbStopBit.SelectedIndex;
                 serial.Handshake = (System.IO.Ports.Handshake)CbHandshake.SelectedIndex;
 
-                ChartDefault.Series.Clear();
-                buffer.Clear();
+                foreach(var g in graph) {
+                    g.ClearChart();
+                }
                 dataManager.clearDataTable();
 
                 try {
@@ -288,17 +273,6 @@ namespace SerialPlotter {
             }
         }
 
-        private Series makeNewSeries(string name) {
-            Series seriesLine = new Series();
-            seriesLine.ChartType = SeriesChartType.Line;
-            seriesLine.LegendText = name;
-            seriesLine.BorderWidth = 2;
-            seriesLine.MarkerStyle = MarkerStyle.Circle;
-            seriesLine.MarkerSize = 6;
-            seriesLine.ChartArea = "ChartAreaDefault";
-            return seriesLine;
-        }
-
         public bool startTimer() {
             stopWatch.Start();
             return true;
@@ -319,36 +293,17 @@ namespace SerialPlotter {
         }
 
         private void BtnPlotReset_Click(object sender, EventArgs e) {
-            ChartDefault.Series.Clear();
-            buffer.Clear();
-        }
-
-        // https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
-        Point? prevPosition = null;
-        ToolTip tooltip = new ToolTip();
-
-        private void chart1_MouseMove(object sender, MouseEventArgs e) {
-            var pos = e.Location;
-            if(prevPosition.HasValue && pos == prevPosition.Value) {
-                return;
-            }
-            tooltip.RemoveAll();
-            prevPosition = pos;
-            var results = ChartDefault.HitTest(pos.X, pos.Y, false, ChartElementType.DataPoint);
-            foreach(var result in results) {
-                if(result.ChartElementType == ChartElementType.DataPoint) {
-                    var valueY = result.ChartArea.AxisY.PixelPositionToValue(pos.Y);
-                    tooltip.Show(((float)valueY).ToString(), ChartDefault, pos.X, pos.Y - 15);
-                }
+            foreach(var g in graph) {
+                g.ClearChart();
             }
         }
 
         private void TrackBarPlotPoint_ValueChanged(object sender, EventArgs e) {
-            LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
+            int range = TrackBarPlotTime.Value;
+            LabelPoltPoint.Text = range.ToString();
             double now = stopWatch.Elapsed.TotalSeconds;
-            for(int cnt = 0; cnt < this.ChartDefault.ChartAreas.Count; ++cnt) {
-                this.ChartDefault.ChartAreas[cnt].AxisX.Maximum = now;
-                this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
+            foreach(var g in graph) {
+                g.ChangePlotRange(now, range);
             }
         }
 
@@ -413,8 +368,8 @@ namespace SerialPlotter {
         }
 
         private void cbPlotMarker_CheckedChanged(object sender, EventArgs e) {
-            foreach(var s in buffer.Values) {
-                s.MarkerStyle = (cbPlotMarker.Checked)? MarkerStyle.Circle : MarkerStyle.None;
+            foreach(var g in graph) {
+                g.ChangeMarkerStyle(cbPlotMarker.Checked);
             }
         }
 
