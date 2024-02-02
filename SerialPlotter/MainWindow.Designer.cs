@@ -108,7 +108,7 @@
             this.dataTableToolStripMenuItem.Name = "dataTableToolStripMenuItem";
             this.dataTableToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.dataTableToolStripMenuItem.Text = "DataTable(&D)";
-            this.dataTableToolStripMenuItem.Click += new System.EventHandler(this.dataTableToolStripMenuItem_Click);
+            this.dataTableToolStripMenuItem.Click += new System.EventHandler(this.DataTableToolStripMenuItem_Click);
             // 
             // GBPlotSettings
             // 
@@ -180,7 +180,7 @@
             this.cbPlotMarker.TabIndex = 59;
             this.cbPlotMarker.Text = "plot marker";
             this.cbPlotMarker.UseVisualStyleBackColor = true;
-            this.cbPlotMarker.CheckedChanged += new System.EventHandler(this.cbPlotMarker_CheckedChanged);
+            this.cbPlotMarker.CheckedChanged += new System.EventHandler(this.CbPlotMarker_CheckedChanged);
             // 
             // LabelPoltPoint
             // 
@@ -303,7 +303,7 @@
             this.btnSerialSend.TabIndex = 60;
             this.btnSerialSend.Text = "send";
             this.btnSerialSend.UseVisualStyleBackColor = true;
-            this.btnSerialSend.Click += new System.EventHandler(this.btnSerialSend_Click);
+            this.btnSerialSend.Click += new System.EventHandler(this.BtnSerialSend_Click);
             // 
             // tbSerialSend
             // 
@@ -311,7 +311,7 @@
             this.tbSerialSend.Name = "tbSerialSend";
             this.tbSerialSend.Size = new System.Drawing.Size(446, 19);
             this.tbSerialSend.TabIndex = 59;
-            this.tbSerialSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSerialSend_KeyPress);
+            this.tbSerialSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbSerialSend_KeyPress);
             // 
             // CbLogWithTime
             // 
@@ -527,14 +527,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(784, 291);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
             this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialPlotter.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::SerialPlotter.Properties.Settings.Default.WindowLocation;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(750, 600);
+            this.MinimumSize = new System.Drawing.Size(750, 330);
             this.Name = "SerialPlotter";
             this.Text = "SerialPlotter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

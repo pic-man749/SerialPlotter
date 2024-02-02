@@ -21,7 +21,7 @@ namespace SerialPlotter {
             this.dataTable.Columns.Add("value");
         }
 
-        public bool insertData(double time, string key, double value) {
+        public bool InsertData(double time, string key, double value) {
             if(!sequentialNumber4key.ContainsKey(key)) {
                 sequentialNumber4key.Add(key, 0);
             }
@@ -29,11 +29,11 @@ namespace SerialPlotter {
             return true;
         }
 
-        public ref DataTable getDataSource() {
+        public ref DataTable GetDataSource() {
             return ref this.dataTable;
         }
 
-        public void clearDataTable() {
+        public void ClearDataTable() {
             this.dataTable.Clear();
             sequentialNumber = 0;
             sequentialNumber4key.Clear();

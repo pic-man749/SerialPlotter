@@ -35,7 +35,7 @@ namespace SerialPlotter {
         public SerialPlotter() {
             InitializeComponent();
             // show Serial Ports
-            getNowConnectedSerialPorts();
+            GetNowConnectedSerialPorts();
             // set combBoxes
             CbBoudrateList.Items.AddRange(Serial.getBoudrates().ToArray());
             CbBoudrateList.SelectedIndex = 1;   // select 9600
@@ -63,7 +63,7 @@ namespace SerialPlotter {
             cbChartRefreshRate.SelectedIndex = 4;   // 30
             // set chart update timer
             chartRefreshTimer.Elapsed += UpdateChart;
-            chartRefreshTimer.Interval = getChartRefreshRatePeriod();
+            chartRefreshTimer.Interval = GetChartRefreshRatePeriod();
 
             // init chart area
             graph.Add(new GraphWindow(graphCounte++,
@@ -73,7 +73,7 @@ namespace SerialPlotter {
                                     TrackBarPlotTime.Maximum ));
         }
         // get COM port name and refresh ListBox
-        private void getNowConnectedSerialPorts() {
+        private void GetNowConnectedSerialPorts() {
             // clear ListBox
             LbComList.Items.Clear();
             // get COMs with device name
@@ -87,7 +87,7 @@ namespace SerialPlotter {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void serialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e) {
+        private void SerialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e) {
             // get recved time
             double recvTime = stopWatch.Elapsed.TotalSeconds;
             while(serial.IsOpen && serial.BytesToRead > 0) {
@@ -119,7 +119,7 @@ namespace SerialPlotter {
 
                 foreach(string key in kvs.Keys) {
                     // insert new data
-                    dataManager.insertData(recvTime, key, kvs[key]);
+                    dataManager.InsertData(recvTime, key, kvs[key]);
 
                     // plot
                     if(!isPlotting) {
@@ -136,7 +136,6 @@ namespace SerialPlotter {
 
         private void UpdateChart(Object source, ElapsedEventArgs e) {
             double now = stopWatch.Elapsed.TotalSeconds;
-            int range = GetTrackBarPlotTime();
             foreach(var g in graph) {
                 g.UpdateChart(now);
             }
@@ -153,7 +152,7 @@ namespace SerialPlotter {
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e) {
-            getNowConnectedSerialPorts();
+            GetNowConnectedSerialPorts();
         }
 
         private void BtnConnect_Click(object sender, EventArgs e) {
@@ -191,7 +190,7 @@ namespace SerialPlotter {
                 foreach(var g in graph) {
                     g.ClearChart();
                 }
-                dataManager.clearDataTable();
+                dataManager.ClearDataTable();
 
                 try {
                     serial.Open();
@@ -199,8 +198,8 @@ namespace SerialPlotter {
                     General.ShowErrMsgBox("Cannot open selected COM port.");
                     return;
                 }
-                resetTimer();
-                startTimer();
+                ResetTimer();
+                StartTimer();
                 // start plot
                 BtnPlotStart_Click(sender, e);
                 BtnConnect.Text = "close";
@@ -213,12 +212,12 @@ namespace SerialPlotter {
                 BtnConnect.Text = "connect";
                 dataTableToolStripMenuItem.Enabled = true;
                 serial.Close();
-                stopTimer();
+                StopTimer();
             }
-            changeSerialParamUI(serial.IsOpen);
+            ChangeSerialParamUI(serial.IsOpen);
         }
 
-        private void changeSerialParamUI(bool isComOpen) {
+        private void ChangeSerialParamUI(bool isComOpen) {
             // open -> disable
             LbComList.Enabled = !isComOpen;
             CbBoudrateList.Enabled = !isComOpen;
@@ -237,7 +236,7 @@ namespace SerialPlotter {
             cbChartRefreshRate.Enabled = !isPlotting;
             if(isPlotting) {
                 BtnPlotStart.Text = "plot stop";
-                chartRefreshTimer.Interval = getChartRefreshRatePeriod();
+                chartRefreshTimer.Interval = GetChartRefreshRatePeriod();
                 chartRefreshTimer.Start();
             } else {
                 BtnPlotStart.Text = "plot start";
@@ -259,7 +258,7 @@ namespace SerialPlotter {
 
         private void Form1_Shown(object sender, EventArgs e) {
             // set DataRecv EventHandler
-            serial.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialDataReceivedEventHandler);
+            serial.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialDataReceivedEventHandler);
 
             // window position setting
             int needRestorePosition = 0;
@@ -273,17 +272,17 @@ namespace SerialPlotter {
             }
         }
 
-        public bool startTimer() {
+        public bool StartTimer() {
             stopWatch.Start();
             return true;
         }
 
-        public bool stopTimer() {
+        public bool StopTimer() {
             stopWatch.Stop();
             return true;
         }
 
-        public bool resetTimer() {
+        public bool ResetTimer() {
             if(stopWatch.IsRunning) {
                 stopWatch.Restart();
             } else {
@@ -348,17 +347,17 @@ namespace SerialPlotter {
             FormatWindow fw = new FormatWindow();
         }
 
-        private void dataTableToolStripMenuItem_Click(object sender, EventArgs e) {
-            DataTableWindow dtw = new DataTableWindow(dataManager.getDataSource());
+        private void DataTableToolStripMenuItem_Click(object sender, EventArgs e) {
+            DataTableWindow dtw = new DataTableWindow(dataManager.GetDataSource());
         }
 
         /// <summary>
         /// リフレッシュレートを周期(ms)で返す関数
         /// </summary>
         /// <returns></returns>
-        private float getChartRefreshRatePeriod() {
+        private float GetChartRefreshRatePeriod() {
             if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { getChartRefreshRatePeriod(); });
+                this.BeginInvoke((MethodInvoker)delegate { GetChartRefreshRatePeriod(); });
                 return 0.0f;    //dummy
             } else {
                 string hzValStr = cbChartRefreshRate.SelectedItem.ToString();
@@ -367,13 +366,13 @@ namespace SerialPlotter {
             }
         }
 
-        private void cbPlotMarker_CheckedChanged(object sender, EventArgs e) {
+        private void CbPlotMarker_CheckedChanged(object sender, EventArgs e) {
             foreach(var g in graph) {
                 g.ChangeMarkerStyle(cbPlotMarker.Checked);
             }
         }
 
-        private void btnSerialSend_Click(object sender, EventArgs e) {
+        private void BtnSerialSend_Click(object sender, EventArgs e) {
             if(!serial.IsOpen) {
                 return;
             }
@@ -387,12 +386,12 @@ namespace SerialPlotter {
             serial.Write(payload, 0, payload.Length);
         }
 
-        private void tbSerialSend_KeyPress(object sender, KeyPressEventArgs e) {
+        private void TbSerialSend_KeyPress(object sender, KeyPressEventArgs e) {
             if(e.KeyChar == '\r') {
                 // disable beep
                 e.Handled = true;
                 // call send
-                btnSerialSend_Click(sender, e);
+                BtnSerialSend_Click(sender, e);
             }
         }
     }

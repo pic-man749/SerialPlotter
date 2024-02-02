@@ -49,7 +49,7 @@ namespace SerialPlotter {
                 // check key existance and set data
                 if(!buffer.ContainsKey(key)) {
                     // make new series
-                    buffer[key] = makeNewSeries(key);
+                    buffer[key] = MakeNewSeries(key);
                     // set graph
                     chartDefault.Series.Add(buffer[key]);
                 }
@@ -63,7 +63,7 @@ namespace SerialPlotter {
             buffer.Clear();
         }
 
-        public void setPlotRange(int range) {
+        public void SetPlotRange(int range) {
             plotRange = range;
         }
 
@@ -107,7 +107,7 @@ namespace SerialPlotter {
         }
 
         public void ChangePlotRange(double now, int range) {
-            setPlotRange(range);
+            SetPlotRange(range);
             if(this.InvokeRequired) {
                 this.BeginInvoke((MethodInvoker)delegate { ChangePlotRange(now, range); });
             } else {
@@ -122,7 +122,7 @@ namespace SerialPlotter {
         Point? prevPosition = null;
         ToolTip tooltip = new ToolTip();
 
-        private void chart_MouseMove(object sender, MouseEventArgs e) {
+        private void Chart_MouseMove(object sender, MouseEventArgs e) {
             var pos = e.Location;
             if(prevPosition.HasValue && pos == prevPosition.Value) {
                 return;
@@ -138,7 +138,7 @@ namespace SerialPlotter {
             }
         }
 
-        private Series makeNewSeries(string name) {
+        private Series MakeNewSeries(string name) {
             Series seriesLine = new Series();
             seriesLine.ChartType = SeriesChartType.Line;
             seriesLine.LegendText = name;
