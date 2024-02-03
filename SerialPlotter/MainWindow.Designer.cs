@@ -23,6 +23,7 @@
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.書式SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,16 +64,18 @@
             this.CbBoudrateList = new System.Windows.Forms.ComboBox();
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
-            this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
+            this.sfdLogging = new System.Windows.Forms.SaveFileDialog();
             this.lGraphFps = new System.Windows.Forms.Label();
             this.dgvGraphWindow = new System.Windows.Forms.DataGridView();
             this.series = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.graphWindowId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGraphWindow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -525,11 +528,11 @@
             this.LbComList.Size = new System.Drawing.Size(514, 64);
             this.LbComList.TabIndex = 39;
             // 
-            // SfdLogging
+            // sfdLogging
             // 
-            this.SfdLogging.DefaultExt = "txt";
-            this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
-            this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
+            this.sfdLogging.DefaultExt = "txt";
+            this.sfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
+            this.sfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
             // 
             // lGraphFps
             // 
@@ -596,6 +599,7 @@
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGraphWindow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -623,7 +627,7 @@
         private System.Windows.Forms.Button BtnPlotReset;
         private System.Windows.Forms.Label LabelPoltPoint;
         private System.Windows.Forms.CheckBox CbLoggingFlag;
-        private System.Windows.Forms.SaveFileDialog SfdLogging;
+        private System.Windows.Forms.SaveFileDialog sfdLogging;
         private System.Windows.Forms.TextBox TbLogFilePath;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox CbNewLine;
@@ -647,6 +651,7 @@
         private System.Windows.Forms.DataGridView dgvGraphWindow;
         private System.Windows.Forms.DataGridViewTextBoxColumn series;
         private System.Windows.Forms.DataGridViewComboBoxColumn graphWindowId;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

@@ -322,10 +322,10 @@ namespace SerialPlotter {
 
             // check(first)
             if(isLoggingEnabled) {
-                SfdLogging.FileName = String.Format("{0:yyyyMMdd_HHmmss}", DateTime.Now);
-                if(SfdLogging.ShowDialog() == DialogResult.OK) {
-                    if((logFileStream = SfdLogging.OpenFile()) != null) {
-                        TbLogFilePath.Text = SfdLogging.FileNames[0];
+                sfdLogging.FileName = String.Format("{0:yyyyMMdd_HHmmss}", DateTime.Now);
+                if(sfdLogging.ShowDialog() == DialogResult.OK) {
+                    if((logFileStream = sfdLogging.OpenFile()) != null) {
+                        TbLogFilePath.Text = sfdLogging.FileNames[0];
                     }
                 }
             } else {
