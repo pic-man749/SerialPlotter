@@ -144,7 +144,7 @@ namespace SerialPlotter {
 
         private Series MakeNewSeries(string name) {
             Series seriesLine = new Series();
-            seriesLine.ChartType = SeriesChartType.Line;
+            seriesLine.ChartType = SeriesChartType.FastLine;
             seriesLine.LegendText = name;
             seriesLine.BorderWidth = 2;
             seriesLine.MarkerStyle = isMarkerPlot ? MarkerStyle.Circle : MarkerStyle.None;
@@ -155,9 +155,9 @@ namespace SerialPlotter {
 
         private void GraphWindow_FormClosing(object sender, FormClosingEventArgs e) {
             // default graph window, then cancel
-            if(GID == 0) {
+            // if(GID == 0) {
                 e.Cancel = true;
-            }
+            // }
         }
     }
 }

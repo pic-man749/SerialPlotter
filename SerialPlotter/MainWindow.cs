@@ -32,7 +32,7 @@ namespace SerialPlotter {
         private List<GraphWindow> graph = new List<GraphWindow>();
         private int graphCounter = 0;
 
-        private List<string> knownSeriesNameList = new List<string>();
+        private Dictionary<string, int> knownSeriesNameDict = new Dictionary<string,int >();
         private DataTable dtGraphWindow = new DataTable();
 
         public SerialPlotter() {
@@ -140,8 +140,8 @@ namespace SerialPlotter {
 
                 foreach(string key in kvs.Keys) {
                     // insert series table
-                    if(!knownSeriesNameList.Contains(key)) {
-                        knownSeriesNameList.Add(key);
+                    if(!knownSeriesNameDict.Keys.Contains(key)) {
+                        knownSeriesNameDict.Add(key, 0);
                         AddSeries(key);
                     }
 
@@ -152,8 +152,11 @@ namespace SerialPlotter {
                     if(!isPlotting) {
                         return;
                     }
+                    int id = knownSeriesNameDict[key];
                     foreach(var g in graph) {
-                        g.AddSeriesToChart(recvTime, key, kvs[key]);
+                        if(g.GID == id) {
+                            g.AddSeriesToChart(recvTime, key, kvs[key]);
+                        }
                     }
                 }
             }
@@ -456,6 +459,25 @@ namespace SerialPlotter {
             foreach(var g in graph) {
                 g.SetIsFullScaleBuffer(cbBufferFullScale.Checked);
             }
+        }
+
+        private void btnNewWindow_Click(object sender, EventArgs e) {
+            AddGraphWindowId(graphCounter);
+            graph.Add(new GraphWindow(graphCounter++,
+                                    TrackBarPlotTime.Value,
+                                    cbPlotMarker.Checked,
+                                    cbBufferFullScale.Checked,
+                                    TrackBarPlotTime.Maximum));
+        }
+
+        private void dgvGraphWindow_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+            // if graph window id changed, update knownSeriesNameDict
+            if(e.ColumnIndex == 1) {
+                string key = dgvGraphWindow[0, e.RowIndex].Value.ToString();
+                int val = int.Parse(dgvGraphWindow[e.ColumnIndex, e.RowIndex].Value.ToString());
+                knownSeriesNameDict[key] = val;
+            }
+            
         }
     }
 }

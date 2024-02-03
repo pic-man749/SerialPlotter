@@ -29,6 +29,10 @@
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.btnNewWindow = new System.Windows.Forms.Button();
+            this.dgvGraphWindow = new System.Windows.Forms.DataGridView();
+            this.series = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lGraphFps = new System.Windows.Forms.Label();
             this.cbBufferFullScale = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cbChartRefreshRate = new System.Windows.Forms.ComboBox();
@@ -64,14 +68,11 @@
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
             this.sfdLogging = new System.Windows.Forms.SaveFileDialog();
-            this.lGraphFps = new System.Windows.Forms.Label();
-            this.dgvGraphWindow = new System.Windows.Forms.DataGridView();
-            this.series = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGraphWindow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvGraphWindow)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -118,6 +119,7 @@
             // 
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GBPlotSettings.Controls.Add(this.btnNewWindow);
             this.GBPlotSettings.Controls.Add(this.dgvGraphWindow);
             this.GBPlotSettings.Controls.Add(this.lGraphFps);
             this.GBPlotSettings.Controls.Add(this.cbBufferFullScale);
@@ -135,6 +137,51 @@
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
+            // 
+            // btnNewWindow
+            // 
+            this.btnNewWindow.Location = new System.Drawing.Point(6, 47);
+            this.btnNewWindow.Name = "btnNewWindow";
+            this.btnNewWindow.Size = new System.Drawing.Size(118, 23);
+            this.btnNewWindow.TabIndex = 65;
+            this.btnNewWindow.Text = "new Window";
+            this.btnNewWindow.UseVisualStyleBackColor = true;
+            this.btnNewWindow.Click += new System.EventHandler(this.btnNewWindow_Click);
+            // 
+            // dgvGraphWindow
+            // 
+            this.dgvGraphWindow.AllowUserToAddRows = false;
+            this.dgvGraphWindow.AllowUserToDeleteRows = false;
+            this.dgvGraphWindow.AllowUserToOrderColumns = true;
+            this.dgvGraphWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvGraphWindow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGraphWindow.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.series});
+            this.dgvGraphWindow.Location = new System.Drawing.Point(6, 105);
+            this.dgvGraphWindow.Name = "dgvGraphWindow";
+            this.dgvGraphWindow.RowHeadersVisible = false;
+            this.dgvGraphWindow.RowHeadersWidth = 50;
+            this.dgvGraphWindow.RowTemplate.Height = 21;
+            this.dgvGraphWindow.Size = new System.Drawing.Size(748, 134);
+            this.dgvGraphWindow.TabIndex = 64;
+            this.dgvGraphWindow.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGraphWindow_CellValueChanged);
+            // 
+            // series
+            // 
+            this.series.HeaderText = "series";
+            this.series.Name = "series";
+            this.series.ReadOnly = true;
+            // 
+            // lGraphFps
+            // 
+            this.lGraphFps.AutoSize = true;
+            this.lGraphFps.Location = new System.Drawing.Point(651, 52);
+            this.lGraphFps.Name = "lGraphFps";
+            this.lGraphFps.Size = new System.Drawing.Size(23, 12);
+            this.lGraphFps.TabIndex = 63;
+            this.lGraphFps.Text = "fps:";
             // 
             // cbBufferFullScale
             // 
@@ -223,7 +270,7 @@
             // 
             // BtnPlotReset
             // 
-            this.BtnPlotReset.Location = new System.Drawing.Point(6, 47);
+            this.BtnPlotReset.Location = new System.Drawing.Point(6, 76);
             this.BtnPlotReset.Name = "BtnPlotReset";
             this.BtnPlotReset.Size = new System.Drawing.Size(120, 23);
             this.BtnPlotReset.TabIndex = 56;
@@ -530,40 +577,6 @@
             this.sfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.sfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
             // 
-            // lGraphFps
-            // 
-            this.lGraphFps.AutoSize = true;
-            this.lGraphFps.Location = new System.Drawing.Point(651, 52);
-            this.lGraphFps.Name = "lGraphFps";
-            this.lGraphFps.Size = new System.Drawing.Size(23, 12);
-            this.lGraphFps.TabIndex = 63;
-            this.lGraphFps.Text = "fps:";
-            // 
-            // dgvGraphWindow
-            // 
-            this.dgvGraphWindow.AllowUserToAddRows = false;
-            this.dgvGraphWindow.AllowUserToDeleteRows = false;
-            this.dgvGraphWindow.AllowUserToOrderColumns = true;
-            this.dgvGraphWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvGraphWindow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGraphWindow.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.series});
-            this.dgvGraphWindow.Location = new System.Drawing.Point(7, 77);
-            this.dgvGraphWindow.Name = "dgvGraphWindow";
-            this.dgvGraphWindow.RowHeadersVisible = false;
-            this.dgvGraphWindow.RowHeadersWidth = 50;
-            this.dgvGraphWindow.RowTemplate.Height = 21;
-            this.dgvGraphWindow.Size = new System.Drawing.Size(747, 162);
-            this.dgvGraphWindow.TabIndex = 64;
-            // 
-            // series
-            // 
-            this.series.HeaderText = "series";
-            this.series.Name = "series";
-            this.series.ReadOnly = true;
-            // 
             // SerialPlotter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -584,10 +597,10 @@
             this.menuStrip1.PerformLayout();
             this.GBPlotSettings.ResumeLayout(false);
             this.GBPlotSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGraphWindow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvGraphWindow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -638,6 +651,7 @@
         private System.Windows.Forms.Label lGraphFps;
         private System.Windows.Forms.DataGridView dgvGraphWindow;
         private System.Windows.Forms.DataGridViewTextBoxColumn series;
+        private System.Windows.Forms.Button btnNewWindow;
     }
 }
 
