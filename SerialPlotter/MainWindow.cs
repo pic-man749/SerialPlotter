@@ -132,12 +132,23 @@ namespace SerialPlotter {
             }
         }
 
-        private delegate void DelegateAddSeriesToChart(double now, string key, double value);
+        private double lastUpdateTime = 0;
 
         private void UpdateChart(Object source, ElapsedEventArgs e) {
             double now = stopWatch.Elapsed.TotalSeconds;
             foreach(var g in graph) {
                 g.UpdateChart(now);
+            }
+            // show fps
+            UpdateGraphFps(1.0 / (now - lastUpdateTime));
+            lastUpdateTime = now;
+        }
+
+        private void UpdateGraphFps(double fps) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { UpdateGraphFps(fps); });
+            } else {
+                lGraphFps.Text = $"fps:{fps:00.00}";
             }
         }
 
