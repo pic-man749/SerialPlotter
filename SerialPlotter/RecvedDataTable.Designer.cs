@@ -1,5 +1,5 @@
 ﻿namespace SerialPlotter {
-    partial class DataTableWindow {
+    partial class RecvedDataTableWindow {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -23,11 +23,8 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.bsRecvData = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsRecvData)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -52,7 +49,6 @@
             this.Name = "DataTableWindow";
             this.Text = "DataTable";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsRecvData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -60,6 +56,5 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource bsRecvData;
     }
 }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SerialPlotter {
-    public partial class DataTableWindow : Form {
+    public partial class RecvedDataTableWindow : Form {
 
-        public DataTableWindow(DataTable dt) {
+        public RecvedDataTableWindow(DataTable dt) {
             InitializeComponent();
             this.dataGridView1.DataSource = dt;
             this.Show();

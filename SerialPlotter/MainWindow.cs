@@ -359,7 +359,7 @@ namespace SerialPlotter {
         }
 
         private void DataTableToolStripMenuItem_Click(object sender, EventArgs e) {
-            DataTableWindow _ = new DataTableWindow(dataManager.GetDataSource());
+            RecvedDataTableWindow _ = new RecvedDataTableWindow(dataManager.GetDataSource());
         }
 
         /// <summary>

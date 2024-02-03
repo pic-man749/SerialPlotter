@@ -51,11 +51,11 @@
   <ItemGroup>
     <Compile Include="DataManager.cs" />
     <Compile Include="DataParser.cs" />
-    <Compile Include="DataTable.cs">
+    <Compile Include="RecvedDataTable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataTable.Designer.cs">
-      <DependentUpon>DataTable.cs</DependentUpon>
+    <Compile Include="RecvedDataTable.Designer.cs">
+      <DependentUpon>RecvedDataTable.cs</DependentUpon>
     </Compile>
     <Compile Include="FormatWindow.cs">
       <SubType>Form</SubType>
@@ -81,8 +81,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DataTable.resx">
-      <DependentUpon>DataTable.cs</DependentUpon>
+    <EmbeddedResource Include="RecvedDataTable.resx">
+      <DependentUpon>RecvedDataTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormatWindow.resx">
       <DependentUpon>FormatWindow.cs</DependentUpon>

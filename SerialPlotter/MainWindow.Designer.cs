@@ -23,7 +23,6 @@
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.書式SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,13 +68,11 @@
             this.dgvGraphWindow = new System.Windows.Forms.DataGridView();
             this.series = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.graphWindowId = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGraphWindow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -599,7 +596,6 @@
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGraphWindow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -651,7 +647,6 @@
         private System.Windows.Forms.DataGridView dgvGraphWindow;
         private System.Windows.Forms.DataGridViewTextBoxColumn series;
         private System.Windows.Forms.DataGridViewComboBoxColumn graphWindowId;
-        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 
