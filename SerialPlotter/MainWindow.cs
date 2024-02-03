@@ -30,7 +30,10 @@ namespace SerialPlotter {
         private System.Timers.Timer chartRefreshTimer = new System.Timers.Timer();
 
         private List<GraphWindow> graph = new List<GraphWindow>();
-        private int graphCounte = 0;
+        private int graphCounter = 0;
+
+        private List<string> knownSeriesNameList = new List<string>();
+        private DataTable dtGraphWindow = new DataTable();
 
         public SerialPlotter() {
             InitializeComponent();
@@ -65,15 +68,29 @@ namespace SerialPlotter {
             chartRefreshTimer.Elapsed += UpdateChart;
             chartRefreshTimer.Interval = GetChartRefreshRatePeriod();
 
+            // init series table
+            dtGraphWindow.Columns.Add("id");
+            dtGraphWindow.Columns.Add("displayName");
+            DataRow dr = dtGraphWindow.NewRow();
+            dr["id"] = graphCounter;
+            dr["displayName"] = graphCounter.ToString();
+            dtGraphWindow.Rows.Add(dr);
+            DataGridViewComboBoxColumn colGraphWindowId = new DataGridViewComboBoxColumn();
+            colGraphWindowId.DataPropertyName = "graphWindowId";
+            colGraphWindowId.DataSource = dtGraphWindow;
+            colGraphWindowId.ValueMember = "id";
+            colGraphWindowId.DisplayMember = "displayName";
+            colGraphWindowId.Name = "graph window id";
+            // insert after 0 : "series"
+            dgvGraphWindow.Columns.Insert(1, colGraphWindowId);
+
             // init chart area
-            graph.Add(new GraphWindow(graphCounte++,
+            graph.Add(new GraphWindow(graphCounter++,
                                     TrackBarPlotTime.Value,
                                     cbPlotMarker.Checked,
                                     cbBufferFullScale.Checked,
                                     TrackBarPlotTime.Maximum ));
 
-            // init series table
-            dgvGraphWindow.DataSource = dataManager.GetRecvedDataSeriesTable();
         }
         // get COM port name and refresh ListBox
         private void GetNowConnectedSerialPorts() {
@@ -85,6 +102,7 @@ namespace SerialPlotter {
                 LbComList.SelectedIndex = 0;
             }
         }
+
         /// <summary>
         /// Serial受信コールバック関数
         /// </summary>
@@ -121,6 +139,12 @@ namespace SerialPlotter {
                 Dictionary<string, double> kvs = parser.parse(data);
 
                 foreach(string key in kvs.Keys) {
+                    // insert series table
+                    if(!knownSeriesNameList.Contains(key)) {
+                        knownSeriesNameList.Add(key);
+                        AddSeries(key);
+                    }
+
                     // insert new data
                     dataManager.InsertRecvedData(recvTime, key, kvs[key]);
 
@@ -145,6 +169,25 @@ namespace SerialPlotter {
             // show fps
             UpdateGraphFps(1.0 / (now - lastUpdateTime));
             lastUpdateTime = now;
+        }
+        private void AddSeries(string key) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { AddSeries(key); });
+            } else {
+                int row = dgvGraphWindow.Rows.Add(key);
+                dgvGraphWindow[1, row].Value = "0"; // default window id
+            }
+        }
+
+        private void AddGraphWindowId(int id) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { AddGraphWindowId(id); });
+            } else {
+                DataRow dr = dtGraphWindow.NewRow();
+                dr["id"] = id;
+                dr["displayName"] = id.ToString();
+                dtGraphWindow.Rows.Add(dr);
+            }
         }
 
         private void UpdateGraphFps(double fps) {
