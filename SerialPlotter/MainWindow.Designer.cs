@@ -66,8 +66,6 @@
             this.sfdLogging = new System.Windows.Forms.SaveFileDialog();
             this.lGraphFps = new System.Windows.Forms.Label();
             this.dgvGraphWindow = new System.Windows.Forms.DataGridView();
-            this.series = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.graphWindowId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
@@ -549,9 +547,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvGraphWindow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGraphWindow.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.series,
-            this.graphWindowId});
             this.dgvGraphWindow.Location = new System.Drawing.Point(7, 77);
             this.dgvGraphWindow.Name = "dgvGraphWindow";
             this.dgvGraphWindow.RowHeadersVisible = false;
@@ -559,18 +554,6 @@
             this.dgvGraphWindow.RowTemplate.Height = 21;
             this.dgvGraphWindow.Size = new System.Drawing.Size(747, 162);
             this.dgvGraphWindow.TabIndex = 64;
-            // 
-            // series
-            // 
-            this.series.Frozen = true;
-            this.series.HeaderText = "series";
-            this.series.Name = "series";
-            // 
-            // graphWindowId
-            // 
-            this.graphWindowId.Frozen = true;
-            this.graphWindowId.HeaderText = "graph window id";
-            this.graphWindowId.Name = "graphWindowId";
             // 
             // SerialPlotter
             // 
@@ -645,8 +628,6 @@
         private System.Windows.Forms.CheckBox cbSerialSendAddCr;
         private System.Windows.Forms.Label lGraphFps;
         private System.Windows.Forms.DataGridView dgvGraphWindow;
-        private System.Windows.Forms.DataGridViewTextBoxColumn series;
-        private System.Windows.Forms.DataGridViewComboBoxColumn graphWindowId;
     }
 }
 

@@ -71,6 +71,9 @@ namespace SerialPlotter {
                                     cbPlotMarker.Checked,
                                     cbBufferFullScale.Checked,
                                     TrackBarPlotTime.Maximum ));
+
+            // init series table
+            dgvGraphWindow.DataSource = dataManager.GetRecvedDataSeriesTable();
         }
         // get COM port name and refresh ListBox
         private void GetNowConnectedSerialPorts() {
@@ -119,7 +122,7 @@ namespace SerialPlotter {
 
                 foreach(string key in kvs.Keys) {
                     // insert new data
-                    dataManager.InsertData(recvTime, key, kvs[key]);
+                    dataManager.InsertRecvedData(recvTime, key, kvs[key]);
 
                     // plot
                     if(!isPlotting) {
@@ -359,7 +362,7 @@ namespace SerialPlotter {
         }
 
         private void DataTableToolStripMenuItem_Click(object sender, EventArgs e) {
-            RecvedDataTableWindow _ = new RecvedDataTableWindow(dataManager.GetDataSource());
+            RecvedDataTableWindow _ = new RecvedDataTableWindow(dataManager.GetRecvedDataTable());
         }
 
         /// <summary>
