@@ -65,6 +65,12 @@ namespace SerialPlotter {
             chartRefreshTimer.Elapsed += UpdateChart;
             chartRefreshTimer.Interval = GetChartRefreshRatePeriod();
 
+            // init tb
+            if(cbAutoScale.Checked) {
+                tbYMax.Enabled = false;
+                tbYMin.Enabled = false;
+            }
+
             // init chart area
             graph.Add(new GraphWindow(graphCounte++,
                                     TrackBarPlotTime.Value,
@@ -398,6 +404,33 @@ namespace SerialPlotter {
         private void CbBufferFullScale_CheckedChanged(object sender, EventArgs e) {
             foreach(var g in graph) {
                 g.SetIsFullScaleBuffer(cbBufferFullScale.Checked);
+            }
+        }
+
+        private void SetYScale(object sender, EventArgs e) {
+            double min = double.NaN;
+            double max = double.NaN;
+            if(!cbAutoScale.Checked) {
+                tbYMax.Enabled = true;
+                tbYMin.Enabled = true;
+                try {
+                    // parse and validation
+                    double _min = double.Parse(tbYMin.Text);
+                    double _max = double.Parse(tbYMax.Text);
+                    if(_min < _max) {
+                        min = _min;
+                        max = _max;
+                    }
+                } catch {
+                    min = double.NaN;
+                    max = double.NaN;
+                }
+            } else {
+                tbYMax.Enabled = false;
+                tbYMin.Enabled = false;
+            }
+            foreach(var g in graph) {
+                g.SetYScale(min, max);
             }
         }
     }

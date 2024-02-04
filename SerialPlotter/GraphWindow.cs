@@ -122,6 +122,17 @@ namespace SerialPlotter {
             }
         }
 
+        public void SetYScale(double min, double max) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { SetYScale(min, max); });
+            } else {
+                for(int cnt = 0; cnt < this.chartDefault.ChartAreas.Count; ++cnt) {
+                    this.chartDefault.ChartAreas[cnt].AxisY.Minimum = min;
+                    this.chartDefault.ChartAreas[cnt].AxisY.Maximum = max;
+                }
+            }
+        }
+
         // https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
         Point? prevPosition = null;
         ToolTip tooltip = new ToolTip();
