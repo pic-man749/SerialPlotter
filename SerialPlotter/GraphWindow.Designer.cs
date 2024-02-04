@@ -27,11 +27,17 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartDefault = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslFps = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.chartDefault)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chartDefault
             // 
+            this.chartDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.AxisX.IsLabelAutoFit = false;
             chartArea1.AxisX.IsStartedFromZero = false;
             chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
@@ -57,13 +63,12 @@
             chartArea1.BackColor = System.Drawing.Color.White;
             chartArea1.InnerPlotPosition.Auto = false;
             chartArea1.InnerPlotPosition.Height = 85F;
-            chartArea1.InnerPlotPosition.Width = 90F;
-            chartArea1.InnerPlotPosition.X = 10F;
+            chartArea1.InnerPlotPosition.Width = 94F;
+            chartArea1.InnerPlotPosition.X = 6F;
             chartArea1.InnerPlotPosition.Y = 2F;
             chartArea1.IsSameFontSizeForAllAxes = true;
             chartArea1.Name = "ChartAreaDefault";
             this.chartDefault.ChartAreas.Add(chartArea1);
-            this.chartDefault.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             legend1.IsTextAutoFit = false;
             legend1.Name = "Legend1";
@@ -75,15 +80,33 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartDefault.Series.Add(series1);
-            this.chartDefault.Size = new System.Drawing.Size(784, 361);
+            this.chartDefault.Size = new System.Drawing.Size(784, 340);
             this.chartDefault.TabIndex = 49;
             this.chartDefault.Text = "chart1";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslFps});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 339);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
+            this.statusStrip1.TabIndex = 50;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsslFps
+            // 
+            this.tsslFps.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tsslFps.Name = "tsslFps";
+            this.tsslFps.Size = new System.Drawing.Size(29, 17);
+            this.tsslFps.Text = "fps:";
             // 
             // GraphWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 361);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.chartDefault);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialPlotter.Properties.Settings.Default, "settingGraphWIndowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::SerialPlotter.Properties.Settings.Default.settingGraphWIndowLocation;
@@ -92,12 +115,17 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GraphWindow_FormClosing);
             this.Shown += new System.EventHandler(this.GraphWindow_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.chartDefault)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chartDefault;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslFps;
     }
 }

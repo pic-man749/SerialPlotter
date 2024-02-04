@@ -55,8 +55,8 @@ namespace SerialPlotter {
             CbNewLine.Items.AddRange(Serial.getNewLines().ToArray());
             CbNewLine.SelectedIndex = 0;        // \n
             newLine = "\n";
-            // timeout:20[s]
-            serial.ReadTimeout = 20000;
+            // timeout:100[ms]
+            serial.ReadTimeout = 100;
 
             // set range value
             LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
@@ -95,18 +95,23 @@ namespace SerialPlotter {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SerialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e) {
+        // private void SerialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e) {
+        private void ThreadTaskSerialRecv() {
             // get recved time
             DataParser parser = new DataParser();
-            double recvTime = stopWatch.Elapsed.TotalSeconds;
 
-            while(serial.IsOpen && serial.BytesToRead > 0) {
+            while(serial.IsOpen) {
                 string data;
+                double recvTime;
                 try {
                     data = serial.ReadLine();
+                    recvTime = stopWatch.Elapsed.TotalSeconds;
+                } catch(TimeoutException) {
+                    continue;
                 } catch {
                     return;
                 }
+
 
                 // output log file
                 if(logFileStream != null) {
@@ -132,7 +137,7 @@ namespace SerialPlotter {
 
                     // plot
                     if(!isPlotting) {
-                        return;
+                        continue;
                     }
                     foreach(var g in graph) {
                         g.AddSeriesToChart(recvTime, key, kvs[key]);
@@ -140,8 +145,6 @@ namespace SerialPlotter {
                 }
             }
         }
-
-        private delegate void DelegateAddSeriesToChart(double now, string key, double value);
 
         private void UpdateChart(Object source, ElapsedEventArgs e) {
             double now = stopWatch.Elapsed.TotalSeconds;
@@ -213,6 +216,11 @@ namespace SerialPlotter {
                 BtnPlotStart_Click(sender, e);
                 BtnConnect.Text = "close";
                 dataTableToolStripMenuItem.Enabled = false;
+
+                Thread _ = new Thread(new ThreadStart(this.ThreadTaskSerialRecv));
+                _.IsBackground = true;
+                _.Start();
+
             } else if(BtnConnect.Text == "close") {
                 if(isPlotting) {
                     // stop plot
@@ -266,8 +274,6 @@ namespace SerialPlotter {
         }
 
         private void MainWindow_Shown(object sender, EventArgs e) {
-            // set DataRecv EventHandler
-            serial.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialDataReceivedEventHandler);
 
             // window position setting
             int needRestorePosition = 0;
