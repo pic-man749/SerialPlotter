@@ -230,16 +230,17 @@ namespace SerialPlotter {
                 BtnConnect.Text = "close";
                 dataTableToolStripMenuItem.Enabled = false;
 
+                // ready for recv thread
+                Thread _ = new Thread(new ThreadStart(this.ThreadTaskSerialRecv));
+                _.IsBackground = true;
                 // read dust data before plotting
-                try{
+                try {
                     serial.ReadExisting();
                     serial.ReadLine();
                 } catch(TimeoutException) {
                     ;
                 }
-                
-                Thread _ = new Thread(new ThreadStart(this.ThreadTaskSerialRecv));
-                _.IsBackground = true;
+                // start thread
                 _.Start();
 
             } else if(BtnConnect.Text == "close") {

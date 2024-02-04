@@ -83,6 +83,7 @@
             this.chartDefault.Size = new System.Drawing.Size(784, 340);
             this.chartDefault.TabIndex = 49;
             this.chartDefault.Text = "chart1";
+            this.chartDefault.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseMove);
             // 
             // statusStrip1
             // 
