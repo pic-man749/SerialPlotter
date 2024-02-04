@@ -214,5 +214,17 @@ namespace SerialPlotter.Properties {
                 this["settingYMax"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20, 20")]
+        public global::System.Drawing.Point settingGraphWIndowLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["settingGraphWIndowLocation"]));
+            }
+            set {
+                this["settingGraphWIndowLocation"] = value;
+            }
+        }
     }
 }
