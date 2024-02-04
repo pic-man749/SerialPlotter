@@ -29,6 +29,8 @@
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tblSeries = new System.Windows.Forms.TableLayoutPanel();
             this.tbYMax = new System.Windows.Forms.TextBox();
             this.tbYMin = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -117,6 +119,10 @@
             // 
             // GBPlotSettings
             // 
+            this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.GBPlotSettings.Controls.Add(this.label12);
+            this.GBPlotSettings.Controls.Add(this.tblSeries);
             this.GBPlotSettings.Controls.Add(this.tbYMax);
             this.GBPlotSettings.Controls.Add(this.tbYMin);
             this.GBPlotSettings.Controls.Add(this.label13);
@@ -133,10 +139,35 @@
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
             this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
-            this.GBPlotSettings.Size = new System.Drawing.Size(760, 96);
+            this.GBPlotSettings.Size = new System.Drawing.Size(760, 145);
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 95);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(86, 12);
+            this.label12.TabIndex = 68;
+            this.label12.Text = "detected series:";
+            // 
+            // tblSeries
+            // 
+            this.tblSeries.AutoSize = true;
+            this.tblSeries.ColumnCount = 5;
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.Location = new System.Drawing.Point(6, 110);
+            this.tblSeries.Name = "tblSeries";
+            this.tblSeries.RowCount = 1;
+            this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblSeries.Size = new System.Drawing.Size(748, 26);
+            this.tblSeries.TabIndex = 67;
             // 
             // tbYMax
             // 
@@ -587,14 +618,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 311);
+            this.ClientSize = new System.Drawing.Size(784, 361);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
             this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialPlotter.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::SerialPlotter.Properties.Settings.Default.WindowLocation;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(800, 350);
+            this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "SerialPlotter";
             this.Text = "SerialPlotter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -658,6 +689,8 @@
         private System.Windows.Forms.TextBox tbYMax;
         private System.Windows.Forms.TextBox tbYMin;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TableLayoutPanel tblSeries;
+        private System.Windows.Forms.Label label12;
     }
 }
 
