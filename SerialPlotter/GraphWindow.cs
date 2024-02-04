@@ -136,7 +136,7 @@ namespace SerialPlotter {
             }
         }
 
-        // https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
+        // original : https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
         Point? prevPosition = null;
         ToolTip tooltip = new ToolTip();
 
@@ -150,8 +150,10 @@ namespace SerialPlotter {
             var results = chartDefault.HitTest(pos.X, pos.Y, false, ChartElementType.DataPoint);
             foreach(var result in results) {
                 if(result.ChartElementType == ChartElementType.DataPoint) {
+                    var valueX = result.ChartArea.AxisX.PixelPositionToValue(pos.X);
                     var valueY = result.ChartArea.AxisY.PixelPositionToValue(pos.Y);
-                    tooltip.Show(((float)valueY).ToString(), chartDefault, pos.X, pos.Y - 15);
+                    string s = $"({(float)valueX}, {(float)valueY})";
+                    tooltip.Show(s, chartDefault, pos.X, pos.Y - 15);
                 }
             }
         }
