@@ -170,5 +170,18 @@ namespace SerialPlotter {
                 e.Cancel = true;
             }
         }
+
+        private void GraphWindow_Shown(object sender, EventArgs e) {
+            // window position setting
+            int needRestorePosition = 0;
+            foreach(Screen scr in Screen.AllScreens) {
+                if(scr.WorkingArea.Contains(this.Location.X, this.Location.Y)) {
+                    needRestorePosition++;
+                }
+            }
+            if(needRestorePosition == 0) {
+                this.Location = new System.Drawing.Point(110, 110);
+            }
+        }
     }
 }

@@ -90,6 +90,7 @@
             this.Name = "GraphWindow";
             this.Text = "GraphWindow";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GraphWindow_FormClosing);
+            this.Shown += new System.EventHandler(this.GraphWindow_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.chartDefault)).EndInit();
             this.ResumeLayout(false);
 

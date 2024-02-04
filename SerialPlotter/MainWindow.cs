@@ -55,6 +55,8 @@ namespace SerialPlotter {
             CbNewLine.Items.AddRange(Serial.getNewLines().ToArray());
             CbNewLine.SelectedIndex = 0;        // \n
             newLine = "\n";
+            // timeout:20[s]
+            serial.ReadTimeout = 20000;
 
             // set range value
             LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
@@ -95,7 +97,9 @@ namespace SerialPlotter {
         /// <param name="e"></param>
         private void SerialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e) {
             // get recved time
+            DataParser parser = new DataParser();
             double recvTime = stopWatch.Elapsed.TotalSeconds;
+
             while(serial.IsOpen && serial.BytesToRead > 0) {
                 string data;
                 try {
@@ -120,7 +124,6 @@ namespace SerialPlotter {
                 if(data[0] == IGNORE_START_CHAR) continue;
 
                 // parse
-                DataParser parser = new DataParser();
                 Dictionary<string, double> kvs = parser.parse(data);
 
                 foreach(string key in kvs.Keys) {
@@ -262,7 +265,7 @@ namespace SerialPlotter {
             Properties.Settings.Default.Save();
         }
 
-        private void Form1_Shown(object sender, EventArgs e) {
+        private void MainWindow_Shown(object sender, EventArgs e) {
             // set DataRecv EventHandler
             serial.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialDataReceivedEventHandler);
 

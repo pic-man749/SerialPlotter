@@ -117,8 +117,6 @@
             // 
             // GBPlotSettings
             // 
-            this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.GBPlotSettings.Controls.Add(this.tbYMax);
             this.GBPlotSettings.Controls.Add(this.tbYMin);
             this.GBPlotSettings.Controls.Add(this.label13);
@@ -301,8 +299,6 @@
             // 
             // GBSerialSettings
             // 
-            this.GBSerialSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.GBSerialSettings.Controls.Add(this.cbSerialSendAddNl);
             this.GBSerialSettings.Controls.Add(this.cbSerialSendAddCr);
             this.GBSerialSettings.Controls.Add(this.btnSerialSend);
@@ -591,18 +587,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 307);
+            this.ClientSize = new System.Drawing.Size(784, 311);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
             this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialPlotter.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::SerialPlotter.Properties.Settings.Default.WindowLocation;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(750, 330);
+            this.MinimumSize = new System.Drawing.Size(800, 350);
             this.Name = "SerialPlotter";
             this.Text = "SerialPlotter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.Shown += new System.EventHandler(this.MainWindow_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.GBPlotSettings.ResumeLayout(false);
