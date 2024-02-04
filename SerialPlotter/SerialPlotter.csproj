@@ -56,7 +56,19 @@
     <Compile Include="DataTable.Designer.cs">
       <DependentUpon>DataTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormatWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormatWindow.Designer.cs">
+      <DependentUpon>FormatWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="General.cs" />
+    <Compile Include="GraphWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphWindow.Designer.cs">
+      <DependentUpon>GraphWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Serial.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -70,6 +82,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DataTable.resx">
       <DependentUpon>DataTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormatWindow.resx">
+      <DependentUpon>FormatWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphWindow.resx">
+      <DependentUpon>GraphWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

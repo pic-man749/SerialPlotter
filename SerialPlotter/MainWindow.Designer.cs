@@ -23,20 +23,24 @@
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.書式SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tblSeries = new System.Windows.Forms.TableLayoutPanel();
+            this.tbYMax = new System.Windows.Forms.TextBox();
+            this.tbYMin = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbAutoScale = new System.Windows.Forms.CheckBox();
             this.cbBufferFullScale = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cbChartRefreshRate = new System.Windows.Forms.ComboBox();
             this.cbPlotMarker = new System.Windows.Forms.CheckBox();
             this.LabelPoltPoint = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.TrackBarPlotTime = new System.Windows.Forms.TrackBar();
             this.BtnPlotReset = new System.Windows.Forms.Button();
@@ -66,13 +70,11 @@
             this.CbBoudrateList = new System.Windows.Forms.ComboBox();
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
-            this.ChartDefault = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartDefault)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -113,27 +115,104 @@
             this.dataTableToolStripMenuItem.Name = "dataTableToolStripMenuItem";
             this.dataTableToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.dataTableToolStripMenuItem.Text = "DataTable(&D)";
-            this.dataTableToolStripMenuItem.Click += new System.EventHandler(this.dataTableToolStripMenuItem_Click);
+            this.dataTableToolStripMenuItem.Click += new System.EventHandler(this.DataTableToolStripMenuItem_Click);
             // 
             // GBPlotSettings
             // 
-            this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.GBPlotSettings.Controls.Add(this.label12);
+            this.GBPlotSettings.Controls.Add(this.tblSeries);
+            this.GBPlotSettings.Controls.Add(this.tbYMax);
+            this.GBPlotSettings.Controls.Add(this.tbYMin);
+            this.GBPlotSettings.Controls.Add(this.label13);
+            this.GBPlotSettings.Controls.Add(this.cbAutoScale);
             this.GBPlotSettings.Controls.Add(this.cbBufferFullScale);
             this.GBPlotSettings.Controls.Add(this.label9);
             this.GBPlotSettings.Controls.Add(this.cbChartRefreshRate);
             this.GBPlotSettings.Controls.Add(this.cbPlotMarker);
             this.GBPlotSettings.Controls.Add(this.LabelPoltPoint);
+            this.GBPlotSettings.Controls.Add(this.label11);
             this.GBPlotSettings.Controls.Add(this.label6);
             this.GBPlotSettings.Controls.Add(this.TrackBarPlotTime);
             this.GBPlotSettings.Controls.Add(this.BtnPlotReset);
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
             this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
-            this.GBPlotSettings.Size = new System.Drawing.Size(760, 76);
+            this.GBPlotSettings.Size = new System.Drawing.Size(760, 145);
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 95);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(86, 12);
+            this.label12.TabIndex = 68;
+            this.label12.Text = "detected series:";
+            // 
+            // tblSeries
+            // 
+            this.tblSeries.AutoSize = true;
+            this.tblSeries.ColumnCount = 5;
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.Location = new System.Drawing.Point(6, 110);
+            this.tblSeries.Name = "tblSeries";
+            this.tblSeries.RowCount = 1;
+            this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblSeries.Size = new System.Drawing.Size(748, 26);
+            this.tblSeries.TabIndex = 67;
+            // 
+            // tbYMax
+            // 
+            this.tbYMax.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingYMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbYMax.Location = new System.Drawing.Point(322, 68);
+            this.tbYMax.MaxLength = 16;
+            this.tbYMax.Name = "tbYMax";
+            this.tbYMax.Size = new System.Drawing.Size(100, 19);
+            this.tbYMax.TabIndex = 66;
+            this.tbYMax.Text = global::SerialPlotter.Properties.Settings.Default.settingYMax;
+            this.tbYMax.TextChanged += new System.EventHandler(this.SetYScale);
+            // 
+            // tbYMin
+            // 
+            this.tbYMin.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingYMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbYMin.Location = new System.Drawing.Point(193, 68);
+            this.tbYMin.MaxLength = 16;
+            this.tbYMin.Name = "tbYMin";
+            this.tbYMin.Size = new System.Drawing.Size(100, 19);
+            this.tbYMin.TabIndex = 65;
+            this.tbYMin.Text = global::SerialPlotter.Properties.Settings.Default.settingYMin;
+            this.tbYMin.TextChanged += new System.EventHandler(this.SetYScale);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(299, 71);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(17, 12);
+            this.label13.TabIndex = 64;
+            this.label13.Text = "～";
+            // 
+            // cbAutoScale
+            // 
+            this.cbAutoScale.AutoSize = true;
+            this.cbAutoScale.Checked = global::SerialPlotter.Properties.Settings.Default.settingAutoScale;
+            this.cbAutoScale.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAutoScale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingAutoScale", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbAutoScale.Location = new System.Drawing.Point(428, 70);
+            this.cbAutoScale.Name = "cbAutoScale";
+            this.cbAutoScale.Size = new System.Drawing.Size(77, 16);
+            this.cbAutoScale.TabIndex = 63;
+            this.cbAutoScale.Text = "auto scale";
+            this.cbAutoScale.UseVisualStyleBackColor = true;
+            this.cbAutoScale.CheckedChanged += new System.EventHandler(this.SetYScale);
             // 
             // cbBufferFullScale
             // 
@@ -141,17 +220,18 @@
             this.cbBufferFullScale.Checked = global::SerialPlotter.Properties.Settings.Default.settingBufferFullScale;
             this.cbBufferFullScale.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbBufferFullScale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingBufferFullScale", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbBufferFullScale.Location = new System.Drawing.Point(548, 22);
+            this.cbBufferFullScale.Location = new System.Drawing.Point(616, 18);
             this.cbBufferFullScale.Name = "cbBufferFullScale";
             this.cbBufferFullScale.Size = new System.Drawing.Size(105, 16);
             this.cbBufferFullScale.TabIndex = 62;
             this.cbBufferFullScale.Text = "buffer full scale";
             this.cbBufferFullScale.UseVisualStyleBackColor = true;
+            this.cbBufferFullScale.CheckedChanged += new System.EventHandler(this.CbBufferFullScale_CheckedChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(454, 52);
+            this.label9.Location = new System.Drawing.Point(526, 43);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 12);
             this.label9.TabIndex = 61;
@@ -168,7 +248,7 @@
             "20",
             "30",
             "60"});
-            this.cbChartRefreshRate.Location = new System.Drawing.Point(548, 49);
+            this.cbChartRefreshRate.Location = new System.Drawing.Point(620, 40);
             this.cbChartRefreshRate.Name = "cbChartRefreshRate";
             this.cbChartRefreshRate.Size = new System.Drawing.Size(97, 20);
             this.cbChartRefreshRate.TabIndex = 60;
@@ -179,23 +259,32 @@
             this.cbPlotMarker.Checked = global::SerialPlotter.Properties.Settings.Default.settingPlotMarker;
             this.cbPlotMarker.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbPlotMarker.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingPlotMarker", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbPlotMarker.Location = new System.Drawing.Point(456, 22);
+            this.cbPlotMarker.Location = new System.Drawing.Point(528, 18);
             this.cbPlotMarker.Name = "cbPlotMarker";
             this.cbPlotMarker.Size = new System.Drawing.Size(82, 16);
             this.cbPlotMarker.TabIndex = 59;
             this.cbPlotMarker.Text = "plot marker";
             this.cbPlotMarker.UseVisualStyleBackColor = true;
-            this.cbPlotMarker.CheckedChanged += new System.EventHandler(this.cbPlotMarker_CheckedChanged);
+            this.cbPlotMarker.CheckedChanged += new System.EventHandler(this.CbPlotMarker_CheckedChanged);
             // 
             // LabelPoltPoint
             // 
             this.LabelPoltPoint.AutoSize = true;
             this.LabelPoltPoint.Font = new System.Drawing.Font("MS UI Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.LabelPoltPoint.Location = new System.Drawing.Point(399, 20);
+            this.LabelPoltPoint.Location = new System.Drawing.Point(471, 26);
             this.LabelPoltPoint.Name = "LabelPoltPoint";
             this.LabelPoltPoint.Size = new System.Drawing.Size(34, 15);
             this.LabelPoltPoint.TabIndex = 58;
             this.LabelPoltPoint.Text = "num";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(132, 71);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(57, 12);
+            this.label11.TabIndex = 55;
+            this.label11.Text = "plot scale:";
             // 
             // label6
             // 
@@ -210,12 +299,11 @@
             // 
             this.TrackBarPlotTime.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::SerialPlotter.Properties.Settings.Default, "settingPlotTime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.TrackBarPlotTime.Location = new System.Drawing.Point(193, 18);
-            this.TrackBarPlotTime.Maximum = 20;
+            this.TrackBarPlotTime.Maximum = 21;
             this.TrackBarPlotTime.Minimum = 1;
             this.TrackBarPlotTime.Name = "TrackBarPlotTime";
-            this.TrackBarPlotTime.Size = new System.Drawing.Size(200, 45);
+            this.TrackBarPlotTime.Size = new System.Drawing.Size(272, 45);
             this.TrackBarPlotTime.TabIndex = 57;
-            this.TrackBarPlotTime.TickFrequency = 2;
             this.TrackBarPlotTime.Value = global::SerialPlotter.Properties.Settings.Default.settingPlotTime;
             this.TrackBarPlotTime.ValueChanged += new System.EventHandler(this.TrackBarPlotPoint_ValueChanged);
             // 
@@ -242,8 +330,6 @@
             // 
             // GBSerialSettings
             // 
-            this.GBSerialSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.GBSerialSettings.Controls.Add(this.cbSerialSendAddNl);
             this.GBSerialSettings.Controls.Add(this.cbSerialSendAddCr);
             this.GBSerialSettings.Controls.Add(this.btnSerialSend);
@@ -308,7 +394,7 @@
             this.btnSerialSend.TabIndex = 60;
             this.btnSerialSend.Text = "send";
             this.btnSerialSend.UseVisualStyleBackColor = true;
-            this.btnSerialSend.Click += new System.EventHandler(this.btnSerialSend_Click);
+            this.btnSerialSend.Click += new System.EventHandler(this.BtnSerialSend_Click);
             // 
             // tbSerialSend
             // 
@@ -316,7 +402,7 @@
             this.tbSerialSend.Name = "tbSerialSend";
             this.tbSerialSend.Size = new System.Drawing.Size(446, 19);
             this.tbSerialSend.TabIndex = 59;
-            this.tbSerialSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSerialSend_KeyPress);
+            this.tbSerialSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbSerialSend_KeyPress);
             // 
             // CbLogWithTime
             // 
@@ -522,58 +608,6 @@
             this.LbComList.Size = new System.Drawing.Size(514, 64);
             this.LbComList.TabIndex = 39;
             // 
-            // ChartDefault
-            // 
-            this.ChartDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.IsStartedFromZero = false;
-            chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
-            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea1.AxisX.Maximum = 0D;
-            chartArea1.AxisX.MaximumAutoSize = 100F;
-            chartArea1.AxisX.Minimum = -10D;
-            chartArea1.AxisX.MinorGrid.Enabled = true;
-            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
-            chartArea1.AxisX.MinorTickMark.Enabled = true;
-            chartArea1.AxisX.Title = "[s]";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.IsLabelAutoFit = false;
-            chartArea1.AxisY.IsStartedFromZero = false;
-            chartArea1.AxisY.LabelAutoFitMinFontSize = 10;
-            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea1.AxisY.MaximumAutoSize = 100F;
-            chartArea1.AxisY.MinorGrid.Enabled = true;
-            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
-            chartArea1.AxisY.MinorTickMark.Enabled = true;
-            chartArea1.BackColor = System.Drawing.Color.White;
-            chartArea1.InnerPlotPosition.Auto = false;
-            chartArea1.InnerPlotPosition.Height = 85F;
-            chartArea1.InnerPlotPosition.Width = 90F;
-            chartArea1.InnerPlotPosition.X = 10F;
-            chartArea1.InnerPlotPosition.Y = 2F;
-            chartArea1.IsSameFontSizeForAllAxes = true;
-            chartArea1.Name = "ChartAreaDefault";
-            this.ChartDefault.ChartAreas.Add(chartArea1);
-            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            this.ChartDefault.Legends.Add(legend1);
-            this.ChartDefault.Location = new System.Drawing.Point(13, 286);
-            this.ChartDefault.Name = "ChartDefault";
-            series1.ChartArea = "ChartAreaDefault";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.ChartDefault.Series.Add(series1);
-            this.ChartDefault.Size = new System.Drawing.Size(759, 363);
-            this.ChartDefault.TabIndex = 48;
-            this.ChartDefault.Text = "chart1";
-            this.ChartDefault.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseMove);
-            // 
             // SfdLogging
             // 
             this.SfdLogging.DefaultExt = "txt";
@@ -584,19 +618,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.ClientSize = new System.Drawing.Size(784, 361);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
-            this.Controls.Add(this.ChartDefault);
             this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialPlotter.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::SerialPlotter.Properties.Settings.Default.WindowLocation;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(750, 600);
+            this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "SerialPlotter";
             this.Text = "SerialPlotter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.Shown += new System.EventHandler(this.MainWindow_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.GBPlotSettings.ResumeLayout(false);
@@ -604,7 +637,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartDefault)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -631,7 +663,6 @@
         private System.Windows.Forms.ListBox LbComList;
         private System.Windows.Forms.Button BtnPlotReset;
         private System.Windows.Forms.Label LabelPoltPoint;
-        private System.Windows.Forms.DataVisualization.Charting.Chart ChartDefault;
         private System.Windows.Forms.CheckBox CbLoggingFlag;
         private System.Windows.Forms.SaveFileDialog SfdLogging;
         private System.Windows.Forms.TextBox TbLogFilePath;
@@ -653,6 +684,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox cbSerialSendAddNl;
         private System.Windows.Forms.CheckBox cbSerialSendAddCr;
+        private System.Windows.Forms.CheckBox cbAutoScale;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbYMax;
+        private System.Windows.Forms.TextBox tbYMin;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TableLayoutPanel tblSeries;
+        private System.Windows.Forms.Label label12;
     }
 }
 

@@ -22,7 +22,6 @@ namespace SerialPlotter {
 
         const char IGNORE_START_CHAR = ';';
         private System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
-        private Dictionary<string, Series> buffer = new Dictionary<string, Series>();
         private bool isPlotting = false;
         private Stream logFileStream = null;
         private string newLine = String.Empty;
@@ -30,12 +29,13 @@ namespace SerialPlotter {
 
         private System.Timers.Timer chartRefreshTimer = new System.Timers.Timer();
 
+        private List<GraphWindow> graph = new List<GraphWindow>();
+        private int graphCounte = 0;
+
         public SerialPlotter() {
             InitializeComponent();
-            // init chart area
-            ChartDefault.Series.Clear();
             // show Serial Ports
-            getNowConnectedSerialPorts();
+            GetNowConnectedSerialPorts();
             // set combBoxes
             CbBoudrateList.Items.AddRange(Serial.getBoudrates().ToArray());
             CbBoudrateList.SelectedIndex = 1;   // select 9600
@@ -55,6 +55,8 @@ namespace SerialPlotter {
             CbNewLine.Items.AddRange(Serial.getNewLines().ToArray());
             CbNewLine.SelectedIndex = 0;        // \n
             newLine = "\n";
+            // timeout:100[ms]
+            serial.ReadTimeout = 50;
 
             // set range value
             LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
@@ -63,11 +65,23 @@ namespace SerialPlotter {
             cbChartRefreshRate.SelectedIndex = 4;   // 30
             // set chart update timer
             chartRefreshTimer.Elapsed += UpdateChart;
-            chartRefreshTimer.Interval = getChartRefreshRatePeriod();
-            chartRefreshTimer.Enabled = true;
+            chartRefreshTimer.Interval = GetChartRefreshRatePeriod();
+
+            // init tb
+            if(cbAutoScale.Checked) {
+                tbYMax.Enabled = false;
+                tbYMin.Enabled = false;
+            }
+
+            // init chart area
+            graph.Add(new GraphWindow(graphCounte++,
+                                    TrackBarPlotTime.Value,
+                                    cbPlotMarker.Checked,
+                                    cbBufferFullScale.Checked,
+                                    TrackBarPlotTime.Maximum ));
         }
         // get COM port name and refresh ListBox
-        private void getNowConnectedSerialPorts() {
+        private void GetNowConnectedSerialPorts() {
             // clear ListBox
             LbComList.Items.Clear();
             // get COMs with device name
@@ -76,18 +90,25 @@ namespace SerialPlotter {
                 LbComList.SelectedIndex = 0;
             }
         }
+
+        private List<string> knownKeyList = new List<string>();
         /// <summary>
         /// Serial受信コールバック関数
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void serialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e) {
+        private void ThreadTaskSerialRecv() {
             // get recved time
-            double recvTime = stopWatch.Elapsed.TotalSeconds;
-            while(serial.IsOpen && serial.BytesToRead > 0) {
+            DataParser parser = new DataParser();
+
+            while(serial.IsOpen) {
                 string data;
+                double recvTime;
                 try {
                     data = serial.ReadLine();
+                    recvTime = stopWatch.Elapsed.TotalSeconds;
+                } catch(TimeoutException) {
+                    continue;
                 } catch {
                     return;
                 }
@@ -108,69 +129,55 @@ namespace SerialPlotter {
                 if(data[0] == IGNORE_START_CHAR) continue;
 
                 // parse
-                DataParser parser = new DataParser();
                 Dictionary<string, double> kvs = parser.parse(data);
 
                 foreach(string key in kvs.Keys) {
                     // insert new data
-                    dataManager.insertData(recvTime, key, kvs[key]);
+                    dataManager.InsertData(recvTime, key, kvs[key]);
+                    // is new key? then add btn
+                    if(!knownKeyList.Contains(key)) {
+                        knownKeyList.Add(key);
+                        AddNewSeries(key);
+                    }
 
                     // plot
-                    if(isPlotting) {
-                        AddSeriesToChart(recvTime, key, kvs[key]);
+                    if(!isPlotting) {
+                        continue;
                     }
+                    // for feature..
+                    // foreach(var g in graph) {
+                    // }
+                    // check key exsitance because of to add will delay
+                    if(seriesEnableCbDict.Keys.Contains(key)) {
+                        // if checked is false, then skip
+                        if(!seriesEnableCbDict[key].Checked) {
+                            continue;
+                        }
+                    }
+                    graph[0].AddSeriesToChart(recvTime, key, kvs[key]);
                 }
-            }
-        }
-
-        private delegate void DelegateAddSeriesToChart(double now, string key, double value);
-
-        private void AddSeriesToChart(double now, string key, double value) {
-
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { AddSeriesToChart(now, key, value); });
-            } else {
-                // check key existance and set data
-                if(!buffer.ContainsKey(key)) {
-                    // make new series
-                    buffer[key] = makeNewSeries(key);
-                    // set graph
-                    ChartDefault.Series.Add(buffer[key]);
-                }
-                DataPoint dp = new DataPoint(now, value);
-                buffer[key].Points.Add(dp);
             }
         }
 
         private void UpdateChart(Object source, ElapsedEventArgs e) {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { UpdateChart(source, e); });
-            } else {
-                double now = stopWatch.Elapsed.TotalSeconds;
+            double now = stopWatch.Elapsed.TotalSeconds;
+            foreach(var g in graph) {
+                g.UpdateChart(now);
+            }
+        }
 
-                for(int cnt = 0; cnt < this.ChartDefault.ChartAreas.Count; ++cnt) {
-                    this.ChartDefault.ChartAreas[cnt].AxisX.Maximum = now;
-                    this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
-                }
-                // delete old point data
-                double bufferXSize = (cbBufferFullScale.Checked) ? now - this.TrackBarPlotTime.Maximum : ChartDefault.ChartAreas[0].AxisX.Minimum;
-                foreach(string k in buffer.Keys) {
-                    while(true) {
-                        if(buffer[k].Points.Count <= 0) {
-                            break;
-                        }
-                        if(buffer[k].Points[0].XValue >= bufferXSize) {
-                            break;
-                        }
-                        buffer[k].Points.RemoveAt(0);
-                    }
-                }
-                ChartDefault.ResetAutoValues();
+        private int GetTrackBarPlotTime() {
+
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { GetTrackBarPlotTime(); });
+                return 10;
+            } else {
+                return TrackBarPlotTime.Value;
             }
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e) {
-            getNowConnectedSerialPorts();
+            GetNowConnectedSerialPorts();
         }
 
         private void BtnConnect_Click(object sender, EventArgs e) {
@@ -205,9 +212,10 @@ namespace SerialPlotter {
                 serial.StopBits = (System.IO.Ports.StopBits)CbStopBit.SelectedIndex;
                 serial.Handshake = (System.IO.Ports.Handshake)CbHandshake.SelectedIndex;
 
-                ChartDefault.Series.Clear();
-                buffer.Clear();
-                dataManager.clearDataTable();
+                foreach(var g in graph) {
+                    g.ClearChart();
+                }
+                dataManager.ClearDataTable();
 
                 try {
                     serial.Open();
@@ -215,12 +223,26 @@ namespace SerialPlotter {
                     General.ShowErrMsgBox("Cannot open selected COM port.");
                     return;
                 }
-                resetTimer();
-                startTimer();
+                ResetTimer();
+                StartTimer();
                 // start plot
                 BtnPlotStart_Click(sender, e);
                 BtnConnect.Text = "close";
                 dataTableToolStripMenuItem.Enabled = false;
+
+                // ready for recv thread
+                Thread _ = new Thread(new ThreadStart(this.ThreadTaskSerialRecv));
+                _.IsBackground = true;
+                // read dust data before plotting
+                try {
+                    serial.ReadExisting();
+                    serial.ReadLine();
+                } catch(TimeoutException) {
+                    ;
+                }
+                // start thread
+                _.Start();
+
             } else if(BtnConnect.Text == "close") {
                 if(isPlotting) {
                     // stop plot
@@ -229,12 +251,12 @@ namespace SerialPlotter {
                 BtnConnect.Text = "connect";
                 dataTableToolStripMenuItem.Enabled = true;
                 serial.Close();
-                stopTimer();
+                StopTimer();
             }
-            changeSerialParamUI(serial.IsOpen);
+            ChangeSerialParamUI(serial.IsOpen);
         }
 
-        private void changeSerialParamUI(bool isComOpen) {
+        private void ChangeSerialParamUI(bool isComOpen) {
             // open -> disable
             LbComList.Enabled = !isComOpen;
             CbBoudrateList.Enabled = !isComOpen;
@@ -253,7 +275,7 @@ namespace SerialPlotter {
             cbChartRefreshRate.Enabled = !isPlotting;
             if(isPlotting) {
                 BtnPlotStart.Text = "plot stop";
-                chartRefreshTimer.Interval = getChartRefreshRatePeriod();
+                chartRefreshTimer.Interval = GetChartRefreshRatePeriod();
                 chartRefreshTimer.Start();
             } else {
                 BtnPlotStart.Text = "plot start";
@@ -271,11 +293,11 @@ namespace SerialPlotter {
                 logFileStream.Close();
             }
             Properties.Settings.Default.Save();
+            // wait for serial timeout
+            Task.Delay(serial.ReadTimeout + 1);
         }
 
-        private void Form1_Shown(object sender, EventArgs e) {
-            // set DataRecv EventHandler
-            serial.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialDataReceivedEventHandler);
+        private void MainWindow_Shown(object sender, EventArgs e) {
 
             // window position setting
             int needRestorePosition = 0;
@@ -289,28 +311,17 @@ namespace SerialPlotter {
             }
         }
 
-        private Series makeNewSeries(string name) {
-            Series seriesLine = new Series();
-            seriesLine.ChartType = SeriesChartType.Line;
-            seriesLine.LegendText = name;
-            seriesLine.BorderWidth = 2;
-            seriesLine.MarkerStyle = MarkerStyle.Circle;
-            seriesLine.MarkerSize = 6;
-            seriesLine.ChartArea = "ChartAreaDefault";
-            return seriesLine;
-        }
-
-        public bool startTimer() {
+        public bool StartTimer() {
             stopWatch.Start();
             return true;
         }
 
-        public bool stopTimer() {
+        public bool StopTimer() {
             stopWatch.Stop();
             return true;
         }
 
-        public bool resetTimer() {
+        public bool ResetTimer() {
             if(stopWatch.IsRunning) {
                 stopWatch.Restart();
             } else {
@@ -320,37 +331,17 @@ namespace SerialPlotter {
         }
 
         private void BtnPlotReset_Click(object sender, EventArgs e) {
-            ChartDefault.Series.Clear();
-            buffer.Clear();
-            dataManager.clearDataTable();
-        }
-
-        // https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
-        Point? prevPosition = null;
-        ToolTip tooltip = new ToolTip();
-
-        private void chart1_MouseMove(object sender, MouseEventArgs e) {
-            var pos = e.Location;
-            if(prevPosition.HasValue && pos == prevPosition.Value) {
-                return;
-            }
-            tooltip.RemoveAll();
-            prevPosition = pos;
-            var results = ChartDefault.HitTest(pos.X, pos.Y, false, ChartElementType.DataPoint);
-            foreach(var result in results) {
-                if(result.ChartElementType == ChartElementType.DataPoint) {
-                    var valueY = result.ChartArea.AxisY.PixelPositionToValue(pos.Y);
-                    tooltip.Show(((float)valueY).ToString(), ChartDefault, pos.X, pos.Y - 15);
-                }
+            foreach(var g in graph) {
+                g.ClearChart();
             }
         }
 
         private void TrackBarPlotPoint_ValueChanged(object sender, EventArgs e) {
-            LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
+            int range = TrackBarPlotTime.Value;
+            LabelPoltPoint.Text = range.ToString();
             double now = stopWatch.Elapsed.TotalSeconds;
-            for(int cnt = 0; cnt < this.ChartDefault.ChartAreas.Count; ++cnt) {
-                this.ChartDefault.ChartAreas[cnt].AxisX.Maximum = now;
-                this.ChartDefault.ChartAreas[cnt].AxisX.Minimum = now - this.TrackBarPlotTime.Value;
+            foreach(var g in graph) {
+                g.ChangePlotRange(now, range);
             }
         }
 
@@ -392,28 +383,20 @@ namespace SerialPlotter {
         }
 
         private void 書式SToolStripMenuItem_Click(object sender, EventArgs e) {
-            General.ShowMsgBox("書式",
-                "シリアルで転送するデータはASCII形式で下記の書式です。" + Environment.NewLine +
-                "空白は無視されません。" + Environment.NewLine +
-                "    {key}:{val},{key};{val},...\\n" + Environment.NewLine +
-                "" + Environment.NewLine +
-                "なお、先頭が「;」の場合はコメント行として無視されます。"
-                );
+            FormatWindow _ = new FormatWindow();
         }
 
-
-        DataTableWindow dtw;
-        private void dataTableToolStripMenuItem_Click(object sender, EventArgs e) {
-            dtw = new DataTableWindow(dataManager.getDataSource());
+        private void DataTableToolStripMenuItem_Click(object sender, EventArgs e) {
+            DataTableWindow _ = new DataTableWindow(dataManager.GetDataSource());
         }
 
         /// <summary>
         /// リフレッシュレートを周期(ms)で返す関数
         /// </summary>
         /// <returns></returns>
-        private float getChartRefreshRatePeriod() {
+        private float GetChartRefreshRatePeriod() {
             if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { getChartRefreshRatePeriod(); });
+                this.BeginInvoke((MethodInvoker)delegate { GetChartRefreshRatePeriod(); });
                 return 0.0f;    //dummy
             } else {
                 string hzValStr = cbChartRefreshRate.SelectedItem.ToString();
@@ -422,13 +405,13 @@ namespace SerialPlotter {
             }
         }
 
-        private void cbPlotMarker_CheckedChanged(object sender, EventArgs e) {
-            foreach(var s in buffer.Values) {
-                s.MarkerStyle = (cbPlotMarker.Checked)? MarkerStyle.Circle : MarkerStyle.None;
+        private void CbPlotMarker_CheckedChanged(object sender, EventArgs e) {
+            foreach(var g in graph) {
+                g.ChangeMarkerStyle(cbPlotMarker.Checked);
             }
         }
 
-        private void btnSerialSend_Click(object sender, EventArgs e) {
+        private void BtnSerialSend_Click(object sender, EventArgs e) {
             if(!serial.IsOpen) {
                 return;
             }
@@ -442,12 +425,73 @@ namespace SerialPlotter {
             serial.Write(payload, 0, payload.Length);
         }
 
-        private void tbSerialSend_KeyPress(object sender, KeyPressEventArgs e) {
+        private void TbSerialSend_KeyPress(object sender, KeyPressEventArgs e) {
             if(e.KeyChar == '\r') {
                 // disable beep
                 e.Handled = true;
                 // call send
-                btnSerialSend_Click(sender, e);
+                BtnSerialSend_Click(sender, e);
+            }
+        }
+
+        private void CbBufferFullScale_CheckedChanged(object sender, EventArgs e) {
+            foreach(var g in graph) {
+                g.SetIsFullScaleBuffer(cbBufferFullScale.Checked);
+            }
+        }
+
+        private void SetYScale(object sender, EventArgs e) {
+            double min = double.NaN;
+            double max = double.NaN;
+            if(!cbAutoScale.Checked) {
+                tbYMax.Enabled = true;
+                tbYMin.Enabled = true;
+                try {
+                    // parse and validation
+                    double _min = double.Parse(tbYMin.Text);
+                    double _max = double.Parse(tbYMax.Text);
+                    if(_min < _max) {
+                        min = _min;
+                        max = _max;
+                    }
+                } catch {
+                    min = double.NaN;
+                    max = double.NaN;
+                }
+            } else {
+                tbYMax.Enabled = false;
+                tbYMin.Enabled = false;
+            }
+            foreach(var g in graph) {
+                g.SetYScale(min, max);
+            }
+        }
+
+        private Dictionary<string, CheckBox> seriesEnableCbDict = new Dictionary<string, CheckBox>();
+
+        private void AddNewSeries(string key) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { AddNewSeries(key); });
+            } else {
+                int addBtnIdx = seriesEnableCbDict.Count + 1;
+                // add row
+                if(addBtnIdx % tblSeries.ColumnCount == 0) {
+                    // add new row
+                    tblSeries.RowCount += 1;
+                    tblSeries.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+                    // add new col
+                    for(int i = 0; i < tblSeries.ColumnCount; i++) {
+                        tblSeries.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                    }
+                }
+                // make new CheckBox and add Dict
+                CheckBox cb = new CheckBox();
+                cb.Text = key;
+                cb.Checked = true;
+                seriesEnableCbDict.Add(key, cb);
+                // put checkbox to table
+                int putCol = addBtnIdx % (tblSeries.ColumnCount) - 1;
+                tblSeries.Controls.Add(cb, putCol, tblSeries.RowCount-1);
             }
         }
     }

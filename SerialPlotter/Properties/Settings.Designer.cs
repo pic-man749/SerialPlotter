@@ -178,5 +178,53 @@ namespace SerialPlotter.Properties {
                 this["settingSerialSendCr"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool settingAutoScale {
+            get {
+                return ((bool)(this["settingAutoScale"]));
+            }
+            set {
+                this["settingAutoScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string settingYMin {
+            get {
+                return ((string)(this["settingYMin"]));
+            }
+            set {
+                this["settingYMin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public string settingYMax {
+            get {
+                return ((string)(this["settingYMax"]));
+            }
+            set {
+                this["settingYMax"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20, 20")]
+        public global::System.Drawing.Point settingGraphWIndowLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["settingGraphWIndowLocation"]));
+            }
+            set {
+                this["settingGraphWIndowLocation"] = value;
+            }
+        }
     }
 }

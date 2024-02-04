@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SerialPlotter {
-    public partial class DataTableWindow : Form {
-
-        public DataTableWindow(DataTable dt) {
+    public partial class FormatWindow : Form {
+        public FormatWindow() {
             InitializeComponent();
-            this.dataGridView1.DataSource = dt;
             this.Show();
+        }
+
+        private void Button1_Click(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }
