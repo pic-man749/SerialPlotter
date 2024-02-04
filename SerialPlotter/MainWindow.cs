@@ -32,6 +32,8 @@ namespace SerialPlotter {
         private List<GraphWindow> graph = new List<GraphWindow>();
         private int graphCounte = 0;
 
+        private double lastChartTime = 0;
+
         public SerialPlotter() {
             InitializeComponent();
             // show Serial Ports
@@ -273,6 +275,7 @@ namespace SerialPlotter {
         private void BtnPlotStart_Click(object sender, EventArgs e) {
             isPlotting = !isPlotting;
             cbChartRefreshRate.Enabled = !isPlotting;
+            lastChartTime = stopWatch.Elapsed.TotalSeconds;
             if(isPlotting) {
                 BtnPlotStart.Text = "plot stop";
                 chartRefreshTimer.Interval = GetChartRefreshRatePeriod();
@@ -294,7 +297,7 @@ namespace SerialPlotter {
             }
             Properties.Settings.Default.Save();
             // wait for serial timeout
-            Task.Delay(serial.ReadTimeout + 1);
+            Task.Delay(serial.ReadTimeout*2);
         }
 
         private void MainWindow_Shown(object sender, EventArgs e) {
@@ -340,9 +343,13 @@ namespace SerialPlotter {
             int range = TrackBarPlotTime.Value;
             LabelPoltPoint.Text = range.ToString();
             double now = stopWatch.Elapsed.TotalSeconds;
+            if(!isPlotting) {
+                now = lastChartTime;
+            }
             foreach(var g in graph) {
                 g.ChangePlotRange(now, range);
             }
+
         }
 
         private void CbLoggingFlag_CheckedChanged(object sender, EventArgs e) {
