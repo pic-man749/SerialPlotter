@@ -34,6 +34,8 @@ namespace SerialPlotter {
 
         private double lastChartTime = 0;
 
+        private List<string> knownKeyList = new List<string>();
+
         public SerialPlotter() {
             InitializeComponent();
             // show Serial Ports
@@ -57,7 +59,7 @@ namespace SerialPlotter {
             CbNewLine.Items.AddRange(Serial.getNewLines().ToArray());
             CbNewLine.SelectedIndex = 0;        // \n
             newLine = "\n";
-            // timeout:100[ms]
+            // timeout
             serial.ReadTimeout = 50;
 
             // set range value
@@ -93,7 +95,6 @@ namespace SerialPlotter {
             }
         }
 
-        private List<string> knownKeyList = new List<string>();
         /// <summary>
         /// Serial受信コールバック関数
         /// </summary>
@@ -136,27 +137,18 @@ namespace SerialPlotter {
                 foreach(string key in kvs.Keys) {
                     // insert new data
                     dataManager.InsertData(recvTime, key, kvs[key]);
-                    // is new key? then add btn
-                    if(!knownKeyList.Contains(key)) {
-                        knownKeyList.Add(key);
-                        AddNewSeries(key);
-                    }
 
                     // plot
                     if(!isPlotting) {
                         continue;
                     }
-                    // for feature..
-                    // foreach(var g in graph) {
-                    // }
-                    // check key exsitance because of to add will delay
-                    if(seriesEnableCbDict.Keys.Contains(key)) {
-                        // if checked is false, then skip
-                        if(!seriesEnableCbDict[key].Checked) {
-                            continue;
-                        }
-                    }
                     graph[0].AddSeriesToChart(recvTime, key, kvs[key]);
+
+                    // is new key? then add btn
+                    if(!knownKeyList.Contains(key)) {
+                        knownKeyList.Add(key);
+                        AddNewSeries(key);
+                    }
                 }
             }
         }
@@ -225,6 +217,9 @@ namespace SerialPlotter {
                     General.ShowErrMsgBox("Cannot open selected COM port.");
                     return;
                 }
+
+                // reset
+                knownKeyList.Clear();
                 ResetTimer();
                 StartTimer();
                 // start plot
@@ -337,6 +332,7 @@ namespace SerialPlotter {
             foreach(var g in graph) {
                 g.ClearChart();
             }
+            knownKeyList.Clear();
         }
 
         private void TrackBarPlotPoint_ValueChanged(object sender, EventArgs e) {
@@ -474,6 +470,11 @@ namespace SerialPlotter {
             }
         }
 
+        private void ChangeSeriesCheckBox(object sender, EventArgs e) {
+            var s = (CheckBox)sender;
+            graph[0].SetSeriesEnable(s.Text, s.Checked);
+        }
+
         private Dictionary<string, CheckBox> seriesEnableCbDict = new Dictionary<string, CheckBox>();
 
         private void AddNewSeries(string key) {
@@ -491,14 +492,19 @@ namespace SerialPlotter {
                         tblSeries.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
                     }
                 }
-                // make new CheckBox and add Dict
-                CheckBox cb = new CheckBox();
-                cb.Text = key;
-                cb.Checked = true;
-                seriesEnableCbDict.Add(key, cb);
-                // put checkbox to table
-                int putCol = addBtnIdx % (tblSeries.ColumnCount) - 1;
-                tblSeries.Controls.Add(cb, putCol, tblSeries.RowCount-1);
+                if(!seriesEnableCbDict.Keys.Contains(key)) {
+                    // make new CheckBox and add Dict
+                    CheckBox cb = new CheckBox();
+                    cb.Text = key;
+                    cb.Checked = true;
+                    cb.CheckedChanged += ChangeSeriesCheckBox;
+                    seriesEnableCbDict.Add(key, cb);
+                    // put checkbox to table
+                    int putCol = addBtnIdx % (tblSeries.ColumnCount) - 1;
+                    tblSeries.Controls.Add(cb, putCol, tblSeries.RowCount - 1);
+                } else {
+                    graph[0].SetSeriesEnable(key, seriesEnableCbDict[key].Checked);
+                }
             }
         }
     }
