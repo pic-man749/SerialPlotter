@@ -507,5 +507,19 @@ namespace SerialPlotter {
                 }
             }
         }
+
+        private void DockingGraphWindowEventCallback(object sender, EventArgs e) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { DockingGraphWindowEventCallback(sender, e); });
+            } else {
+                if(cbDockingGeaphWindow.Checked) {
+                    graph[0].Activate();
+                    int x = this.Location.X;
+                    int y = this.Location.Y + this.Height;
+                    graph[0].Location = new Point(x, y);
+                    graph[0].Width = this.Width;
+                }
+            }
+        }
     }
 }

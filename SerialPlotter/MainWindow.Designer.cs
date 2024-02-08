@@ -29,6 +29,7 @@
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.cbDockingGeaphWindow = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tblSeries = new System.Windows.Forms.TableLayoutPanel();
             this.tbYMax = new System.Windows.Forms.TextBox();
@@ -121,6 +122,7 @@
             // 
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.GBPlotSettings.Controls.Add(this.cbDockingGeaphWindow);
             this.GBPlotSettings.Controls.Add(this.label12);
             this.GBPlotSettings.Controls.Add(this.tblSeries);
             this.GBPlotSettings.Controls.Add(this.tbYMax);
@@ -143,6 +145,19 @@
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
+            // 
+            // cbDockingGeaphWindow
+            // 
+            this.cbDockingGeaphWindow.AutoSize = true;
+            this.cbDockingGeaphWindow.Checked = global::SerialPlotter.Properties.Settings.Default.settingDockingGraphWindow;
+            this.cbDockingGeaphWindow.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbDockingGeaphWindow.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingDockingGraphWindow", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbDockingGeaphWindow.Location = new System.Drawing.Point(528, 70);
+            this.cbDockingGeaphWindow.Name = "cbDockingGeaphWindow";
+            this.cbDockingGeaphWindow.Size = new System.Drawing.Size(136, 16);
+            this.cbDockingGeaphWindow.TabIndex = 69;
+            this.cbDockingGeaphWindow.Text = "docking graph window";
+            this.cbDockingGeaphWindow.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -630,6 +645,8 @@
             this.Text = "SerialPlotter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Shown += new System.EventHandler(this.MainWindow_Shown);
+            this.Move += new System.EventHandler(this.DockingGraphWindowEventCallback);
+            this.Resize += new System.EventHandler(this.DockingGraphWindowEventCallback);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.GBPlotSettings.ResumeLayout(false);
@@ -691,6 +708,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TableLayoutPanel tblSeries;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox cbDockingGeaphWindow;
     }
 }
 

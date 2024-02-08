@@ -226,5 +226,17 @@ namespace SerialPlotter.Properties {
                 this["settingGraphWIndowLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool settingDockingGraphWindow {
+            get {
+                return ((bool)(this["settingDockingGraphWindow"]));
+            }
+            set {
+                this["settingDockingGraphWindow"] = value;
+            }
+        }
     }
 }
