@@ -142,7 +142,10 @@ namespace SerialPlotter {
                     if(!isPlotting) {
                         continue;
                     }
-                    graph[0].AddSeriesToChart(recvTime, key, kvs[key]);
+
+                    foreach(var g in graph) {
+                        g.AddSeriesToChart(recvTime, key, kvs[key]);
+                    }
 
                     // is new key? then add btn
                     if(!knownKeyList.Contains(key)) {
@@ -472,7 +475,9 @@ namespace SerialPlotter {
 
         private void ChangeSeriesCheckBox(object sender, EventArgs e) {
             var s = (CheckBox)sender;
-            graph[0].SetSeriesEnable(s.Text, s.Checked);
+            foreach(var g in graph) {
+                g.SetSeriesEnable(s.Text, s.Checked);
+            }
         }
 
         private Dictionary<string, CheckBox> seriesEnableCbDict = new Dictionary<string, CheckBox>();
@@ -503,7 +508,9 @@ namespace SerialPlotter {
                     int putCol = addBtnIdx % (tblSeries.ColumnCount) - 1;
                     tblSeries.Controls.Add(cb, putCol, tblSeries.RowCount - 1);
                 } else {
-                    graph[0].SetSeriesEnable(key, seriesEnableCbDict[key].Checked);
+                    foreach(var g in graph) {
+                        g.SetSeriesEnable(key, seriesEnableCbDict[key].Checked);
+                    }
                 }
             }
         }
@@ -513,11 +520,13 @@ namespace SerialPlotter {
                 this.BeginInvoke((MethodInvoker)delegate { DockingGraphWindowEventCallback(sender, e); });
             } else {
                 if(cbDockingGeaphWindow.Checked) {
-                    graph[0].Activate();
-                    int x = this.Location.X;
-                    int y = this.Location.Y + this.Height;
-                    graph[0].Location = new Point(x, y);
-                    graph[0].Width = this.Width;
+                    foreach(var g in graph) {
+                        g.Activate();
+                        int x = this.Location.X;
+                        int y = this.Location.Y + this.Height;
+                        g.Location = new Point(x, y);
+                        g.Width = this.Width;
+                    }
                 }
             }
         }
