@@ -163,16 +163,6 @@ namespace SerialPlotter {
             }
         }
 
-        private int GetTrackBarPlotTime() {
-
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { GetTrackBarPlotTime(); });
-                return 10;
-            } else {
-                return TrackBarPlotTime.Value;
-            }
-        }
-
         private void BtnRefresh_Click(object sender, EventArgs e) {
             GetNowConnectedSerialPorts();
         }
@@ -401,14 +391,9 @@ namespace SerialPlotter {
         /// </summary>
         /// <returns></returns>
         private float GetChartRefreshRatePeriod() {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { GetChartRefreshRatePeriod(); });
-                return 0.0f;    //dummy
-            } else {
-                string hzValStr = cbChartRefreshRate.SelectedItem.ToString();
-                float hzVal = float.Parse(hzValStr);
-                return 1000.0f / hzVal;
-            }
+            string hzValStr = cbChartRefreshRate.SelectedItem.ToString();
+            float hzVal = float.Parse(hzValStr);
+            return 1000f / hzVal;
         }
 
         private void CbPlotMarker_CheckedChanged(object sender, EventArgs e) {
