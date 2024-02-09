@@ -122,6 +122,7 @@
             // 
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.GBPlotSettings.AutoSize = true;
             this.GBPlotSettings.Controls.Add(this.cbDockingGeaphWindow);
             this.GBPlotSettings.Controls.Add(this.label12);
             this.GBPlotSettings.Controls.Add(this.tblSeries);
@@ -141,7 +142,7 @@
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
             this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
-            this.GBPlotSettings.Size = new System.Drawing.Size(760, 145);
+            this.GBPlotSettings.Size = new System.Drawing.Size(760, 154);
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
@@ -171,6 +172,7 @@
             // tblSeries
             // 
             this.tblSeries.AutoSize = true;
+            this.tblSeries.BackColor = System.Drawing.Color.White;
             this.tblSeries.ColumnCount = 5;
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -633,14 +635,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 361);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(784, 366);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
             this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialPlotter.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::SerialPlotter.Properties.Settings.Default.WindowLocation;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(800, 400);
+            this.MinimumSize = new System.Drawing.Size(800, 405);
             this.Name = "SerialPlotter";
             this.Text = "SerialPlotter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
