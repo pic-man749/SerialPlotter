@@ -515,5 +515,37 @@ namespace SerialPlotter {
                 }
             }
         }
+
+        private void cbDockingGeaphWindow_CheckedChanged(object sender, EventArgs e) {
+            if(cbDockingGeaphWindow.Checked) {
+                DockingGraphWindowEventCallback(sender, e);
+            }
+        }
+
+        private void btnDetectedSeriesClear_Click(object sender, EventArgs e) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { btnDetectedSeriesClear_Click(sender, e); });
+            } else {
+                this.tblSeries.Controls.Clear();
+                this.tblSeries.RowStyles.Clear();
+                this.tblSeries.RowCount = 1;
+                // チェックボックスが外れた状態でクリアすると次回更新時該当グラフが表示されないためチェック状態にする
+                btnDetectedSeriesAllCheck_Click(sender, e);
+                this.knownKeyList.Clear();
+                this.seriesEnableCbDict.Clear();
+            }
+        }
+
+        private void btnDetectedSeriesAllCheck_Click(object sender, EventArgs e) {
+            foreach(var cb in seriesEnableCbDict.Values) {
+                cb.Checked = true;
+            }
+        }
+
+        private void btnDetectedSeriesAllUncheck_Click(object sender, EventArgs e) {
+            foreach(var cb in seriesEnableCbDict.Values) {
+                cb.Checked = false;
+            }
+        }
     }
 }

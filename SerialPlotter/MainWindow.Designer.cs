@@ -29,6 +29,7 @@
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.btnDetectedSeriesClear = new System.Windows.Forms.Button();
             this.cbDockingGeaphWindow = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tblSeries = new System.Windows.Forms.TableLayoutPanel();
@@ -72,6 +73,8 @@
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
+            this.btnDetectedSeriesAllCheck = new System.Windows.Forms.Button();
+            this.btnDetectedSeriesAllUncheck = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
@@ -123,6 +126,10 @@
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.GBPlotSettings.AutoSize = true;
+            this.GBPlotSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesAllUncheck);
+            this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesAllCheck);
+            this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesClear);
             this.GBPlotSettings.Controls.Add(this.cbDockingGeaphWindow);
             this.GBPlotSettings.Controls.Add(this.label12);
             this.GBPlotSettings.Controls.Add(this.tblSeries);
@@ -142,10 +149,20 @@
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
             this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
-            this.GBPlotSettings.Size = new System.Drawing.Size(760, 154);
+            this.GBPlotSettings.Size = new System.Drawing.Size(760, 183);
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
+            // 
+            // btnDetectedSeriesClear
+            // 
+            this.btnDetectedSeriesClear.Location = new System.Drawing.Point(634, 110);
+            this.btnDetectedSeriesClear.Name = "btnDetectedSeriesClear";
+            this.btnDetectedSeriesClear.Size = new System.Drawing.Size(120, 23);
+            this.btnDetectedSeriesClear.TabIndex = 70;
+            this.btnDetectedSeriesClear.Text = "clear";
+            this.btnDetectedSeriesClear.UseVisualStyleBackColor = true;
+            this.btnDetectedSeriesClear.Click += new System.EventHandler(this.btnDetectedSeriesClear_Click);
             // 
             // cbDockingGeaphWindow
             // 
@@ -159,6 +176,7 @@
             this.cbDockingGeaphWindow.TabIndex = 69;
             this.cbDockingGeaphWindow.Text = "docking graph window";
             this.cbDockingGeaphWindow.UseVisualStyleBackColor = true;
+            this.cbDockingGeaphWindow.CheckedChanged += new System.EventHandler(this.cbDockingGeaphWindow_CheckedChanged);
             // 
             // label12
             // 
@@ -179,7 +197,7 @@
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblSeries.Location = new System.Drawing.Point(6, 110);
+            this.tblSeries.Location = new System.Drawing.Point(6, 139);
             this.tblSeries.Name = "tblSeries";
             this.tblSeries.RowCount = 1;
             this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -631,12 +649,33 @@
             this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
             // 
+            // btnDetectedSeriesAllCheck
+            // 
+            this.btnDetectedSeriesAllCheck.Location = new System.Drawing.Point(8, 110);
+            this.btnDetectedSeriesAllCheck.Name = "btnDetectedSeriesAllCheck";
+            this.btnDetectedSeriesAllCheck.Size = new System.Drawing.Size(118, 23);
+            this.btnDetectedSeriesAllCheck.TabIndex = 71;
+            this.btnDetectedSeriesAllCheck.Text = "all check";
+            this.btnDetectedSeriesAllCheck.UseVisualStyleBackColor = true;
+            this.btnDetectedSeriesAllCheck.Click += new System.EventHandler(this.btnDetectedSeriesAllCheck_Click);
+            // 
+            // btnDetectedSeriesAllUncheck
+            // 
+            this.btnDetectedSeriesAllUncheck.Location = new System.Drawing.Point(132, 110);
+            this.btnDetectedSeriesAllUncheck.Name = "btnDetectedSeriesAllUncheck";
+            this.btnDetectedSeriesAllUncheck.Size = new System.Drawing.Size(118, 23);
+            this.btnDetectedSeriesAllUncheck.TabIndex = 72;
+            this.btnDetectedSeriesAllUncheck.Text = "all uncheck";
+            this.btnDetectedSeriesAllUncheck.UseVisualStyleBackColor = true;
+            this.btnDetectedSeriesAllUncheck.Click += new System.EventHandler(this.btnDetectedSeriesAllUncheck_Click);
+            // 
             // SerialPlotter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(784, 366);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(784, 396);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
             this.Controls.Add(this.menuStrip1);
@@ -712,6 +751,9 @@
         private System.Windows.Forms.TableLayoutPanel tblSeries;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox cbDockingGeaphWindow;
+        private System.Windows.Forms.Button btnDetectedSeriesClear;
+        private System.Windows.Forms.Button btnDetectedSeriesAllUncheck;
+        private System.Windows.Forms.Button btnDetectedSeriesAllCheck;
     }
 }
 

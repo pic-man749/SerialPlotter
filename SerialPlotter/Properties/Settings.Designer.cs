@@ -217,7 +217,7 @@ namespace SerialPlotter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20, 20")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 17")]
         public global::System.Drawing.Point settingGraphWIndowLocation {
             get {
                 return ((global::System.Drawing.Point)(this["settingGraphWIndowLocation"]));
