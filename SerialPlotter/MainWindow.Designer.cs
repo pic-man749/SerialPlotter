@@ -302,7 +302,8 @@
             "10",
             "20",
             "30",
-            "60"});
+            "60",
+            "120"});
             this.cbChartRefreshRate.Location = new System.Drawing.Point(620, 40);
             this.cbChartRefreshRate.Name = "cbChartRefreshRate";
             this.cbChartRefreshRate.Size = new System.Drawing.Size(97, 20);
