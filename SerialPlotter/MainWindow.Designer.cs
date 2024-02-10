@@ -29,6 +29,8 @@
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.btnDetectedSeriesAllUncheck = new System.Windows.Forms.Button();
+            this.btnDetectedSeriesAllCheck = new System.Windows.Forms.Button();
             this.btnDetectedSeriesClear = new System.Windows.Forms.Button();
             this.cbDockingGeaphWindow = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -73,8 +75,6 @@
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
-            this.btnDetectedSeriesAllCheck = new System.Windows.Forms.Button();
-            this.btnDetectedSeriesAllUncheck = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
@@ -149,14 +149,34 @@
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
             this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
-            this.GBPlotSettings.Size = new System.Drawing.Size(760, 183);
+            this.GBPlotSettings.Size = new System.Drawing.Size(760, 166);
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
             // 
+            // btnDetectedSeriesAllUncheck
+            // 
+            this.btnDetectedSeriesAllUncheck.Location = new System.Drawing.Point(222, 93);
+            this.btnDetectedSeriesAllUncheck.Name = "btnDetectedSeriesAllUncheck";
+            this.btnDetectedSeriesAllUncheck.Size = new System.Drawing.Size(118, 23);
+            this.btnDetectedSeriesAllUncheck.TabIndex = 72;
+            this.btnDetectedSeriesAllUncheck.Text = "all uncheck";
+            this.btnDetectedSeriesAllUncheck.UseVisualStyleBackColor = true;
+            this.btnDetectedSeriesAllUncheck.Click += new System.EventHandler(this.btnDetectedSeriesAllUncheck_Click);
+            // 
+            // btnDetectedSeriesAllCheck
+            // 
+            this.btnDetectedSeriesAllCheck.Location = new System.Drawing.Point(98, 93);
+            this.btnDetectedSeriesAllCheck.Name = "btnDetectedSeriesAllCheck";
+            this.btnDetectedSeriesAllCheck.Size = new System.Drawing.Size(118, 23);
+            this.btnDetectedSeriesAllCheck.TabIndex = 71;
+            this.btnDetectedSeriesAllCheck.Text = "all check";
+            this.btnDetectedSeriesAllCheck.UseVisualStyleBackColor = true;
+            this.btnDetectedSeriesAllCheck.Click += new System.EventHandler(this.btnDetectedSeriesAllCheck_Click);
+            // 
             // btnDetectedSeriesClear
             // 
-            this.btnDetectedSeriesClear.Location = new System.Drawing.Point(634, 110);
+            this.btnDetectedSeriesClear.Location = new System.Drawing.Point(634, 93);
             this.btnDetectedSeriesClear.Name = "btnDetectedSeriesClear";
             this.btnDetectedSeriesClear.Size = new System.Drawing.Size(120, 23);
             this.btnDetectedSeriesClear.TabIndex = 70;
@@ -181,7 +201,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 95);
+            this.label12.Location = new System.Drawing.Point(6, 98);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(86, 12);
             this.label12.TabIndex = 68;
@@ -197,7 +217,7 @@
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblSeries.Location = new System.Drawing.Point(6, 139);
+            this.tblSeries.Location = new System.Drawing.Point(6, 122);
             this.tblSeries.Name = "tblSeries";
             this.tblSeries.RowCount = 1;
             this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -649,40 +669,20 @@
             this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
             // 
-            // btnDetectedSeriesAllCheck
-            // 
-            this.btnDetectedSeriesAllCheck.Location = new System.Drawing.Point(8, 110);
-            this.btnDetectedSeriesAllCheck.Name = "btnDetectedSeriesAllCheck";
-            this.btnDetectedSeriesAllCheck.Size = new System.Drawing.Size(118, 23);
-            this.btnDetectedSeriesAllCheck.TabIndex = 71;
-            this.btnDetectedSeriesAllCheck.Text = "all check";
-            this.btnDetectedSeriesAllCheck.UseVisualStyleBackColor = true;
-            this.btnDetectedSeriesAllCheck.Click += new System.EventHandler(this.btnDetectedSeriesAllCheck_Click);
-            // 
-            // btnDetectedSeriesAllUncheck
-            // 
-            this.btnDetectedSeriesAllUncheck.Location = new System.Drawing.Point(132, 110);
-            this.btnDetectedSeriesAllUncheck.Name = "btnDetectedSeriesAllUncheck";
-            this.btnDetectedSeriesAllUncheck.Size = new System.Drawing.Size(118, 23);
-            this.btnDetectedSeriesAllUncheck.TabIndex = 72;
-            this.btnDetectedSeriesAllUncheck.Text = "all uncheck";
-            this.btnDetectedSeriesAllUncheck.UseVisualStyleBackColor = true;
-            this.btnDetectedSeriesAllUncheck.Click += new System.EventHandler(this.btnDetectedSeriesAllUncheck_Click);
-            // 
             // SerialPlotter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(784, 396);
+            this.ClientSize = new System.Drawing.Size(784, 381);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
             this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialPlotter.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::SerialPlotter.Properties.Settings.Default.WindowLocation;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(800, 405);
+            this.MinimumSize = new System.Drawing.Size(800, 420);
             this.Name = "SerialPlotter";
             this.Text = "SerialPlotter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

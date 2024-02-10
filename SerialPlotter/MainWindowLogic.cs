@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace SerialPlotter {
     partial class SerialPlotter {
 
-        private Dictionary<string, CheckBox> seriesEnableCbDict = new Dictionary<string, CheckBox>();
+        const char IGNORE_START_CHAR = ';';
 
         // get COM port name and refresh ListBox
         private void GetNowConnectedSerialPorts() {

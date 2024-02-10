@@ -20,7 +20,6 @@ namespace SerialPlotter {
 
         private Serial serial = new Serial();
 
-        const char IGNORE_START_CHAR = ';';
         private System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
         private bool isPlotting = false;
         private Stream logFileStream = null;
@@ -35,6 +34,7 @@ namespace SerialPlotter {
         private double lastChartTime = 0;
 
         private List<string> knownKeyList = new List<string>();
+        private Dictionary<string, CheckBox> seriesEnableCbDict = new Dictionary<string, CheckBox>();
 
         public SerialPlotter() {
             InitializeComponent();
