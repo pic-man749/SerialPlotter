@@ -60,6 +60,8 @@ namespace SerialPlotter {
 
                 // parse
                 Dictionary<string, double> kvs = parser.parse(data);
+                
+                bool isNeedRefresh = false;
 
                 foreach(string key in kvs.Keys) {
                     // insert new data
@@ -78,8 +80,22 @@ namespace SerialPlotter {
                     if(!knownKeyList.Contains(key)) {
                         knownKeyList.Add(key);
                         AddNewSeries(key);
+                        isNeedRefresh = true;
                     }
                 }
+                
+                // 大量にテーブルを更新すると次の再描画まで表示されないことがあるのでRefresh()
+                if(isNeedRefresh) {
+                     RefreshGui(GBPlotSettings);
+                }
+            }
+        }
+
+        private void RefreshGui(Control ctrl) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { RefreshGui(ctrl); });
+            } else {
+                ctrl.Refresh();
             }
         }
 
