@@ -238,5 +238,41 @@ namespace SerialPlotter.Properties {
                 this["settingDockingGraphWindow"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool settingAutoScale2nd {
+            get {
+                return ((bool)(this["settingAutoScale2nd"]));
+            }
+            set {
+                this["settingAutoScale2nd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string settingY2ndMin {
+            get {
+                return ((string)(this["settingY2ndMin"]));
+            }
+            set {
+                this["settingY2ndMin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public string settingY2ndMax {
+            get {
+                return ((string)(this["settingY2ndMax"]));
+            }
+            set {
+                this["settingY2ndMax"] = value;
+            }
+        }
     }
 }

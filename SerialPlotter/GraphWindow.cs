@@ -133,13 +133,18 @@ namespace SerialPlotter {
             }
         }
 
-        public void SetYScale(double min, double max) {
+        public void SetYScale(double min, double max, bool is2ndAxis) {
             if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { SetYScale(min, max); });
+                this.BeginInvoke((MethodInvoker)delegate { SetYScale(min, max, is2ndAxis); });
             } else {
                 for(int cnt = 0; cnt < this.chartDefault.ChartAreas.Count; ++cnt) {
-                    this.chartDefault.ChartAreas[cnt].AxisY.Minimum = min;
-                    this.chartDefault.ChartAreas[cnt].AxisY.Maximum = max;
+                    if(is2ndAxis) {
+                        this.chartDefault.ChartAreas[cnt].AxisY2.Minimum = min;
+                        this.chartDefault.ChartAreas[cnt].AxisY2.Maximum = max;
+                    } else {
+                        this.chartDefault.ChartAreas[cnt].AxisY.Minimum = min;
+                        this.chartDefault.ChartAreas[cnt].AxisY.Maximum = max;
+                    }
                 }
             }
         }

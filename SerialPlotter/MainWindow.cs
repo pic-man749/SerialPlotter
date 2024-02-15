@@ -78,6 +78,10 @@ namespace SerialPlotter {
                 tbYMax.Enabled = false;
                 tbYMin.Enabled = false;
             }
+            if(cbAutoScale2nd.Checked) {
+                tbY2ndMax.Enabled = false;
+                tbY2ndMin.Enabled = false;
+            }
 
             // init chart area
             graph.Add(new GraphWindow(graphCounte++,
@@ -354,7 +358,33 @@ namespace SerialPlotter {
                 tbYMin.Enabled = false;
             }
             foreach(var g in graph) {
-                g.SetYScale(min, max);
+                g.SetYScale(min, max ,false);
+            }
+        }
+        private void Set2ndYScale(object sender, EventArgs e) {
+            double min = double.NaN;
+            double max = double.NaN;
+            if(!cbAutoScale2nd.Checked) {
+                tbY2ndMin.Enabled = true;
+                tbY2ndMax.Enabled = true;
+                try {
+                    // parse and validation
+                    double _min = double.Parse(tbY2ndMin.Text);
+                    double _max = double.Parse(tbY2ndMax.Text);
+                    if(_min < _max) {
+                        min = _min;
+                        max = _max;
+                    }
+                } catch {
+                    min = double.NaN;
+                    max = double.NaN;
+                }
+            } else {
+                tbY2ndMax.Enabled = false;
+                tbY2ndMin.Enabled = false;
+            }
+            foreach(var g in graph) {
+                g.SetYScale(min, max, true);
             }
         }
 

@@ -29,12 +29,18 @@
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.tbY2ndMax = new System.Windows.Forms.TextBox();
+            this.tbY2ndMin = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cbAutoScale2nd = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.btnDetectedSeriesAllUncheck = new System.Windows.Forms.Button();
             this.btnDetectedSeriesAllCheck = new System.Windows.Forms.Button();
             this.btnDetectedSeriesClear = new System.Windows.Forms.Button();
             this.cbDockingGeaphWindow = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tblSeries = new System.Windows.Forms.TableLayoutPanel();
+            this.lLatestValue = new System.Windows.Forms.Label();
             this.lUseRightYAxis = new System.Windows.Forms.Label();
             this.lVisible = new System.Windows.Forms.Label();
             this.lSeriesName = new System.Windows.Forms.Label();
@@ -78,7 +84,6 @@
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
-            this.lLatestValue = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             this.tblSeries.SuspendLayout();
@@ -131,6 +136,11 @@
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.GBPlotSettings.AutoSize = true;
+            this.GBPlotSettings.Controls.Add(this.tbY2ndMax);
+            this.GBPlotSettings.Controls.Add(this.tbY2ndMin);
+            this.GBPlotSettings.Controls.Add(this.label14);
+            this.GBPlotSettings.Controls.Add(this.cbAutoScale2nd);
+            this.GBPlotSettings.Controls.Add(this.label15);
             this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesAllUncheck);
             this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesAllCheck);
             this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesClear);
@@ -153,14 +163,66 @@
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
             this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
-            this.GBPlotSettings.Size = new System.Drawing.Size(760, 166);
+            this.GBPlotSettings.Size = new System.Drawing.Size(760, 197);
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
             // 
+            // tbY2ndMax
+            // 
+            this.tbY2ndMax.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingY2ndMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbY2ndMax.Location = new System.Drawing.Point(339, 93);
+            this.tbY2ndMax.MaxLength = 16;
+            this.tbY2ndMax.Name = "tbY2ndMax";
+            this.tbY2ndMax.Size = new System.Drawing.Size(83, 19);
+            this.tbY2ndMax.TabIndex = 77;
+            this.tbY2ndMax.Text = global::SerialPlotter.Properties.Settings.Default.settingY2ndMax;
+            // 
+            // tbY2ndMin
+            // 
+            this.tbY2ndMin.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingY2ndMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbY2ndMin.Location = new System.Drawing.Point(222, 93);
+            this.tbY2ndMin.MaxLength = 16;
+            this.tbY2ndMin.Name = "tbY2ndMin";
+            this.tbY2ndMin.Size = new System.Drawing.Size(88, 19);
+            this.tbY2ndMin.TabIndex = 76;
+            this.tbY2ndMin.Text = global::SerialPlotter.Properties.Settings.Default.settingY2ndMin;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(316, 96);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(17, 12);
+            this.label14.TabIndex = 75;
+            this.label14.Text = "～";
+            // 
+            // cbAutoScale2nd
+            // 
+            this.cbAutoScale2nd.AutoSize = true;
+            this.cbAutoScale2nd.Checked = global::SerialPlotter.Properties.Settings.Default.settingAutoScale2nd;
+            this.cbAutoScale2nd.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAutoScale2nd.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingAutoScale2nd", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbAutoScale2nd.Location = new System.Drawing.Point(428, 95);
+            this.cbAutoScale2nd.Name = "cbAutoScale2nd";
+            this.cbAutoScale2nd.Size = new System.Drawing.Size(77, 16);
+            this.cbAutoScale2nd.TabIndex = 74;
+            this.cbAutoScale2nd.Text = "auto scale";
+            this.cbAutoScale2nd.UseVisualStyleBackColor = true;
+            this.cbAutoScale2nd.CheckedChanged += new System.EventHandler(this.Set2ndYScale);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(132, 96);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(81, 12);
+            this.label15.TabIndex = 73;
+            this.label15.Text = "plot scale(2nd)";
+            // 
             // btnDetectedSeriesAllUncheck
             // 
-            this.btnDetectedSeriesAllUncheck.Location = new System.Drawing.Point(222, 93);
+            this.btnDetectedSeriesAllUncheck.Location = new System.Drawing.Point(222, 124);
             this.btnDetectedSeriesAllUncheck.Name = "btnDetectedSeriesAllUncheck";
             this.btnDetectedSeriesAllUncheck.Size = new System.Drawing.Size(118, 23);
             this.btnDetectedSeriesAllUncheck.TabIndex = 72;
@@ -170,7 +232,7 @@
             // 
             // btnDetectedSeriesAllCheck
             // 
-            this.btnDetectedSeriesAllCheck.Location = new System.Drawing.Point(98, 93);
+            this.btnDetectedSeriesAllCheck.Location = new System.Drawing.Point(98, 124);
             this.btnDetectedSeriesAllCheck.Name = "btnDetectedSeriesAllCheck";
             this.btnDetectedSeriesAllCheck.Size = new System.Drawing.Size(118, 23);
             this.btnDetectedSeriesAllCheck.TabIndex = 71;
@@ -180,7 +242,7 @@
             // 
             // btnDetectedSeriesClear
             // 
-            this.btnDetectedSeriesClear.Location = new System.Drawing.Point(634, 93);
+            this.btnDetectedSeriesClear.Location = new System.Drawing.Point(634, 124);
             this.btnDetectedSeriesClear.Name = "btnDetectedSeriesClear";
             this.btnDetectedSeriesClear.Size = new System.Drawing.Size(120, 23);
             this.btnDetectedSeriesClear.TabIndex = 70;
@@ -205,7 +267,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 98);
+            this.label12.Location = new System.Drawing.Point(6, 129);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(86, 12);
             this.label12.TabIndex = 68;
@@ -224,13 +286,24 @@
             this.tblSeries.Controls.Add(this.lUseRightYAxis, 2, 0);
             this.tblSeries.Controls.Add(this.lVisible, 1, 0);
             this.tblSeries.Controls.Add(this.lSeriesName, 0, 0);
-            this.tblSeries.Location = new System.Drawing.Point(6, 122);
+            this.tblSeries.Location = new System.Drawing.Point(6, 153);
             this.tblSeries.Name = "tblSeries";
             this.tblSeries.RowCount = 1;
             this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tblSeries.Size = new System.Drawing.Size(748, 26);
             this.tblSeries.TabIndex = 67;
+            // 
+            // lLatestValue
+            // 
+            this.lLatestValue.AutoSize = true;
+            this.lLatestValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lLatestValue.Location = new System.Drawing.Point(638, 0);
+            this.lLatestValue.Name = "lLatestValue";
+            this.lLatestValue.Size = new System.Drawing.Size(107, 26);
+            this.lLatestValue.TabIndex = 73;
+            this.lLatestValue.Text = "latest value";
+            this.lLatestValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lUseRightYAxis
             // 
@@ -269,10 +342,10 @@
             // tbYMax
             // 
             this.tbYMax.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingYMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbYMax.Location = new System.Drawing.Point(322, 68);
+            this.tbYMax.Location = new System.Drawing.Point(339, 68);
             this.tbYMax.MaxLength = 16;
             this.tbYMax.Name = "tbYMax";
-            this.tbYMax.Size = new System.Drawing.Size(100, 19);
+            this.tbYMax.Size = new System.Drawing.Size(83, 19);
             this.tbYMax.TabIndex = 66;
             this.tbYMax.Text = global::SerialPlotter.Properties.Settings.Default.settingYMax;
             this.tbYMax.TextChanged += new System.EventHandler(this.SetYScale);
@@ -280,10 +353,10 @@
             // tbYMin
             // 
             this.tbYMin.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingYMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbYMin.Location = new System.Drawing.Point(193, 68);
+            this.tbYMin.Location = new System.Drawing.Point(222, 68);
             this.tbYMin.MaxLength = 16;
             this.tbYMin.Name = "tbYMin";
-            this.tbYMin.Size = new System.Drawing.Size(100, 19);
+            this.tbYMin.Size = new System.Drawing.Size(88, 19);
             this.tbYMin.TabIndex = 65;
             this.tbYMin.Text = global::SerialPlotter.Properties.Settings.Default.settingYMin;
             this.tbYMin.TextChanged += new System.EventHandler(this.SetYScale);
@@ -291,7 +364,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(299, 71);
+            this.label13.Location = new System.Drawing.Point(316, 71);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(17, 12);
             this.label13.TabIndex = 64;
@@ -380,9 +453,9 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(132, 71);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(57, 12);
+            this.label11.Size = new System.Drawing.Size(87, 12);
             this.label11.TabIndex = 55;
-            this.label11.Text = "plot scale:";
+            this.label11.Text = "plot scale(prim):";
             // 
             // label6
             // 
@@ -712,23 +785,12 @@
             this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
             // 
-            // lLatestValue
-            // 
-            this.lLatestValue.AutoSize = true;
-            this.lLatestValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lLatestValue.Location = new System.Drawing.Point(638, 0);
-            this.lLatestValue.Name = "lLatestValue";
-            this.lLatestValue.Size = new System.Drawing.Size(107, 26);
-            this.lLatestValue.TabIndex = 73;
-            this.lLatestValue.Text = "latest value";
-            this.lLatestValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // SerialPlotter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(784, 381);
+            this.ClientSize = new System.Drawing.Size(784, 411);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
             this.Controls.Add(this.menuStrip1);
@@ -813,6 +875,11 @@
         private System.Windows.Forms.Label lUseRightYAxis;
         private System.Windows.Forms.Label lVisible;
         private System.Windows.Forms.Label lLatestValue;
+        private System.Windows.Forms.TextBox tbY2ndMax;
+        private System.Windows.Forms.TextBox tbY2ndMin;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox cbAutoScale2nd;
+        private System.Windows.Forms.Label label15;
     }
 }
 
