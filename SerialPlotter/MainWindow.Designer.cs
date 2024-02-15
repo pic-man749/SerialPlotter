@@ -178,6 +178,7 @@
             this.tbY2ndMax.Size = new System.Drawing.Size(83, 19);
             this.tbY2ndMax.TabIndex = 77;
             this.tbY2ndMax.Text = global::SerialPlotter.Properties.Settings.Default.settingY2ndMax;
+            this.tbY2ndMax.TextChanged += new System.EventHandler(this.Set2ndYScale);
             // 
             // tbY2ndMin
             // 
@@ -188,6 +189,7 @@
             this.tbY2ndMin.Size = new System.Drawing.Size(84, 19);
             this.tbY2ndMin.TabIndex = 76;
             this.tbY2ndMin.Text = global::SerialPlotter.Properties.Settings.Default.settingY2ndMin;
+            this.tbY2ndMin.TextChanged += new System.EventHandler(this.Set2ndYScale);
             // 
             // label14
             // 
