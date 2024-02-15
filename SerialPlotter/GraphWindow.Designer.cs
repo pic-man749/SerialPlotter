@@ -35,10 +35,6 @@
             // 
             // chartDefault
             // 
-            this.chartDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.AxisX.IsLabelAutoFit = false;
             chartArea1.AxisX.IsStartedFromZero = false;
             chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -64,17 +60,17 @@
             chartArea1.AxisY2.IsStartedFromZero = false;
             chartArea1.AxisY2.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisY2.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY2.MajorGrid.Enabled = false;
             chartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.Gray;
             chartArea1.AxisY2.MaximumAutoSize = 100F;
-            chartArea1.AxisY2.MinorGrid.Enabled = true;
             chartArea1.AxisY2.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea1.AxisY2.MinorTickMark.Enabled = true;
             chartArea1.BackColor = System.Drawing.Color.White;
             chartArea1.InnerPlotPosition.Auto = false;
-            chartArea1.InnerPlotPosition.Height = 85F;
-            chartArea1.InnerPlotPosition.Width = 94F;
-            chartArea1.InnerPlotPosition.X = 6F;
-            chartArea1.InnerPlotPosition.Y = 2F;
+            chartArea1.InnerPlotPosition.Height = 82.78285F;
+            chartArea1.InnerPlotPosition.Width = 82.52946F;
+            chartArea1.InnerPlotPosition.X = 8.05975F;
+            chartArea1.InnerPlotPosition.Y = 2.79255F;
             chartArea1.IsSameFontSizeForAllAxes = true;
             chartArea1.Name = "ChartAreaDefault";
             this.chartDefault.ChartAreas.Add(chartArea1);

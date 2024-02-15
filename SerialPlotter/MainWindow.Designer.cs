@@ -136,6 +136,7 @@
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.GBPlotSettings.AutoSize = true;
+            this.GBPlotSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.GBPlotSettings.Controls.Add(this.tbY2ndMax);
             this.GBPlotSettings.Controls.Add(this.tbY2ndMin);
             this.GBPlotSettings.Controls.Add(this.label14);
@@ -163,7 +164,7 @@
             this.GBPlotSettings.Controls.Add(this.BtnPlotStart);
             this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
-            this.GBPlotSettings.Size = new System.Drawing.Size(760, 197);
+            this.GBPlotSettings.Size = new System.Drawing.Size(765, 197);
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
@@ -275,7 +276,9 @@
             // 
             // tblSeries
             // 
+            this.tblSeries.AutoScroll = true;
             this.tblSeries.AutoSize = true;
+            this.tblSeries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tblSeries.BackColor = System.Drawing.Color.White;
             this.tblSeries.ColumnCount = 4;
             this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
@@ -291,12 +294,11 @@
             this.tblSeries.RowCount = 1;
             this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tblSeries.Size = new System.Drawing.Size(748, 26);
+            this.tblSeries.Size = new System.Drawing.Size(753, 26);
             this.tblSeries.TabIndex = 67;
             // 
             // lLatestValue
             // 
-            this.lLatestValue.AutoSize = true;
             this.lLatestValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lLatestValue.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lLatestValue.Location = new System.Drawing.Point(638, 0);
@@ -308,7 +310,6 @@
             // 
             // lUseRightYAxis
             // 
-            this.lUseRightYAxis.AutoSize = true;
             this.lUseRightYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lUseRightYAxis.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lUseRightYAxis.Location = new System.Drawing.Point(526, 0);
@@ -320,7 +321,6 @@
             // 
             // lVisible
             // 
-            this.lVisible.AutoSize = true;
             this.lVisible.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lVisible.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lVisible.Location = new System.Drawing.Point(414, 0);
@@ -332,7 +332,6 @@
             // 
             // lSeriesName
             // 
-            this.lSeriesName.AutoSize = true;
             this.lSeriesName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lSeriesName.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lSeriesName.Location = new System.Drawing.Point(3, 0);
@@ -793,6 +792,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(784, 411);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
@@ -812,7 +812,6 @@
             this.GBPlotSettings.ResumeLayout(false);
             this.GBPlotSettings.PerformLayout();
             this.tblSeries.ResumeLayout(false);
-            this.tblSeries.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
