@@ -181,10 +181,10 @@
             // tbY2ndMin
             // 
             this.tbY2ndMin.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingY2ndMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbY2ndMin.Location = new System.Drawing.Point(222, 93);
+            this.tbY2ndMin.Location = new System.Drawing.Point(226, 93);
             this.tbY2ndMin.MaxLength = 16;
             this.tbY2ndMin.Name = "tbY2ndMin";
-            this.tbY2ndMin.Size = new System.Drawing.Size(88, 19);
+            this.tbY2ndMin.Size = new System.Drawing.Size(84, 19);
             this.tbY2ndMin.TabIndex = 76;
             this.tbY2ndMin.Text = global::SerialPlotter.Properties.Settings.Default.settingY2ndMin;
             // 
@@ -216,9 +216,9 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(132, 96);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(81, 12);
+            this.label15.Size = new System.Drawing.Size(82, 12);
             this.label15.TabIndex = 73;
-            this.label15.Text = "plot scale(2nd)";
+            this.label15.Text = "plot range(2nd)";
             // 
             // btnDetectedSeriesAllUncheck
             // 
@@ -298,6 +298,7 @@
             // 
             this.lLatestValue.AutoSize = true;
             this.lLatestValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lLatestValue.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lLatestValue.Location = new System.Drawing.Point(638, 0);
             this.lLatestValue.Name = "lLatestValue";
             this.lLatestValue.Size = new System.Drawing.Size(107, 26);
@@ -309,6 +310,7 @@
             // 
             this.lUseRightYAxis.AutoSize = true;
             this.lUseRightYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lUseRightYAxis.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lUseRightYAxis.Location = new System.Drawing.Point(526, 0);
             this.lUseRightYAxis.Name = "lUseRightYAxis";
             this.lUseRightYAxis.Size = new System.Drawing.Size(106, 26);
@@ -320,6 +322,7 @@
             // 
             this.lVisible.AutoSize = true;
             this.lVisible.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lVisible.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lVisible.Location = new System.Drawing.Point(414, 0);
             this.lVisible.Name = "lVisible";
             this.lVisible.Size = new System.Drawing.Size(106, 26);
@@ -331,7 +334,7 @@
             // 
             this.lSeriesName.AutoSize = true;
             this.lSeriesName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lSeriesName.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lSeriesName.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lSeriesName.Location = new System.Drawing.Point(3, 0);
             this.lSeriesName.Name = "lSeriesName";
             this.lSeriesName.Size = new System.Drawing.Size(405, 26);
@@ -353,10 +356,10 @@
             // tbYMin
             // 
             this.tbYMin.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SerialPlotter.Properties.Settings.Default, "settingYMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbYMin.Location = new System.Drawing.Point(222, 68);
+            this.tbYMin.Location = new System.Drawing.Point(226, 68);
             this.tbYMin.MaxLength = 16;
             this.tbYMin.Name = "tbYMin";
-            this.tbYMin.Size = new System.Drawing.Size(88, 19);
+            this.tbYMin.Size = new System.Drawing.Size(84, 19);
             this.tbYMin.TabIndex = 65;
             this.tbYMin.Text = global::SerialPlotter.Properties.Settings.Default.settingYMin;
             this.tbYMin.TextChanged += new System.EventHandler(this.SetYScale);
@@ -453,9 +456,9 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(132, 71);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 12);
+            this.label11.Size = new System.Drawing.Size(88, 12);
             this.label11.TabIndex = 55;
-            this.label11.Text = "plot scale(prim):";
+            this.label11.Text = "plot range(prim):";
             // 
             // label6
             // 
