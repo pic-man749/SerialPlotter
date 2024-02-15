@@ -35,6 +35,8 @@ namespace SerialPlotter {
 
         private List<string> knownKeyList = new List<string>();
         private Dictionary<string, CheckBox> seriesEnableCbDict = new Dictionary<string, CheckBox>();
+        private Dictionary<string, CheckBox> seriesUse2ndYAxis = new Dictionary<string, CheckBox>();
+        private Dictionary<string, Label> seriesLatestValue = new Dictionary<string, Label>();
 
         public SerialPlotter() {
             InitializeComponent();
@@ -356,10 +358,17 @@ namespace SerialPlotter {
             }
         }
 
-        private void ChangeSeriesCheckBox(object sender, EventArgs e) {
+        private void ChangeSeriesVisibleCb(object sender, EventArgs e) {
             var s = (CheckBox)sender;
             foreach(var g in graph) {
-                g.SetSeriesEnable(s.Text, s.Checked);
+                g.SetSeriesEnable(s.Name, s.Checked);
+            }
+        }
+
+        private void ChangeSeries2ndAxisCb(object sender, EventArgs e) {
+            var s = (CheckBox)sender;
+            foreach(var g in graph) {
+                g.ChangePlotAxis(s.Name, s.Checked);
             }
         }
 
@@ -389,9 +398,14 @@ namespace SerialPlotter {
             if(this.InvokeRequired) {
                 this.BeginInvoke((MethodInvoker)delegate { btnDetectedSeriesClear_Click(sender, e); });
             } else {
+                // reset
                 this.tblSeries.Controls.Clear();
                 this.tblSeries.RowStyles.Clear();
                 this.tblSeries.RowCount = 1;
+                this.tblSeries.Controls.Add(this.lLatestValue, 3, 0);
+                this.tblSeries.Controls.Add(this.lUseRightYAxis, 2, 0);
+                this.tblSeries.Controls.Add(this.lVisible, 1, 0);
+                this.tblSeries.Controls.Add(this.lSeriesName, 0, 0);
                 // チェックボックスが外れた状態でクリアすると次回更新時該当グラフが表示されないためチェック状態にする
                 btnDetectedSeriesAllCheck_Click(sender, e);
                 this.knownKeyList.Clear();

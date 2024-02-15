@@ -35,6 +35,9 @@
             this.cbDockingGeaphWindow = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tblSeries = new System.Windows.Forms.TableLayoutPanel();
+            this.lUseRightYAxis = new System.Windows.Forms.Label();
+            this.lVisible = new System.Windows.Forms.Label();
+            this.lSeriesName = new System.Windows.Forms.Label();
             this.tbYMax = new System.Windows.Forms.TextBox();
             this.tbYMin = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -75,8 +78,10 @@
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
+            this.lLatestValue = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
+            this.tblSeries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
             this.SuspendLayout();
@@ -126,7 +131,6 @@
             this.GBPlotSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.GBPlotSettings.AutoSize = true;
-            this.GBPlotSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesAllUncheck);
             this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesAllCheck);
             this.GBPlotSettings.Controls.Add(this.btnDetectedSeriesClear);
@@ -211,18 +215,56 @@
             // 
             this.tblSeries.AutoSize = true;
             this.tblSeries.BackColor = System.Drawing.Color.White;
-            this.tblSeries.ColumnCount = 5;
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblSeries.ColumnCount = 4;
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tblSeries.Controls.Add(this.lLatestValue, 3, 0);
+            this.tblSeries.Controls.Add(this.lUseRightYAxis, 2, 0);
+            this.tblSeries.Controls.Add(this.lVisible, 1, 0);
+            this.tblSeries.Controls.Add(this.lSeriesName, 0, 0);
             this.tblSeries.Location = new System.Drawing.Point(6, 122);
             this.tblSeries.Name = "tblSeries";
             this.tblSeries.RowCount = 1;
             this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblSeries.Size = new System.Drawing.Size(748, 26);
             this.tblSeries.TabIndex = 67;
+            // 
+            // lUseRightYAxis
+            // 
+            this.lUseRightYAxis.AutoSize = true;
+            this.lUseRightYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lUseRightYAxis.Location = new System.Drawing.Point(526, 0);
+            this.lUseRightYAxis.Name = "lUseRightYAxis";
+            this.lUseRightYAxis.Size = new System.Drawing.Size(106, 26);
+            this.lUseRightYAxis.TabIndex = 73;
+            this.lUseRightYAxis.Text = "use 2nd Y axis";
+            this.lUseRightYAxis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lVisible
+            // 
+            this.lVisible.AutoSize = true;
+            this.lVisible.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lVisible.Location = new System.Drawing.Point(414, 0);
+            this.lVisible.Name = "lVisible";
+            this.lVisible.Size = new System.Drawing.Size(106, 26);
+            this.lVisible.TabIndex = 73;
+            this.lVisible.Text = "visible";
+            this.lVisible.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lSeriesName
+            // 
+            this.lSeriesName.AutoSize = true;
+            this.lSeriesName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lSeriesName.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lSeriesName.Location = new System.Drawing.Point(3, 0);
+            this.lSeriesName.Name = "lSeriesName";
+            this.lSeriesName.Size = new System.Drawing.Size(405, 26);
+            this.lSeriesName.TabIndex = 69;
+            this.lSeriesName.Text = "series name";
+            this.lSeriesName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbYMax
             // 
@@ -670,12 +712,22 @@
             this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
             // 
+            // lLatestValue
+            // 
+            this.lLatestValue.AutoSize = true;
+            this.lLatestValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lLatestValue.Location = new System.Drawing.Point(638, 0);
+            this.lLatestValue.Name = "lLatestValue";
+            this.lLatestValue.Size = new System.Drawing.Size(107, 26);
+            this.lLatestValue.TabIndex = 73;
+            this.lLatestValue.Text = "latest value";
+            this.lLatestValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // SerialPlotter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(784, 381);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
@@ -694,6 +746,8 @@
             this.menuStrip1.PerformLayout();
             this.GBPlotSettings.ResumeLayout(false);
             this.GBPlotSettings.PerformLayout();
+            this.tblSeries.ResumeLayout(false);
+            this.tblSeries.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
@@ -755,6 +809,10 @@
         private System.Windows.Forms.Button btnDetectedSeriesClear;
         private System.Windows.Forms.Button btnDetectedSeriesAllUncheck;
         private System.Windows.Forms.Button btnDetectedSeriesAllCheck;
+        private System.Windows.Forms.Label lSeriesName;
+        private System.Windows.Forms.Label lUseRightYAxis;
+        private System.Windows.Forms.Label lVisible;
+        private System.Windows.Forms.Label lLatestValue;
     }
 }
 

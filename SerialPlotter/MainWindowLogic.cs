@@ -64,8 +64,9 @@ namespace SerialPlotter {
                 bool isNeedRefresh = false;
 
                 foreach(string key in kvs.Keys) {
+                    double value = kvs[key];
                     // insert new data
-                    dataManager.InsertData(recvTime, key, kvs[key]);
+                    dataManager.InsertData(recvTime, key, value);
 
                     // plot
                     if(!isPlotting) {
@@ -73,7 +74,7 @@ namespace SerialPlotter {
                     }
 
                     foreach(var g in graph) {
-                        g.AddSeriesToChart(recvTime, key, kvs[key]);
+                        g.AddSeriesToChart(recvTime, key, value);
                     }
 
                     // is new key? then add btn
@@ -82,8 +83,11 @@ namespace SerialPlotter {
                         AddNewSeries(key);
                         isNeedRefresh = true;
                     }
+
+                    // update Latest Value
+                    UpdateLatestValue(key, value);
                 }
-                
+
                 // 大量にテーブルを更新すると次の再描画まで表示されないことがあるのでRefresh()
                 if(isNeedRefresh) {
                      RefreshGui(GBPlotSettings);
@@ -103,6 +107,15 @@ namespace SerialPlotter {
             double now = stopWatch.Elapsed.TotalSeconds;
             foreach(var g in graph) {
                 g.UpdateChart(now);
+            }
+        }
+
+        private void UpdateLatestValue(string key, double val) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { UpdateLatestValue(key, val); });
+            } else {
+                // check key existance and update
+                if(seriesLatestValue.Keys.Contains(key)) seriesLatestValue[key].Text = val.ToString();
             }
         }
 
@@ -134,32 +147,58 @@ namespace SerialPlotter {
             if(this.InvokeRequired) {
                 this.BeginInvoke((MethodInvoker)delegate { AddNewSeries(key); });
             } else {
-                int addBtnIdx = seriesEnableCbDict.Count + 1;
-                // add row
-                if(addBtnIdx % tblSeries.ColumnCount == 0) {
-                    // add new row
-                    tblSeries.RowCount += 1;
-                    tblSeries.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-                    // add new col
-                    for(int i = 0; i < tblSeries.ColumnCount; i++) {
-                        tblSeries.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-                    }
-                }
-                if(!seriesEnableCbDict.Keys.Contains(key)) {
-                    // make new CheckBox and add Dict
-                    CheckBox cb = new CheckBox();
-                    cb.Text = key;
-                    cb.Checked = true;
-                    cb.CheckedChanged += ChangeSeriesCheckBox;
-                    seriesEnableCbDict.Add(key, cb);
-                    // put checkbox to table
-                    int putCol = addBtnIdx % (tblSeries.ColumnCount) - 1;
-                    tblSeries.Controls.Add(cb, putCol, tblSeries.RowCount - 1);
-                } else {
+                if(seriesEnableCbDict.Keys.Contains(key)) {
                     foreach(var g in graph) {
                         g.SetSeriesEnable(key, seriesEnableCbDict[key].Checked);
                     }
+                    return;
                 }
+
+                // add row
+                tblSeries.RowCount += 1;
+                tblSeries.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+                this.tblSeries.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55F));
+                this.tblSeries.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
+                this.tblSeries.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
+                this.tblSeries.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
+
+                int nowRow = tblSeries.RowCount - 1;
+                int colCount = 0;
+
+                // make new series label
+                Label l = new Label();
+                l.Text = key;
+                l.Dock = System.Windows.Forms.DockStyle.Fill;
+                l.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                tblSeries.Controls.Add(l, colCount++, nowRow);
+
+                // make visible CheckBox and add Dict
+                CheckBox cbVisible = new CheckBox();
+                cbVisible.Checked = true;
+                cbVisible.Name = key;
+                cbVisible.Dock = System.Windows.Forms.DockStyle.Fill;
+                cbVisible.CheckedChanged += ChangeSeriesVisibleCb;
+                cbVisible.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                seriesEnableCbDict.Add(key, cbVisible);
+                tblSeries.Controls.Add(cbVisible, colCount++, nowRow);
+
+                // make 2ndAxis CheckBox and add Dict
+                CheckBox cb2ndAxis = new CheckBox();
+                cb2ndAxis.Checked = false;
+                cb2ndAxis.Name = key;
+                cb2ndAxis.Dock = System.Windows.Forms.DockStyle.Fill;
+                cb2ndAxis.CheckedChanged += ChangeSeries2ndAxisCb;
+                cb2ndAxis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                seriesUse2ndYAxis.Add(key, cb2ndAxis);
+                tblSeries.Controls.Add(cb2ndAxis, colCount++, nowRow);
+
+                // make new latest value label
+                Label llv = new Label();
+                llv.Text = "0.0";
+                llv.Dock = System.Windows.Forms.DockStyle.Fill;
+                llv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                seriesLatestValue.Add(key, llv);
+                tblSeries.Controls.Add(llv, colCount++, nowRow);
             }
         }
     }

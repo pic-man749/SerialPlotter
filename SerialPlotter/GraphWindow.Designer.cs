@@ -60,6 +60,15 @@
             chartArea1.AxisY.MinorGrid.Enabled = true;
             chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea1.AxisY.MinorTickMark.Enabled = true;
+            chartArea1.AxisY2.IsLabelAutoFit = false;
+            chartArea1.AxisY2.IsStartedFromZero = false;
+            chartArea1.AxisY2.LabelAutoFitMinFontSize = 10;
+            chartArea1.AxisY2.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.Gray;
+            chartArea1.AxisY2.MaximumAutoSize = 100F;
+            chartArea1.AxisY2.MinorGrid.Enabled = true;
+            chartArea1.AxisY2.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
+            chartArea1.AxisY2.MinorTickMark.Enabled = true;
             chartArea1.BackColor = System.Drawing.Color.White;
             chartArea1.InnerPlotPosition.Auto = false;
             chartArea1.InnerPlotPosition.Height = 85F;

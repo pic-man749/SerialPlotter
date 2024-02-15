@@ -125,6 +125,14 @@ namespace SerialPlotter {
             }
         }
 
+        public void ChangePlotAxis(string key, bool is2ndAxis) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { ChangePlotAxis(key, is2ndAxis); });
+            } else {
+                buffer[key].YAxisType = is2ndAxis? AxisType.Secondary : AxisType.Primary;
+            }
+        }
+
         public void SetYScale(double min, double max) {
             if(this.InvokeRequired) {
                 this.BeginInvoke((MethodInvoker)delegate { SetYScale(min, max); });
