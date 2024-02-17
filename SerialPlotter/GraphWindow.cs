@@ -75,12 +75,8 @@ namespace SerialPlotter {
 
             isMarkerPlot = f;
 
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { ChangeMarkerStyle(f); });
-            } else {
-                foreach(var s in buffer.Values) {
-                    s.MarkerStyle = isMarkerPlot ? MarkerStyle.Circle : MarkerStyle.None;
-                }
+            foreach(var s in buffer.Values) {
+                s.MarkerStyle = isMarkerPlot ? MarkerStyle.Circle : MarkerStyle.None;
             }
         }
 
@@ -115,49 +111,33 @@ namespace SerialPlotter {
 
         public void ChangePlotRange(double now, int range) {
             SetPlotRange(range);
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { ChangePlotRange(now, range); });
-            } else {
-                for(int cnt = 0; cnt < this.chartDefault.ChartAreas.Count; ++cnt) {
-                    this.chartDefault.ChartAreas[cnt].AxisX.Maximum = now;
-                    this.chartDefault.ChartAreas[cnt].AxisX.Minimum = now - plotRange;
-                }
+            for(int cnt = 0; cnt < this.chartDefault.ChartAreas.Count; ++cnt) {
+                this.chartDefault.ChartAreas[cnt].AxisX.Maximum = now;
+                this.chartDefault.ChartAreas[cnt].AxisX.Minimum = now - plotRange;
             }
         }
 
         public void ChangePlotAxis(string key, bool is2ndAxis) {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { ChangePlotAxis(key, is2ndAxis); });
-            } else {
-                buffer[key].YAxisType = is2ndAxis? AxisType.Secondary : AxisType.Primary;
-            }
+            buffer[key].YAxisType = is2ndAxis? AxisType.Secondary : AxisType.Primary;
         }
 
         public void SetYScale(double min, double max, bool is2ndAxis) {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { SetYScale(min, max, is2ndAxis); });
-            } else {
-                for(int cnt = 0; cnt < this.chartDefault.ChartAreas.Count; ++cnt) {
-                    if(is2ndAxis) {
-                        this.chartDefault.ChartAreas[cnt].AxisY2.Minimum = min;
-                        this.chartDefault.ChartAreas[cnt].AxisY2.Maximum = max;
-                    } else {
-                        this.chartDefault.ChartAreas[cnt].AxisY.Minimum = min;
-                        this.chartDefault.ChartAreas[cnt].AxisY.Maximum = max;
-                    }
+            for(int cnt = 0; cnt < this.chartDefault.ChartAreas.Count; ++cnt) {
+                if(is2ndAxis) {
+                    this.chartDefault.ChartAreas[cnt].AxisY2.Minimum = min;
+                    this.chartDefault.ChartAreas[cnt].AxisY2.Maximum = max;
+                } else {
+                    this.chartDefault.ChartAreas[cnt].AxisY.Minimum = min;
+                    this.chartDefault.ChartAreas[cnt].AxisY.Maximum = max;
                 }
             }
         }
 
         public void SetSeriesEnable(string name, bool isEnable) {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { SetSeriesEnable(name, isEnable); });
-            } else {
-                for(int cnt = 0; cnt < this.chartDefault.ChartAreas.Count; ++cnt) {
-                    foreach(var s in this.chartDefault.Series) {
-                        if(s.LegendText == name) {
-                            s.Enabled = isEnable;
-                        }
+            for(int cnt = 0; cnt < this.chartDefault.ChartAreas.Count; ++cnt) {
+                foreach(var s in this.chartDefault.Series) {
+                    if(s.LegendText == name) {
+                        s.Enabled = isEnable;
                     }
                 }
             }
