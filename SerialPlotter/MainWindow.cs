@@ -460,17 +460,5 @@ namespace SerialPlotter {
                 cb.Checked = false;
             }
         }
-
-        private void SerialPlotter_Activated(object sender, EventArgs e) {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { SerialPlotter_Activated(sender, e); });
-            } else {
-                if(cbDockingGeaphWindow.Checked) {
-                    foreach(var g in graph) {
-                        g.Activate();
-                    }
-                }
-            }
-        }
     }
 }

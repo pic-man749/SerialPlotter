@@ -806,7 +806,6 @@
             this.MinimumSize = new System.Drawing.Size(800, 420);
             this.Name = "SerialPlotter";
             this.Text = "SerialPlotter";
-            this.Activated += new System.EventHandler(this.SerialPlotter_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Shown += new System.EventHandler(this.MainWindow_Shown);
             this.Move += new System.EventHandler(this.DockingGraphWindowEventCallback);
