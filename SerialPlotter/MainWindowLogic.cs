@@ -108,6 +108,7 @@ namespace SerialPlotter {
             foreach(var g in graph) {
                 g.UpdateChart(now);
             }
+            chartRefreshTimer.Start();
         }
 
         private void UpdateLatestValue(string key, double val) {

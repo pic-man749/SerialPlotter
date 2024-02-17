@@ -72,6 +72,7 @@ namespace SerialPlotter {
             // set chart update timer
             chartRefreshTimer.Elapsed += UpdateChart;
             chartRefreshTimer.Interval = GetChartRefreshRatePeriod();
+            chartRefreshTimer.AutoReset = false;
 
             // init tb
             if(cbAutoScale.Checked) {
