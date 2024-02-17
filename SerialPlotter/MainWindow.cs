@@ -404,17 +404,13 @@ namespace SerialPlotter {
         }
 
         private void DockingGraphWindowEventCallback(object sender, EventArgs e) {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { DockingGraphWindowEventCallback(sender, e); });
-            } else {
-                if(cbDockingGeaphWindow.Checked) {
-                    foreach(var g in graph) {
-                        g.Activate();
-                        int x = this.Location.X;
-                        int y = this.Location.Y + this.Height;
-                        g.Location = new Point(x, y);
-                        g.Width = this.Width;
-                    }
+            if(cbDockingGeaphWindow.Checked) {
+                foreach(var g in graph) {
+                    g.Activate();
+                    int x = this.Location.X;
+                    int y = this.Location.Y + this.Height;
+                    g.Location = new Point(x, y);
+                    g.Width = this.Width;
                 }
             }
         }
@@ -426,28 +422,25 @@ namespace SerialPlotter {
         }
 
         private void btnDetectedSeriesClear_Click(object sender, EventArgs e) {
-            if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { btnDetectedSeriesClear_Click(sender, e); });
-            } else {
-                // reset
-                this.tblSeries.Controls.Clear();
-                this.tblSeries.RowStyles.Clear();
-                this.tblSeries.RowCount = 1;
-                this.tblSeries.Controls.Add(this.lLatestValue, 3, 0);
-                this.tblSeries.Controls.Add(this.lUseRightYAxis, 2, 0);
-                this.tblSeries.Controls.Add(this.lVisible, 1, 0);
-                this.tblSeries.Controls.Add(this.lSeriesName, 0, 0);
-                // チェックボックスが外れた状態でクリアすると次回更新時該当グラフが表示されないためチェック状態にする
-                btnDetectedSeriesAllCheck_Click(sender, e);
-                // 同上の理由で2軸指定のほうも初期化する
-                foreach(var cb in dictSeriesUse2ndYAxis.Values) {
-                    cb.Checked = false;
-                }
-                this.knownKeyList.Clear();
-                this.dictSeriesEnableCb.Clear();
-                this.dictSeriesUse2ndYAxis.Clear();
-                this.dictSeriesLatestValue.Clear();
+
+            // reset
+            this.tblSeries.Controls.Clear();
+            this.tblSeries.RowStyles.Clear();
+            this.tblSeries.RowCount = 1;
+            this.tblSeries.Controls.Add(this.lLatestValue, 3, 0);
+            this.tblSeries.Controls.Add(this.lUseRightYAxis, 2, 0);
+            this.tblSeries.Controls.Add(this.lVisible, 1, 0);
+            this.tblSeries.Controls.Add(this.lSeriesName, 0, 0);
+            // チェックボックスが外れた状態でクリアすると次回更新時該当グラフが表示されないためチェック状態にする
+            btnDetectedSeriesAllCheck_Click(sender, e);
+            // 同上の理由で2軸指定のほうも初期化する
+            foreach(var cb in dictSeriesUse2ndYAxis.Values) {
+                cb.Checked = false;
             }
+            this.knownKeyList.Clear();
+            this.dictSeriesEnableCb.Clear();
+            this.dictSeriesUse2ndYAxis.Clear();
+            this.dictSeriesLatestValue.Clear();
         }
 
         private void btnDetectedSeriesAllCheck_Click(object sender, EventArgs e) {
