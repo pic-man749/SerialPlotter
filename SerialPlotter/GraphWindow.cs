@@ -163,7 +163,7 @@ namespace SerialPlotter {
             }
         }
 
-        // original : https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
+        // ref : https://stackoverflow.com/questions/33978447/display-tooltip-when-mouse-over-the-line-chart
         Point? prevPosition = null;
         ToolTip tooltip = new ToolTip();
 

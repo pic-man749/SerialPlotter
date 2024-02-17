@@ -115,7 +115,7 @@ namespace SerialPlotter {
                 this.BeginInvoke((MethodInvoker)delegate { UpdateLatestValue(key, val); });
             } else {
                 // check key existance and update
-                if(seriesLatestValue.Keys.Contains(key)) seriesLatestValue[key].Text = val.ToString();
+                if(dictSeriesLatestValue.Keys.Contains(key)) dictSeriesLatestValue[key].Text = val.ToString();
             }
         }
 
@@ -147,9 +147,10 @@ namespace SerialPlotter {
             if(this.InvokeRequired) {
                 this.BeginInvoke((MethodInvoker)delegate { AddNewSeries(key); });
             } else {
-                if(seriesEnableCbDict.Keys.Contains(key)) {
+                if(dictSeriesEnableCb.Keys.Contains(key)) {
                     foreach(var g in graph) {
-                        g.SetSeriesEnable(key, seriesEnableCbDict[key].Checked);
+                        g.SetSeriesEnable(key, dictSeriesEnableCb[key].Checked);
+                        g.ChangePlotAxis(key, dictSeriesUse2ndYAxis[key].Checked);
                     }
                     return;
                 }
@@ -179,7 +180,7 @@ namespace SerialPlotter {
                 cbVisible.Dock = System.Windows.Forms.DockStyle.Fill;
                 cbVisible.CheckedChanged += ChangeSeriesVisibleCb;
                 cbVisible.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                seriesEnableCbDict.Add(key, cbVisible);
+                dictSeriesEnableCb.Add(key, cbVisible);
                 tblSeries.Controls.Add(cbVisible, colCount++, nowRow);
 
                 // make 2ndAxis CheckBox and add Dict
@@ -189,7 +190,7 @@ namespace SerialPlotter {
                 cb2ndAxis.Dock = System.Windows.Forms.DockStyle.Fill;
                 cb2ndAxis.CheckedChanged += ChangeSeries2ndAxisCb;
                 cb2ndAxis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                seriesUse2ndYAxis.Add(key, cb2ndAxis);
+                dictSeriesUse2ndYAxis.Add(key, cb2ndAxis);
                 tblSeries.Controls.Add(cb2ndAxis, colCount++, nowRow);
 
                 // make new latest value label
@@ -197,7 +198,7 @@ namespace SerialPlotter {
                 llv.Text = "0.0";
                 llv.Dock = System.Windows.Forms.DockStyle.Fill;
                 llv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                seriesLatestValue.Add(key, llv);
+                dictSeriesLatestValue.Add(key, llv);
                 tblSeries.Controls.Add(llv, colCount++, nowRow);
             }
         }

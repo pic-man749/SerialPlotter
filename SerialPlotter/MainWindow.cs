@@ -34,9 +34,9 @@ namespace SerialPlotter {
         private double lastChartTime = 0;
 
         private List<string> knownKeyList = new List<string>();
-        private Dictionary<string, CheckBox> seriesEnableCbDict = new Dictionary<string, CheckBox>();
-        private Dictionary<string, CheckBox> seriesUse2ndYAxis = new Dictionary<string, CheckBox>();
-        private Dictionary<string, Label> seriesLatestValue = new Dictionary<string, Label>();
+        private Dictionary<string, CheckBox> dictSeriesEnableCb = new Dictionary<string, CheckBox>();
+        private Dictionary<string, CheckBox> dictSeriesUse2ndYAxis = new Dictionary<string, CheckBox>();
+        private Dictionary<string, Label> dictSeriesLatestValue = new Dictionary<string, Label>();
 
         public SerialPlotter() {
             InitializeComponent();
@@ -62,7 +62,7 @@ namespace SerialPlotter {
             CbNewLine.SelectedIndex = 0;        // \n
             newLine = "\n";
             // timeout
-            serial.ReadTimeout = 50;
+            serial.ReadTimeout = 500;
 
             // set range value
             LabelPoltPoint.Text = TrackBarPlotTime.Value.ToString();
@@ -438,20 +438,38 @@ namespace SerialPlotter {
                 this.tblSeries.Controls.Add(this.lSeriesName, 0, 0);
                 // チェックボックスが外れた状態でクリアすると次回更新時該当グラフが表示されないためチェック状態にする
                 btnDetectedSeriesAllCheck_Click(sender, e);
+                // 同上の理由で2軸指定のほうも初期化する
+                foreach(var cb in dictSeriesUse2ndYAxis.Values) {
+                    cb.Checked = false;
+                }
                 this.knownKeyList.Clear();
-                this.seriesEnableCbDict.Clear();
+                this.dictSeriesEnableCb.Clear();
+                this.dictSeriesUse2ndYAxis.Clear();
+                this.dictSeriesLatestValue.Clear();
             }
         }
 
         private void btnDetectedSeriesAllCheck_Click(object sender, EventArgs e) {
-            foreach(var cb in seriesEnableCbDict.Values) {
+            foreach(var cb in dictSeriesEnableCb.Values) {
                 cb.Checked = true;
             }
         }
 
         private void btnDetectedSeriesAllUncheck_Click(object sender, EventArgs e) {
-            foreach(var cb in seriesEnableCbDict.Values) {
+            foreach(var cb in dictSeriesEnableCb.Values) {
                 cb.Checked = false;
+            }
+        }
+
+        private void SerialPlotter_Activated(object sender, EventArgs e) {
+            if(this.InvokeRequired) {
+                this.BeginInvoke((MethodInvoker)delegate { SerialPlotter_Activated(sender, e); });
+            } else {
+                if(cbDockingGeaphWindow.Checked) {
+                    foreach(var g in graph) {
+                        g.Activate();
+                    }
+                }
             }
         }
     }

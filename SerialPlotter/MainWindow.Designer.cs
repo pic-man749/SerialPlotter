@@ -84,6 +84,7 @@
             this.BtnConnect = new System.Windows.Forms.Button();
             this.LbComList = new System.Windows.Forms.ListBox();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
             this.tblSeries.SuspendLayout();
@@ -303,9 +304,9 @@
             // 
             this.lLatestValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lLatestValue.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lLatestValue.Location = new System.Drawing.Point(638, 0);
+            this.lLatestValue.Location = new System.Drawing.Point(641, 0);
             this.lLatestValue.Name = "lLatestValue";
-            this.lLatestValue.Size = new System.Drawing.Size(107, 26);
+            this.lLatestValue.Size = new System.Drawing.Size(109, 26);
             this.lLatestValue.TabIndex = 73;
             this.lLatestValue.Text = "latest value";
             this.lLatestValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -314,7 +315,7 @@
             // 
             this.lUseRightYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lUseRightYAxis.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lUseRightYAxis.Location = new System.Drawing.Point(526, 0);
+            this.lUseRightYAxis.Location = new System.Drawing.Point(529, 0);
             this.lUseRightYAxis.Name = "lUseRightYAxis";
             this.lUseRightYAxis.Size = new System.Drawing.Size(106, 26);
             this.lUseRightYAxis.TabIndex = 73;
@@ -325,7 +326,7 @@
             // 
             this.lVisible.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lVisible.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lVisible.Location = new System.Drawing.Point(414, 0);
+            this.lVisible.Location = new System.Drawing.Point(417, 0);
             this.lVisible.Name = "lVisible";
             this.lVisible.Size = new System.Drawing.Size(106, 26);
             this.lVisible.TabIndex = 73;
@@ -338,7 +339,7 @@
             this.lSeriesName.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lSeriesName.Location = new System.Drawing.Point(3, 0);
             this.lSeriesName.Name = "lSeriesName";
-            this.lSeriesName.Size = new System.Drawing.Size(405, 26);
+            this.lSeriesName.Size = new System.Drawing.Size(408, 26);
             this.lSeriesName.TabIndex = 69;
             this.lSeriesName.Text = "series name";
             this.lSeriesName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -805,6 +806,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 420);
             this.Name = "SerialPlotter";
             this.Text = "SerialPlotter";
+            this.Activated += new System.EventHandler(this.SerialPlotter_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Shown += new System.EventHandler(this.MainWindow_Shown);
             this.Move += new System.EventHandler(this.DockingGraphWindowEventCallback);
@@ -884,6 +886,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox cbAutoScale2nd;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
 
