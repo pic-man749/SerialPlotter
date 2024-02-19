@@ -32,9 +32,6 @@
             // 
             // chartDefault
             // 
-            this.chartDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.AxisX.IsStartedFromZero = false;
             chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -74,6 +71,7 @@
             chartArea1.IsSameFontSizeForAllAxes = true;
             chartArea1.Name = "ChartAreaDefault";
             this.chartDefault.ChartAreas.Add(chartArea1);
+            this.chartDefault.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             legend1.IsTextAutoFit = false;
             legend1.Name = "Legend1";
@@ -85,7 +83,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartDefault.Series.Add(series1);
-            this.chartDefault.Size = new System.Drawing.Size(784, 340);
+            this.chartDefault.Size = new System.Drawing.Size(784, 361);
             this.chartDefault.TabIndex = 49;
             this.chartDefault.Text = "chart1";
             this.chartDefault.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseMove);
