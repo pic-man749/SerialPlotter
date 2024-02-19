@@ -73,9 +73,7 @@ namespace SerialPlotter {
                         continue;
                     }
 
-                    foreach(var g in graph) {
-                        g.AddSeriesToChart(recvTime, key, value);
-                    }
+                    graphWindow.AddSeriesToChart(recvTime, key, value);
 
                     // is new key? then add btn
                     if(!knownKeyList.Contains(key)) {
@@ -105,9 +103,7 @@ namespace SerialPlotter {
 
         private void UpdateChart(Object source, ElapsedEventArgs e) {
             double now = stopWatch.Elapsed.TotalSeconds;
-            foreach(var g in graph) {
-                g.UpdateChart(now);
-            }
+            graphWindow.UpdateChart(now);
             chartRefreshTimer.Start();
         }
 
@@ -149,10 +145,8 @@ namespace SerialPlotter {
                 this.BeginInvoke((MethodInvoker)delegate { AddNewSeries(key); });
             } else {
                 if(dictSeriesEnableCb.Keys.Contains(key)) {
-                    foreach(var g in graph) {
-                        g.SetSeriesEnable(key, dictSeriesEnableCb[key].Checked);
-                        g.ChangePlotAxis(key, dictSeriesUse2ndYAxis[key].Checked);
-                    }
+                    graphWindow.SetSeriesEnable(key, dictSeriesEnableCb[key].Checked);
+                    graphWindow.ChangePlotAxis(key, dictSeriesUse2ndYAxis[key].Checked);
                     return;
                 }
 

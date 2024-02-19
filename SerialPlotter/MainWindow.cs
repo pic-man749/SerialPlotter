@@ -30,7 +30,7 @@ namespace SerialPlotter {
 
         private System.Timers.Timer chartRefreshTimer = new System.Timers.Timer();
 
-        private List<GraphWindow> graph = new List<GraphWindow>();
+        private GraphWindow graphWindow = null;
         private int graphCounte = 0;
 
         private double lastChartTime = 0;
@@ -87,11 +87,11 @@ namespace SerialPlotter {
             }
 
             // init chart area
-            graph.Add(new GraphWindow(graphCounte++,
+            graphWindow = new GraphWindow(graphCounte++,
                                     TrackBarPlotTime.Value,
                                     cbPlotMarker.Checked,
                                     cbBufferFullScale.Checked,
-                                    TrackBarPlotTime.Maximum ));
+                                    TrackBarPlotTime.Maximum );
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e) {
@@ -130,9 +130,7 @@ namespace SerialPlotter {
                 serial.StopBits = (System.IO.Ports.StopBits)CbStopBit.SelectedIndex;
                 serial.Handshake = (System.IO.Ports.Handshake)CbHandshake.SelectedIndex;
 
-                foreach(var g in graph) {
-                    g.ClearChart();
-                }
+                graphWindow.ClearChart();
                 dataManager.ClearDataTable();
 
                 try {
@@ -243,9 +241,7 @@ namespace SerialPlotter {
         }
 
         private void BtnPlotReset_Click(object sender, EventArgs e) {
-            foreach(var g in graph) {
-                g.ClearChart();
-            }
+            graphWindow.ClearChart();
             knownKeyList.Clear();
         }
 
@@ -256,10 +252,7 @@ namespace SerialPlotter {
             if(!isPlotting) {
                 now = lastChartTime;
             }
-            foreach(var g in graph) {
-                g.ChangePlotRange(now, range);
-            }
-
+            graphWindow.ChangePlotRange(now, range);
         }
 
         private void CbLoggingFlag_CheckedChanged(object sender, EventArgs e) {
@@ -308,9 +301,7 @@ namespace SerialPlotter {
         }
 
         private void CbPlotMarker_CheckedChanged(object sender, EventArgs e) {
-            foreach(var g in graph) {
-                g.ChangeMarkerStyle(cbPlotMarker.Checked);
-            }
+            graphWindow.ChangeMarkerStyle(cbPlotMarker.Checked);
         }
 
         private void BtnSerialSend_Click(object sender, EventArgs e) {
@@ -337,9 +328,7 @@ namespace SerialPlotter {
         }
 
         private void CbBufferFullScale_CheckedChanged(object sender, EventArgs e) {
-            foreach(var g in graph) {
-                g.SetIsFullScaleBuffer(cbBufferFullScale.Checked);
-            }
+            graphWindow.SetIsFullScaleBuffer(cbBufferFullScale.Checked);
         }
 
         private void SetYScale(object sender, EventArgs e) {
@@ -364,9 +353,7 @@ namespace SerialPlotter {
                 tbYMax.Enabled = false;
                 tbYMin.Enabled = false;
             }
-            foreach(var g in graph) {
-                g.SetYScale(min, max ,false);
-            }
+            graphWindow.SetYScale(min, max ,false);
         }
         private void Set2ndYScale(object sender, EventArgs e) {
             double min = double.NaN;
@@ -390,34 +377,26 @@ namespace SerialPlotter {
                 tbY2ndMax.Enabled = false;
                 tbY2ndMin.Enabled = false;
             }
-            foreach(var g in graph) {
-                g.SetYScale(min, max, true);
-            }
+            graphWindow.SetYScale(min, max, true);
         }
 
         private void ChangeSeriesVisibleCb(object sender, EventArgs e) {
             var s = (CheckBox)sender;
-            foreach(var g in graph) {
-                g.SetSeriesEnable(s.Name, s.Checked);
-            }
+            graphWindow.SetSeriesEnable(s.Name, s.Checked);
         }
 
         private void ChangeSeries2ndAxisCb(object sender, EventArgs e) {
             var s = (CheckBox)sender;
-            foreach(var g in graph) {
-                g.ChangePlotAxis(s.Name, s.Checked);
-            }
+            graphWindow.ChangePlotAxis(s.Name, s.Checked);
         }
 
         private void DockingGraphWindowEventCallback(object sender, EventArgs e) {
-            if(cbDockingGeaphWindow.Checked) {
-                foreach(var g in graph) {
-                    g.Activate();
-                    int x = this.Location.X;
-                    int y = this.Location.Y + this.Height;
-                    g.Location = new Point(x, y);
-                    g.Width = this.Width;
-                }
+            if(cbDockingGeaphWindow.Checked && graphWindow != null) {
+                graphWindow.Activate();
+                int x = this.Location.X;
+                int y = this.Location.Y + this.Height;
+                graphWindow.Location = new Point(x, y);
+                graphWindow.Width = this.Width;
             }
         }
 
