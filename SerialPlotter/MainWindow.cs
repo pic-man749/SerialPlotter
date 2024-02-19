@@ -18,6 +18,8 @@ using System.Drawing.Drawing2D;
 namespace SerialPlotter {
     public partial class SerialPlotter : Form {
 
+        private readonly string MY_NAME = "SerialPlotter";
+
         private Serial serial = new Serial();
 
         private System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
@@ -140,6 +142,9 @@ namespace SerialPlotter {
                     return;
                 }
 
+                // update title
+                this.Text = MY_NAME + " : " + serial.PortName;
+
                 // reset
                 knownKeyList.Clear();
                 ResetTimer();
@@ -167,6 +172,8 @@ namespace SerialPlotter {
                     BtnPlotStart_Click(sender, e);
                 }
                 BtnConnect.Text = "connect";
+                // update title
+                this.Text = MY_NAME;
                 dataTableToolStripMenuItem.Enabled = true;
                 serial.Close();
                 StopTimer();
