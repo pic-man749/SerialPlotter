@@ -32,7 +32,7 @@ namespace SerialPlotter {
 
             InitializeComponent();
 
-            this.Text += " - " + GID.ToString();
+            // this.Text += " - " + GID.ToString();
 
             // init chart area
             chartDefault.Series.Clear();
@@ -80,7 +80,6 @@ namespace SerialPlotter {
             }
         }
 
-        private double lastUpdateValue = 0;
         public void UpdateChart(double now) {
             if(this.InvokeRequired) {
                 this.BeginInvoke((MethodInvoker)delegate { UpdateChart(now); });
@@ -104,8 +103,6 @@ namespace SerialPlotter {
                     }
                 }
                 chartDefault.ResetAutoValues();
-                tsslFps.Text = $"fps:{1.0/(now - lastUpdateValue):00.00}";
-                lastUpdateValue = now;
             }
         }
 
