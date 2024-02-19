@@ -21,6 +21,7 @@ namespace SerialPlotter {
             tmp.Add("38400");
             tmp.Add("115200");
             tmp.Add("921600");
+            tmp.Add("3125000");
             return tmp;
         }
 
