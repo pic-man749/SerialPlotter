@@ -253,6 +253,7 @@ namespace SerialPlotter {
                 now = lastChartTime;
             }
             graphWindow.ChangePlotRange(now, range);
+            RefreshGui(LabelPoltPoint);
         }
 
         private void CbLoggingFlag_CheckedChanged(object sender, EventArgs e) {
