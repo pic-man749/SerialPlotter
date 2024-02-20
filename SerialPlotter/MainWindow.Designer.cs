@@ -280,13 +280,14 @@
             // tblSeries
             // 
             this.tblSeries.AutoScroll = true;
+            this.tblSeries.AutoSize = true;
             this.tblSeries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tblSeries.BackColor = System.Drawing.Color.White;
             this.tblSeries.ColumnCount = 4;
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tblSeries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
             this.tblSeries.Controls.Add(this.lLatestValue, 3, 0);
             this.tblSeries.Controls.Add(this.lUseRightYAxis, 2, 0);
             this.tblSeries.Controls.Add(this.lVisible, 1, 0);
@@ -295,17 +296,16 @@
             this.tblSeries.Name = "tblSeries";
             this.tblSeries.RowCount = 1;
             this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tblSeries.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tblSeries.Size = new System.Drawing.Size(748, 26);
+            this.tblSeries.Size = new System.Drawing.Size(745, 26);
             this.tblSeries.TabIndex = 67;
             // 
             // lLatestValue
             // 
             this.lLatestValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lLatestValue.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lLatestValue.Location = new System.Drawing.Point(638, 0);
+            this.lLatestValue.Location = new System.Drawing.Point(618, 0);
             this.lLatestValue.Name = "lLatestValue";
-            this.lLatestValue.Size = new System.Drawing.Size(107, 26);
+            this.lLatestValue.Size = new System.Drawing.Size(124, 26);
             this.lLatestValue.TabIndex = 73;
             this.lLatestValue.Text = "latest value";
             this.lLatestValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -314,9 +314,9 @@
             // 
             this.lUseRightYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lUseRightYAxis.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lUseRightYAxis.Location = new System.Drawing.Point(526, 0);
+            this.lUseRightYAxis.Location = new System.Drawing.Point(488, 0);
             this.lUseRightYAxis.Name = "lUseRightYAxis";
-            this.lUseRightYAxis.Size = new System.Drawing.Size(106, 26);
+            this.lUseRightYAxis.Size = new System.Drawing.Size(124, 26);
             this.lUseRightYAxis.TabIndex = 73;
             this.lUseRightYAxis.Text = "use 2nd Y axis";
             this.lUseRightYAxis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -325,9 +325,9 @@
             // 
             this.lVisible.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lVisible.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lVisible.Location = new System.Drawing.Point(414, 0);
+            this.lVisible.Location = new System.Drawing.Point(358, 0);
             this.lVisible.Name = "lVisible";
-            this.lVisible.Size = new System.Drawing.Size(106, 26);
+            this.lVisible.Size = new System.Drawing.Size(124, 26);
             this.lVisible.TabIndex = 73;
             this.lVisible.Text = "visible";
             this.lVisible.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -338,7 +338,7 @@
             this.lSeriesName.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lSeriesName.Location = new System.Drawing.Point(3, 0);
             this.lSeriesName.Name = "lSeriesName";
-            this.lSeriesName.Size = new System.Drawing.Size(405, 26);
+            this.lSeriesName.Size = new System.Drawing.Size(349, 26);
             this.lSeriesName.TabIndex = 69;
             this.lSeriesName.Text = "series name";
             this.lSeriesName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
