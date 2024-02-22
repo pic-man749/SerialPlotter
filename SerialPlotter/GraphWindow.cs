@@ -95,10 +95,11 @@ namespace SerialPlotter {
                 double bufferXSize = (isFullScaleBuffer) ? now - BUFFER_MAX : chartDefault.ChartAreas[0].AxisX.Minimum;
                 foreach(string k in buffer.Keys) {
                     while(true) {
-                        if(buffer[k].Points.Count <= 0) {
+                        // to prevent the line from breaking within the frame, leave one point outside the range.
+                        if(buffer[k].Points.Count <= 1) {
                             break;
                         }
-                        if(buffer[k].Points[0].XValue >= bufferXSize) {
+                        if(buffer[k].Points[1].XValue >= bufferXSize) {
                             break;
                         }
                         buffer[k].Points.RemoveAt(0);
