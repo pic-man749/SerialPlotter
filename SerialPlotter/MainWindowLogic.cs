@@ -60,7 +60,8 @@ namespace SerialPlotter {
 
                 // parse
                 Dictionary<string, double> kvs = parser.parse(data);
-                
+                graphWindow.AddDatapointToSeries(recvTime, kvs);
+
                 bool isNeedRefresh = false;
 
                 foreach(string key in kvs.Keys) {
@@ -73,22 +74,20 @@ namespace SerialPlotter {
                         continue;
                     }
 
-                    graphWindow.AddSeriesToChart(recvTime, key, value);
-
-                    // is new key? then add btn
+                    // is new key? then add keyList and series table row
                     if(!knownKeyList.Contains(key)) {
                         knownKeyList.Add(key);
                         AddNewSeries(key);
                         isNeedRefresh = true;
                     }
-
-                    // update Latest Value
-                    UpdateLatestValue(key, value);
                 }
+
+                // update Latest Value in table
+                UpdateLatestValue(kvs);
 
                 // 大量にテーブルを更新すると次の再描画まで表示されないことがあるのでRefresh()
                 if(isNeedRefresh) {
-                     RefreshGui(GBPlotSettings);
+                    RefreshGui(tblSeries);
                 }
             }
         }
@@ -107,12 +106,14 @@ namespace SerialPlotter {
             chartRefreshTimer.Start();
         }
 
-        private void UpdateLatestValue(string key, double val) {
+        private void UpdateLatestValue(Dictionary<string, double> kvs) {
             if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { UpdateLatestValue(key, val); });
+                this.BeginInvoke((MethodInvoker)delegate { UpdateLatestValue(kvs); });
             } else {
                 // check key existance and update
-                if(dictSeriesLatestValue.Keys.Contains(key)) dictSeriesLatestValue[key].Text = val.ToString();
+                foreach(string  key in kvs.Keys) {
+                    if(dictSeriesLatestValue.Keys.Contains(key)) dictSeriesLatestValue[key].Text = kvs[key].ToString();
+                }
             }
         }
 

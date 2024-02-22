@@ -41,20 +41,22 @@ namespace SerialPlotter {
 
         }
 
-        public void AddSeriesToChart(double now, string key, double value) {
+        public void AddDatapointToSeries(double now, Dictionary<string, double> kvs) {
 
             if(this.InvokeRequired) {
-                this.BeginInvoke((MethodInvoker)delegate { AddSeriesToChart(now, key, value); });
+                this.BeginInvoke((MethodInvoker)delegate { AddDatapointToSeries(now, kvs); });
             } else {
-                // check key existance and set data
-                if(!buffer.ContainsKey(key)) {
-                    // make new series
-                    buffer[key] = MakeNewSeries(key);
-                    // set graph
-                    chartDefault.Series.Add(buffer[key]);
+                foreach(string key in kvs.Keys) {
+                    // check key existance and set data
+                    if(!buffer.ContainsKey(key)) {
+                        // make new series
+                        buffer[key] = MakeNewSeries(key);
+                        // set graph
+                        chartDefault.Series.Add(buffer[key]);
+                    }
+                    DataPoint dp = new DataPoint(now, kvs[key]);
+                    buffer[key].Points.Add(dp);
                 }
-                DataPoint dp = new DataPoint(now, value);
-                buffer[key].Points.Add(dp);
             }
         }
 
