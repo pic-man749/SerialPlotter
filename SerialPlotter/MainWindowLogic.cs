@@ -62,9 +62,13 @@ namespace SerialPlotter {
                 Dictionary<string, double> kvs = parser.parse(data);
                 graphWindow.AddDatapointToSeries(recvTime, kvs);
 
+                // for latest value kvs
+                Dictionary<string, string> kvss = new Dictionary<string, string>();
+
                 bool isNeedRefresh = false;
 
                 foreach(string key in kvs.Keys) {
+                    kvss[key] = kvs[key].ToString();
                     double value = kvs[key];
                     // insert new data
                     dataManager.InsertData(recvTime, key, value);
@@ -83,7 +87,7 @@ namespace SerialPlotter {
                 }
 
                 // update Latest Value in table
-                UpdateLatestValue(kvs);
+                UpdateLatestValue(kvss);
 
                 // 大量にテーブルを更新すると次の再描画まで表示されないことがあるのでRefresh()
                 if(isNeedRefresh) {
@@ -106,13 +110,13 @@ namespace SerialPlotter {
             chartRefreshTimer.Start();
         }
 
-        private void UpdateLatestValue(Dictionary<string, double> kvs) {
+        private void UpdateLatestValue(Dictionary<string, string> kvs) {
             if(this.InvokeRequired) {
                 this.BeginInvoke((MethodInvoker)delegate { UpdateLatestValue(kvs); });
             } else {
                 // check key existance and update
                 foreach(string  key in kvs.Keys) {
-                    if(dictSeriesLatestValue.Keys.Contains(key)) dictSeriesLatestValue[key].Text = kvs[key].ToString();
+                    if(dictSeriesLatestValue.Keys.Contains(key)) dictSeriesLatestValue[key].Text = kvs[key];
                 }
             }
         }
