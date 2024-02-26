@@ -118,7 +118,7 @@ namespace SerialPlotter {
         }
 
         public void ChangePlotAxis(string key, bool is2ndAxis) {
-            buffer[key].YAxisType = is2ndAxis? AxisType.Secondary : AxisType.Primary;
+            if(buffer.ContainsKey(key)) buffer[key].YAxisType = is2ndAxis? AxisType.Secondary : AxisType.Primary;
         }
 
         public void SetYScale(double min, double max, bool is2ndAxis) {
