@@ -91,7 +91,7 @@ namespace SerialPlotter {
 
                 // 大量にテーブルを更新すると次の再描画まで表示されないことがあるのでRefresh()
                 if(isNeedRefresh) {
-                    RefreshGui(tblSeries);
+                    RefreshGui(gbDetectedSeries);
                 }
             }
         }

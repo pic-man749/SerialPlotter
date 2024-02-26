@@ -76,7 +76,7 @@
             this.LbComList = new System.Windows.Forms.ListBox();
             this.SfdLogging = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbDetectedSeries = new System.Windows.Forms.GroupBox();
             this.btnDetectedSeriesAllUncheck = new System.Windows.Forms.Button();
             this.btnDetectedSeriesAllCheck = new System.Windows.Forms.Button();
             this.btnDetectedSeriesClear = new System.Windows.Forms.Button();
@@ -89,7 +89,7 @@
             this.GBPlotSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).BeginInit();
             this.GBSerialSettings.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbDetectedSeries.SuspendLayout();
             this.tblSeries.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -676,22 +676,22 @@
             this.SfdLogging.Filter = "テキストファイル(*.txt)|*.txt|ログファイル(*.log)|*.log|すべてのファイル(*.*)|*.*";
             this.SfdLogging.InitialDirectory = "Environment.SpecialFolder.Desktop";
             // 
-            // groupBox1
+            // gbDetectedSeries
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gbDetectedSeries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.AutoSize = true;
-            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox1.Controls.Add(this.btnDetectedSeriesAllUncheck);
-            this.groupBox1.Controls.Add(this.btnDetectedSeriesAllCheck);
-            this.groupBox1.Controls.Add(this.btnDetectedSeriesClear);
-            this.groupBox1.Controls.Add(this.tblSeries);
-            this.groupBox1.Location = new System.Drawing.Point(12, 331);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(760, 91);
-            this.groupBox1.TabIndex = 51;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Detected series";
+            this.gbDetectedSeries.AutoSize = true;
+            this.gbDetectedSeries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.gbDetectedSeries.Controls.Add(this.btnDetectedSeriesAllUncheck);
+            this.gbDetectedSeries.Controls.Add(this.btnDetectedSeriesAllCheck);
+            this.gbDetectedSeries.Controls.Add(this.btnDetectedSeriesClear);
+            this.gbDetectedSeries.Controls.Add(this.tblSeries);
+            this.gbDetectedSeries.Location = new System.Drawing.Point(12, 331);
+            this.gbDetectedSeries.Name = "gbDetectedSeries";
+            this.gbDetectedSeries.Size = new System.Drawing.Size(760, 91);
+            this.gbDetectedSeries.TabIndex = 51;
+            this.gbDetectedSeries.TabStop = false;
+            this.gbDetectedSeries.Text = "Detected series";
             // 
             // btnDetectedSeriesAllUncheck
             // 
@@ -701,6 +701,7 @@
             this.btnDetectedSeriesAllUncheck.TabIndex = 76;
             this.btnDetectedSeriesAllUncheck.Text = "all uncheck";
             this.btnDetectedSeriesAllUncheck.UseVisualStyleBackColor = true;
+            this.btnDetectedSeriesAllUncheck.Click += new System.EventHandler(this.btnDetectedSeriesAllUncheck_Click);
             // 
             // btnDetectedSeriesAllCheck
             // 
@@ -710,6 +711,7 @@
             this.btnDetectedSeriesAllCheck.TabIndex = 75;
             this.btnDetectedSeriesAllCheck.Text = "all check";
             this.btnDetectedSeriesAllCheck.UseVisualStyleBackColor = true;
+            this.btnDetectedSeriesAllCheck.Click += new System.EventHandler(this.btnDetectedSeriesAllCheck_Click);
             // 
             // btnDetectedSeriesClear
             // 
@@ -719,6 +721,7 @@
             this.btnDetectedSeriesClear.TabIndex = 74;
             this.btnDetectedSeriesClear.Text = "clear";
             this.btnDetectedSeriesClear.UseVisualStyleBackColor = true;
+            this.btnDetectedSeriesClear.Click += new System.EventHandler(this.btnDetectedSeriesClear_Click);
             // 
             // tblSeries
             // 
@@ -793,7 +796,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(784, 430);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbDetectedSeries);
             this.Controls.Add(this.GBSerialSettings);
             this.Controls.Add(this.GBPlotSettings);
             this.Controls.Add(this.menuStrip1);
@@ -814,8 +817,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarPlotTime)).EndInit();
             this.GBSerialSettings.ResumeLayout(false);
             this.GBSerialSettings.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbDetectedSeries.ResumeLayout(false);
+            this.gbDetectedSeries.PerformLayout();
             this.tblSeries.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -876,7 +879,7 @@
         private System.Windows.Forms.CheckBox cbAutoScale2nd;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbDetectedSeries;
         private System.Windows.Forms.Button btnDetectedSeriesAllUncheck;
         private System.Windows.Forms.Button btnDetectedSeriesAllCheck;
         private System.Windows.Forms.Button btnDetectedSeriesClear;
