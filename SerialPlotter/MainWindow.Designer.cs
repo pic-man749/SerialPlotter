@@ -29,6 +29,8 @@
             this.ウィンドウToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GBPlotSettings = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cbDownSampling = new System.Windows.Forms.ComboBox();
             this.tbY2ndMax = new System.Windows.Forms.TextBox();
             this.tbY2ndMin = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -81,12 +83,10 @@
             this.btnDetectedSeriesAllCheck = new System.Windows.Forms.Button();
             this.btnDetectedSeriesClear = new System.Windows.Forms.Button();
             this.tblSeries = new System.Windows.Forms.TableLayoutPanel();
+            this.lDownSampling = new System.Windows.Forms.Label();
             this.lUseRightYAxis = new System.Windows.Forms.Label();
             this.lVisible = new System.Windows.Forms.Label();
             this.lSeriesName = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.cbDownSampling = new System.Windows.Forms.ComboBox();
-            this.lDownSampling = new System.Windows.Forms.Label();
             this.lLatestValue = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.GBPlotSettings.SuspendLayout();
@@ -166,6 +166,38 @@
             this.GBPlotSettings.TabIndex = 49;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(526, 69);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(108, 12);
+            this.label12.TabIndex = 79;
+            this.label12.Text = "down sampling(1/n):";
+            // 
+            // cbDownSampling
+            // 
+            this.cbDownSampling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDownSampling.FormattingEnabled = true;
+            this.cbDownSampling.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "30",
+            "50",
+            "100"});
+            this.cbDownSampling.Location = new System.Drawing.Point(640, 66);
+            this.cbDownSampling.Name = "cbDownSampling";
+            this.cbDownSampling.Size = new System.Drawing.Size(97, 20);
+            this.cbDownSampling.TabIndex = 78;
             // 
             // tbY2ndMax
             // 
@@ -315,7 +347,7 @@
             "30",
             "60",
             "120"});
-            this.cbChartRefreshRate.Location = new System.Drawing.Point(620, 40);
+            this.cbChartRefreshRate.Location = new System.Drawing.Point(640, 40);
             this.cbChartRefreshRate.Name = "cbChartRefreshRate";
             this.cbChartRefreshRate.Size = new System.Drawing.Size(97, 20);
             this.cbChartRefreshRate.TabIndex = 60;
@@ -752,6 +784,17 @@
             this.tblSeries.Size = new System.Drawing.Size(745, 26);
             this.tblSeries.TabIndex = 73;
             // 
+            // lDownSampling
+            // 
+            this.lDownSampling.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lDownSampling.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lDownSampling.Location = new System.Drawing.Point(508, 0);
+            this.lDownSampling.Name = "lDownSampling";
+            this.lDownSampling.Size = new System.Drawing.Size(114, 26);
+            this.lDownSampling.TabIndex = 73;
+            this.lDownSampling.Text = "down sampling";
+            this.lDownSampling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // lUseRightYAxis
             // 
             this.lUseRightYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -784,49 +827,6 @@
             this.lSeriesName.TabIndex = 69;
             this.lSeriesName.Text = "series name";
             this.lSeriesName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(526, 69);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(82, 12);
-            this.label12.TabIndex = 79;
-            this.label12.Text = "down sampling:";
-            // 
-            // cbDownSampling
-            // 
-            this.cbDownSampling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDownSampling.FormattingEnabled = true;
-            this.cbDownSampling.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "30",
-            "50",
-            "100"});
-            this.cbDownSampling.Location = new System.Drawing.Point(620, 66);
-            this.cbDownSampling.Name = "cbDownSampling";
-            this.cbDownSampling.Size = new System.Drawing.Size(97, 20);
-            this.cbDownSampling.TabIndex = 78;
-            // 
-            // lDownSampling
-            // 
-            this.lDownSampling.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lDownSampling.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lDownSampling.Location = new System.Drawing.Point(508, 0);
-            this.lDownSampling.Name = "lDownSampling";
-            this.lDownSampling.Size = new System.Drawing.Size(114, 26);
-            this.lDownSampling.TabIndex = 73;
-            this.lDownSampling.Text = "down sampling";
-            this.lDownSampling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lLatestValue
             // 
