@@ -10,6 +10,7 @@ namespace SerialPlotter {
     partial class SerialPlotter {
 
         const char IGNORE_START_CHAR = ';';
+        Dictionary<string, int> DictDownSamplingCounter = new Dictionary<string, int>();
 
         // get COM port name and refresh ListBox
         private void GetNowConnectedSerialPorts() {
@@ -30,6 +31,7 @@ namespace SerialPlotter {
         private void ThreadTaskSerialRecv() {
             // get recved time
             DataParser parser = new DataParser();
+            DictDownSamplingCounter = new Dictionary<string, int>();
 
             while(serial.IsOpen) {
                 string data;
@@ -60,7 +62,6 @@ namespace SerialPlotter {
 
                 // parse
                 Dictionary<string, double> kvs = parser.parse(data);
-                graphWindow.AddDatapointToSeries(recvTime, kvs);
 
                 // for latest value kvs
                 Dictionary<string, string> kvss = new Dictionary<string, string>();
@@ -81,9 +82,13 @@ namespace SerialPlotter {
                     // is new key? then add keyList and series table row
                     if(!knownKeyList.Contains(key)) {
                         knownKeyList.Add(key);
+                        DictDownSamplingCounter[key] = downSampleNum;
                         AddNewSeries(key);
                         isNeedRefresh = true;
                     }
+
+                    // incriment downSampling counter
+                    DictDownSamplingCounter[key]++;
                 }
 
                 // update Latest Value in table
@@ -93,6 +98,21 @@ namespace SerialPlotter {
                 if(isNeedRefresh) {
                     RefreshGui(gbDetectedSeries);
                 }
+
+                // update chart
+                Dictionary<string, double> chartKvs = new Dictionary<string, double>();
+                foreach(string key in kvs.Keys) {
+                    // disable down sampling
+                    if(dictDownSamplingCb.ContainsKey(key)) {
+                        if(!dictDownSamplingCb[key].Checked || (DictDownSamplingCounter[key] >= downSampleNum)) {
+                            chartKvs[key] = kvs[key];
+                            DictDownSamplingCounter[key] = 0;
+                        }
+                    } else {
+                        chartKvs[key] = kvs[key];
+                    }
+                }
+                graphWindow.AddDatapointToSeries(recvTime, chartKvs);
             }
         }
 
@@ -192,6 +212,15 @@ namespace SerialPlotter {
                 cb2ndAxis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 dictSeriesUse2ndYAxis.Add(key, cb2ndAxis);
                 tblSeries.Controls.Add(cb2ndAxis, colCount++, nowRow);
+
+                // make down sampling CheckBox and add Dict
+                CheckBox cbDownSampling = new CheckBox();
+                cbDownSampling.Checked = true;
+                cbDownSampling.Name = key;
+                cbDownSampling.Dock = System.Windows.Forms.DockStyle.Fill;
+                cbDownSampling.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                dictDownSamplingCb.Add(key, cbDownSampling);
+                tblSeries.Controls.Add(cbDownSampling, colCount++, nowRow);
 
                 // make new latest value label
                 Label llv = new Label();
