@@ -172,9 +172,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(526, 69);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(108, 12);
+            this.label12.Size = new System.Drawing.Size(104, 12);
             this.label12.TabIndex = 79;
-            this.label12.Text = "down sampling(1/n):";
+            this.label12.Text = "downsampling(1/n):";
             // 
             // cbDownSampling
             // 
@@ -792,7 +792,7 @@
             this.lDownSampling.Name = "lDownSampling";
             this.lDownSampling.Size = new System.Drawing.Size(114, 26);
             this.lDownSampling.TabIndex = 73;
-            this.lDownSampling.Text = "down sampling";
+            this.lDownSampling.Text = "downsampling";
             this.lDownSampling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lUseRightYAxis
