@@ -170,7 +170,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(526, 69);
+            this.label12.Location = new System.Drawing.Point(526, 96);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(104, 12);
             this.label12.TabIndex = 79;
@@ -194,7 +194,7 @@
             "30",
             "50",
             "100"});
-            this.cbDownSampling.Location = new System.Drawing.Point(640, 66);
+            this.cbDownSampling.Location = new System.Drawing.Point(636, 93);
             this.cbDownSampling.Name = "cbDownSampling";
             this.cbDownSampling.Size = new System.Drawing.Size(97, 20);
             this.cbDownSampling.TabIndex = 78;
@@ -259,7 +259,7 @@
             this.cbDockingGeaphWindow.Checked = global::SerialPlotter.Properties.Settings.Default.settingDockingGraphWindow;
             this.cbDockingGeaphWindow.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbDockingGeaphWindow.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::SerialPlotter.Properties.Settings.Default, "settingDockingGraphWindow", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbDockingGeaphWindow.Location = new System.Drawing.Point(528, 95);
+            this.cbDockingGeaphWindow.Location = new System.Drawing.Point(528, 40);
             this.cbDockingGeaphWindow.Name = "cbDockingGeaphWindow";
             this.cbDockingGeaphWindow.Size = new System.Drawing.Size(136, 16);
             this.cbDockingGeaphWindow.TabIndex = 69;
@@ -329,7 +329,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(526, 43);
+            this.label9.Location = new System.Drawing.Point(526, 71);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 12);
             this.label9.TabIndex = 61;
@@ -347,7 +347,7 @@
             "30",
             "60",
             "120"});
-            this.cbChartRefreshRate.Location = new System.Drawing.Point(640, 40);
+            this.cbChartRefreshRate.Location = new System.Drawing.Point(636, 68);
             this.cbChartRefreshRate.Name = "cbChartRefreshRate";
             this.cbChartRefreshRate.Size = new System.Drawing.Size(97, 20);
             this.cbChartRefreshRate.TabIndex = 60;
