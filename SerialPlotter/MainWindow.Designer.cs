@@ -736,7 +736,7 @@
             this.btnDetectedSeriesAllUncheck.Name = "btnDetectedSeriesAllUncheck";
             this.btnDetectedSeriesAllUncheck.Size = new System.Drawing.Size(118, 23);
             this.btnDetectedSeriesAllUncheck.TabIndex = 76;
-            this.btnDetectedSeriesAllUncheck.Text = "all uncheck";
+            this.btnDetectedSeriesAllUncheck.Text = "all invisibe";
             this.btnDetectedSeriesAllUncheck.UseVisualStyleBackColor = true;
             this.btnDetectedSeriesAllUncheck.Click += new System.EventHandler(this.btnDetectedSeriesAllUncheck_Click);
             // 
@@ -746,7 +746,7 @@
             this.btnDetectedSeriesAllCheck.Name = "btnDetectedSeriesAllCheck";
             this.btnDetectedSeriesAllCheck.Size = new System.Drawing.Size(118, 23);
             this.btnDetectedSeriesAllCheck.TabIndex = 75;
-            this.btnDetectedSeriesAllCheck.Text = "all check";
+            this.btnDetectedSeriesAllCheck.Text = "all visible";
             this.btnDetectedSeriesAllCheck.UseVisualStyleBackColor = true;
             this.btnDetectedSeriesAllCheck.Click += new System.EventHandler(this.btnDetectedSeriesAllCheck_Click);
             // 
