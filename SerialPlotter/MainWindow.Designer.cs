@@ -163,7 +163,7 @@
             this.GBPlotSettings.Location = new System.Drawing.Point(12, 204);
             this.GBPlotSettings.Name = "GBPlotSettings";
             this.GBPlotSettings.Size = new System.Drawing.Size(760, 121);
-            this.GBPlotSettings.TabIndex = 49;
+            this.GBPlotSettings.TabIndex = 100;
             this.GBPlotSettings.TabStop = false;
             this.GBPlotSettings.Text = "Plot settings";
             // 
@@ -197,7 +197,7 @@
             this.cbDownSampling.Location = new System.Drawing.Point(636, 93);
             this.cbDownSampling.Name = "cbDownSampling";
             this.cbDownSampling.Size = new System.Drawing.Size(97, 20);
-            this.cbDownSampling.TabIndex = 78;
+            this.cbDownSampling.TabIndex = 124;
             // 
             // tbY2ndMax
             // 
@@ -206,7 +206,7 @@
             this.tbY2ndMax.MaxLength = 16;
             this.tbY2ndMax.Name = "tbY2ndMax";
             this.tbY2ndMax.Size = new System.Drawing.Size(83, 19);
-            this.tbY2ndMax.TabIndex = 77;
+            this.tbY2ndMax.TabIndex = 114;
             this.tbY2ndMax.Text = global::SerialPlotter.Properties.Settings.Default.settingY2ndMax;
             this.tbY2ndMax.TextChanged += new System.EventHandler(this.Set2ndYScale);
             // 
@@ -217,7 +217,7 @@
             this.tbY2ndMin.MaxLength = 16;
             this.tbY2ndMin.Name = "tbY2ndMin";
             this.tbY2ndMin.Size = new System.Drawing.Size(84, 19);
-            this.tbY2ndMin.TabIndex = 76;
+            this.tbY2ndMin.TabIndex = 113;
             this.tbY2ndMin.Text = global::SerialPlotter.Properties.Settings.Default.settingY2ndMin;
             this.tbY2ndMin.TextChanged += new System.EventHandler(this.Set2ndYScale);
             // 
@@ -239,7 +239,7 @@
             this.cbAutoScale2nd.Location = new System.Drawing.Point(428, 95);
             this.cbAutoScale2nd.Name = "cbAutoScale2nd";
             this.cbAutoScale2nd.Size = new System.Drawing.Size(77, 16);
-            this.cbAutoScale2nd.TabIndex = 74;
+            this.cbAutoScale2nd.TabIndex = 116;
             this.cbAutoScale2nd.Text = "auto scale";
             this.cbAutoScale2nd.UseVisualStyleBackColor = true;
             this.cbAutoScale2nd.CheckedChanged += new System.EventHandler(this.Set2ndYScale);
@@ -262,7 +262,7 @@
             this.cbDockingGeaphWindow.Location = new System.Drawing.Point(528, 40);
             this.cbDockingGeaphWindow.Name = "cbDockingGeaphWindow";
             this.cbDockingGeaphWindow.Size = new System.Drawing.Size(136, 16);
-            this.cbDockingGeaphWindow.TabIndex = 69;
+            this.cbDockingGeaphWindow.TabIndex = 122;
             this.cbDockingGeaphWindow.Text = "docking graph window";
             this.cbDockingGeaphWindow.UseVisualStyleBackColor = true;
             this.cbDockingGeaphWindow.CheckedChanged += new System.EventHandler(this.cbDockingGeaphWindow_CheckedChanged);
@@ -274,7 +274,7 @@
             this.tbYMax.MaxLength = 16;
             this.tbYMax.Name = "tbYMax";
             this.tbYMax.Size = new System.Drawing.Size(83, 19);
-            this.tbYMax.TabIndex = 66;
+            this.tbYMax.TabIndex = 112;
             this.tbYMax.Text = global::SerialPlotter.Properties.Settings.Default.settingYMax;
             this.tbYMax.TextChanged += new System.EventHandler(this.SetYScale);
             // 
@@ -285,7 +285,7 @@
             this.tbYMin.MaxLength = 16;
             this.tbYMin.Name = "tbYMin";
             this.tbYMin.Size = new System.Drawing.Size(84, 19);
-            this.tbYMin.TabIndex = 65;
+            this.tbYMin.TabIndex = 111;
             this.tbYMin.Text = global::SerialPlotter.Properties.Settings.Default.settingYMin;
             this.tbYMin.TextChanged += new System.EventHandler(this.SetYScale);
             // 
@@ -307,7 +307,7 @@
             this.cbAutoScale.Location = new System.Drawing.Point(428, 70);
             this.cbAutoScale.Name = "cbAutoScale";
             this.cbAutoScale.Size = new System.Drawing.Size(77, 16);
-            this.cbAutoScale.TabIndex = 63;
+            this.cbAutoScale.TabIndex = 115;
             this.cbAutoScale.Text = "auto scale";
             this.cbAutoScale.UseVisualStyleBackColor = true;
             this.cbAutoScale.CheckedChanged += new System.EventHandler(this.SetYScale);
@@ -321,7 +321,7 @@
             this.cbBufferFullScale.Location = new System.Drawing.Point(616, 18);
             this.cbBufferFullScale.Name = "cbBufferFullScale";
             this.cbBufferFullScale.Size = new System.Drawing.Size(105, 16);
-            this.cbBufferFullScale.TabIndex = 62;
+            this.cbBufferFullScale.TabIndex = 121;
             this.cbBufferFullScale.Text = "buffer full scale";
             this.cbBufferFullScale.UseVisualStyleBackColor = true;
             this.cbBufferFullScale.CheckedChanged += new System.EventHandler(this.CbBufferFullScale_CheckedChanged);
@@ -350,7 +350,7 @@
             this.cbChartRefreshRate.Location = new System.Drawing.Point(636, 68);
             this.cbChartRefreshRate.Name = "cbChartRefreshRate";
             this.cbChartRefreshRate.Size = new System.Drawing.Size(97, 20);
-            this.cbChartRefreshRate.TabIndex = 60;
+            this.cbChartRefreshRate.TabIndex = 123;
             // 
             // cbPlotMarker
             // 
@@ -361,7 +361,7 @@
             this.cbPlotMarker.Location = new System.Drawing.Point(528, 18);
             this.cbPlotMarker.Name = "cbPlotMarker";
             this.cbPlotMarker.Size = new System.Drawing.Size(82, 16);
-            this.cbPlotMarker.TabIndex = 59;
+            this.cbPlotMarker.TabIndex = 120;
             this.cbPlotMarker.Text = "plot marker";
             this.cbPlotMarker.UseVisualStyleBackColor = true;
             this.cbPlotMarker.CheckedChanged += new System.EventHandler(this.CbPlotMarker_CheckedChanged);
@@ -402,7 +402,7 @@
             this.TrackBarPlotTime.Minimum = 1;
             this.TrackBarPlotTime.Name = "TrackBarPlotTime";
             this.TrackBarPlotTime.Size = new System.Drawing.Size(272, 45);
-            this.TrackBarPlotTime.TabIndex = 57;
+            this.TrackBarPlotTime.TabIndex = 110;
             this.TrackBarPlotTime.Value = global::SerialPlotter.Properties.Settings.Default.settingPlotTime;
             this.TrackBarPlotTime.ValueChanged += new System.EventHandler(this.TrackBarPlotPoint_ValueChanged);
             // 
@@ -411,7 +411,7 @@
             this.BtnPlotReset.Location = new System.Drawing.Point(6, 47);
             this.BtnPlotReset.Name = "BtnPlotReset";
             this.BtnPlotReset.Size = new System.Drawing.Size(120, 23);
-            this.BtnPlotReset.TabIndex = 56;
+            this.BtnPlotReset.TabIndex = 102;
             this.BtnPlotReset.Text = "reset";
             this.BtnPlotReset.UseVisualStyleBackColor = true;
             this.BtnPlotReset.Click += new System.EventHandler(this.BtnPlotReset_Click);
@@ -422,7 +422,7 @@
             this.BtnPlotStart.Location = new System.Drawing.Point(6, 18);
             this.BtnPlotStart.Name = "BtnPlotStart";
             this.BtnPlotStart.Size = new System.Drawing.Size(120, 23);
-            this.BtnPlotStart.TabIndex = 55;
+            this.BtnPlotStart.TabIndex = 101;
             this.BtnPlotStart.Text = "plot start";
             this.BtnPlotStart.UseVisualStyleBackColor = true;
             this.BtnPlotStart.Click += new System.EventHandler(this.BtnPlotStart_Click);
@@ -456,7 +456,7 @@
             this.GBSerialSettings.Location = new System.Drawing.Point(12, 27);
             this.GBSerialSettings.Name = "GBSerialSettings";
             this.GBSerialSettings.Size = new System.Drawing.Size(760, 171);
-            this.GBSerialSettings.TabIndex = 50;
+            this.GBSerialSettings.TabIndex = 0;
             this.GBSerialSettings.TabStop = false;
             this.GBSerialSettings.Text = "Serial settings";
             // 
@@ -468,7 +468,7 @@
             this.cbSerialSendAddNl.Location = new System.Drawing.Point(574, 147);
             this.cbSerialSendAddNl.Name = "cbSerialSendAddNl";
             this.cbSerialSendAddNl.Size = new System.Drawing.Size(42, 16);
-            this.cbSerialSendAddNl.TabIndex = 62;
+            this.cbSerialSendAddNl.TabIndex = 52;
             this.cbSerialSendAddNl.Text = "+\\n";
             this.cbSerialSendAddNl.UseVisualStyleBackColor = true;
             // 
@@ -480,7 +480,7 @@
             this.cbSerialSendAddCr.Location = new System.Drawing.Point(528, 147);
             this.cbSerialSendAddCr.Name = "cbSerialSendAddCr";
             this.cbSerialSendAddCr.Size = new System.Drawing.Size(40, 16);
-            this.cbSerialSendAddCr.TabIndex = 61;
+            this.cbSerialSendAddCr.TabIndex = 51;
             this.cbSerialSendAddCr.Text = "+\\r";
             this.cbSerialSendAddCr.UseVisualStyleBackColor = true;
             // 
@@ -490,7 +490,7 @@
             this.btnSerialSend.Location = new System.Drawing.Point(621, 143);
             this.btnSerialSend.Name = "btnSerialSend";
             this.btnSerialSend.Size = new System.Drawing.Size(133, 23);
-            this.btnSerialSend.TabIndex = 60;
+            this.btnSerialSend.TabIndex = 53;
             this.btnSerialSend.Text = "send";
             this.btnSerialSend.UseVisualStyleBackColor = true;
             this.btnSerialSend.Click += new System.EventHandler(this.BtnSerialSend_Click);
@@ -500,7 +500,7 @@
             this.tbSerialSend.Location = new System.Drawing.Point(76, 145);
             this.tbSerialSend.Name = "tbSerialSend";
             this.tbSerialSend.Size = new System.Drawing.Size(446, 19);
-            this.tbSerialSend.TabIndex = 59;
+            this.tbSerialSend.TabIndex = 50;
             this.tbSerialSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbSerialSend_KeyPress);
             // 
             // CbLogWithTime
@@ -511,7 +511,7 @@
             this.CbLogWithTime.Location = new System.Drawing.Point(449, 118);
             this.CbLogWithTime.Name = "CbLogWithTime";
             this.CbLogWithTime.Size = new System.Drawing.Size(71, 16);
-            this.CbLogWithTime.TabIndex = 58;
+            this.CbLogWithTime.TabIndex = 32;
             this.CbLogWithTime.Text = "with time";
             this.CbLogWithTime.UseVisualStyleBackColor = true;
             // 
@@ -524,7 +524,7 @@
             this.CbNewLine.MaxDropDownItems = 2;
             this.CbNewLine.Name = "CbNewLine";
             this.CbNewLine.Size = new System.Drawing.Size(169, 20);
-            this.CbNewLine.TabIndex = 57;
+            this.CbNewLine.TabIndex = 9;
             this.CbNewLine.Text = global::SerialPlotter.Properties.Settings.Default.settingNewLine;
             this.CbNewLine.SelectedIndexChanged += new System.EventHandler(this.CbNewLine_SelectedIndexChanged);
             // 
@@ -543,7 +543,7 @@
             this.TbLogFilePath.Name = "TbLogFilePath";
             this.TbLogFilePath.ReadOnly = true;
             this.TbLogFilePath.Size = new System.Drawing.Size(311, 19);
-            this.TbLogFilePath.TabIndex = 1;
+            this.TbLogFilePath.TabIndex = 31;
             // 
             // label10
             // 
@@ -572,7 +572,7 @@
             this.CbHandshake.MaxDropDownItems = 2;
             this.CbHandshake.Name = "CbHandshake";
             this.CbHandshake.Size = new System.Drawing.Size(169, 20);
-            this.CbHandshake.TabIndex = 54;
+            this.CbHandshake.TabIndex = 8;
             this.CbHandshake.Text = global::SerialPlotter.Properties.Settings.Default.settingFlowCtrl;
             // 
             // label5
@@ -590,7 +590,7 @@
             this.CbLoggingFlag.Location = new System.Drawing.Point(7, 119);
             this.CbLoggingFlag.Name = "CbLoggingFlag";
             this.CbLoggingFlag.Size = new System.Drawing.Size(63, 16);
-            this.CbLoggingFlag.TabIndex = 0;
+            this.CbLoggingFlag.TabIndex = 30;
             this.CbLoggingFlag.Text = "Logging";
             this.CbLoggingFlag.UseVisualStyleBackColor = true;
             this.CbLoggingFlag.CheckedChanged += new System.EventHandler(this.CbLoggingFlag_CheckedChanged);
@@ -613,7 +613,7 @@
             this.CbStopBit.MaxDropDownItems = 2;
             this.CbStopBit.Name = "CbStopBit";
             this.CbStopBit.Size = new System.Drawing.Size(169, 20);
-            this.CbStopBit.TabIndex = 51;
+            this.CbStopBit.TabIndex = 7;
             this.CbStopBit.Text = global::SerialPlotter.Properties.Settings.Default.settingStopBit;
             // 
             // label3
@@ -634,7 +634,7 @@
             this.CbParity.MaxDropDownItems = 2;
             this.CbParity.Name = "CbParity";
             this.CbParity.Size = new System.Drawing.Size(169, 20);
-            this.CbParity.TabIndex = 49;
+            this.CbParity.TabIndex = 6;
             this.CbParity.Text = global::SerialPlotter.Properties.Settings.Default.settingParity;
             // 
             // label2
@@ -655,7 +655,7 @@
             this.CbDataBits.MaxDropDownItems = 2;
             this.CbDataBits.Name = "CbDataBits";
             this.CbDataBits.Size = new System.Drawing.Size(169, 20);
-            this.CbDataBits.TabIndex = 47;
+            this.CbDataBits.TabIndex = 5;
             this.CbDataBits.Text = global::SerialPlotter.Properties.Settings.Default.settingDataBits;
             // 
             // label1
@@ -672,7 +672,7 @@
             this.BtnRefresh.Location = new System.Drawing.Point(6, 88);
             this.BtnRefresh.Name = "BtnRefresh";
             this.BtnRefresh.Size = new System.Drawing.Size(120, 23);
-            this.BtnRefresh.TabIndex = 40;
+            this.BtnRefresh.TabIndex = 2;
             this.BtnRefresh.Text = "refresh";
             this.BtnRefresh.UseVisualStyleBackColor = true;
             this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
@@ -684,7 +684,7 @@
             this.CbBoudrateList.Location = new System.Drawing.Point(191, 90);
             this.CbBoudrateList.Name = "CbBoudrateList";
             this.CbBoudrateList.Size = new System.Drawing.Size(128, 20);
-            this.CbBoudrateList.TabIndex = 41;
+            this.CbBoudrateList.TabIndex = 3;
             this.CbBoudrateList.Text = global::SerialPlotter.Properties.Settings.Default.settingBaudrate;
             // 
             // BtnConnect
@@ -692,7 +692,7 @@
             this.BtnConnect.Location = new System.Drawing.Point(325, 88);
             this.BtnConnect.Name = "BtnConnect";
             this.BtnConnect.Size = new System.Drawing.Size(195, 22);
-            this.BtnConnect.TabIndex = 42;
+            this.BtnConnect.TabIndex = 4;
             this.BtnConnect.Text = "connect";
             this.BtnConnect.UseVisualStyleBackColor = true;
             this.BtnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
@@ -705,7 +705,7 @@
             this.LbComList.Location = new System.Drawing.Point(6, 18);
             this.LbComList.Name = "LbComList";
             this.LbComList.Size = new System.Drawing.Size(514, 64);
-            this.LbComList.TabIndex = 39;
+            this.LbComList.TabIndex = 1;
             // 
             // SfdLogging
             // 
@@ -726,7 +726,7 @@
             this.gbDetectedSeries.Location = new System.Drawing.Point(12, 331);
             this.gbDetectedSeries.Name = "gbDetectedSeries";
             this.gbDetectedSeries.Size = new System.Drawing.Size(760, 91);
-            this.gbDetectedSeries.TabIndex = 51;
+            this.gbDetectedSeries.TabIndex = 200;
             this.gbDetectedSeries.TabStop = false;
             this.gbDetectedSeries.Text = "Detected series";
             // 
@@ -735,7 +735,7 @@
             this.btnDetectedSeriesAllUncheck.Location = new System.Drawing.Point(130, 18);
             this.btnDetectedSeriesAllUncheck.Name = "btnDetectedSeriesAllUncheck";
             this.btnDetectedSeriesAllUncheck.Size = new System.Drawing.Size(118, 23);
-            this.btnDetectedSeriesAllUncheck.TabIndex = 76;
+            this.btnDetectedSeriesAllUncheck.TabIndex = 202;
             this.btnDetectedSeriesAllUncheck.Text = "all invisibe";
             this.btnDetectedSeriesAllUncheck.UseVisualStyleBackColor = true;
             this.btnDetectedSeriesAllUncheck.Click += new System.EventHandler(this.btnDetectedSeriesAllUncheck_Click);
@@ -745,7 +745,7 @@
             this.btnDetectedSeriesAllCheck.Location = new System.Drawing.Point(6, 18);
             this.btnDetectedSeriesAllCheck.Name = "btnDetectedSeriesAllCheck";
             this.btnDetectedSeriesAllCheck.Size = new System.Drawing.Size(118, 23);
-            this.btnDetectedSeriesAllCheck.TabIndex = 75;
+            this.btnDetectedSeriesAllCheck.TabIndex = 201;
             this.btnDetectedSeriesAllCheck.Text = "all visible";
             this.btnDetectedSeriesAllCheck.UseVisualStyleBackColor = true;
             this.btnDetectedSeriesAllCheck.Click += new System.EventHandler(this.btnDetectedSeriesAllCheck_Click);
@@ -755,7 +755,7 @@
             this.btnDetectedSeriesClear.Location = new System.Drawing.Point(634, 18);
             this.btnDetectedSeriesClear.Name = "btnDetectedSeriesClear";
             this.btnDetectedSeriesClear.Size = new System.Drawing.Size(120, 23);
-            this.btnDetectedSeriesClear.TabIndex = 74;
+            this.btnDetectedSeriesClear.TabIndex = 203;
             this.btnDetectedSeriesClear.Text = "clear";
             this.btnDetectedSeriesClear.UseVisualStyleBackColor = true;
             this.btnDetectedSeriesClear.Click += new System.EventHandler(this.btnDetectedSeriesClear_Click);
