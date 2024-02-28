@@ -253,7 +253,7 @@ namespace SerialPlotter {
         }
 
         private void BtnPlotReset_Click(object sender, EventArgs e) {
-            graphWindow.ClearChart();
+            graphWindow.ClearChartSeries();
             knownKeyList.Clear();
         }
 

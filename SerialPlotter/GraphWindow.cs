@@ -60,10 +60,14 @@ namespace SerialPlotter {
             }
         }
 
-        public void ClearChart() {
+        public void ClearChartSeries() {
             foreach(var s in chartDefault.Series) {
                 s.Points.Clear();
             }
+        }
+
+        public void ClearChart() {
+            buffer.Clear();
         }
 
         public void SetPlotRange(int range) {
