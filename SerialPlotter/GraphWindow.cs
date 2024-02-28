@@ -67,6 +67,7 @@ namespace SerialPlotter {
         }
 
         public void ClearChart() {
+            chartDefault.Series.Clear();
             buffer.Clear();
         }
 
