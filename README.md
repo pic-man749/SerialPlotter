@@ -1,6 +1,6 @@
 # SerialPlotter
 
-![image](https://github.com/pic-man749/SerialPlotter/assets/29609700/a4d2baa2-9038-470b-8686-cbbfce0f0be3)
+![image](https://github.com/pic-man749/SerialPlotter/assets/29609700/e2d3aae3-8a2a-4172-a7e4-fc28e23eece8)
 
 シリアルで受信したデータをグラフ表示するツールです。
 
