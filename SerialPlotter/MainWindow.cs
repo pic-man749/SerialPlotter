@@ -38,10 +38,15 @@ namespace SerialPlotter {
         private int downSampleNum = 1;
 
         private List<string> knownKeyList = new List<string>();
-        private Dictionary<string, CheckBox> dictSeriesEnableCb = new Dictionary<string, CheckBox>();
-        private Dictionary<string, CheckBox> dictSeriesUse2ndYAxis = new Dictionary<string, CheckBox>();
-        private Dictionary<string, CheckBox> dictDownSamplingCb = new Dictionary<string, CheckBox>();
-        private Dictionary<string, Label> dictSeriesLatestValue = new Dictionary<string, Label>();
+
+        private Dictionary<string, TableRow> dictTableRows = new Dictionary<string, TableRow>();
+
+        private struct TableRow {
+            public CheckBox cbSeriesEnable;
+            public CheckBox cbSeriesUse2ndYAxis;
+            public CheckBox cbDownSampling;
+            public Label lSeriesLatestValue;
+        }
 
         public SerialPlotter() {
             InitializeComponent();
@@ -425,31 +430,25 @@ namespace SerialPlotter {
             this.tblSeries.Controls.Add(this.lUseRightYAxis, 2, 0);
             this.tblSeries.Controls.Add(this.lVisible, 1, 0);
             this.tblSeries.Controls.Add(this.lSeriesName, 0, 0);
-            // チェックボックスが外れた状態でクリアすると次回更新時該当グラフが表示されないためチェック状態にする
-            btnDetectedSeriesAllCheck_Click(sender, e);
-            // 同上の理由で他CBも初期化する
-            foreach(var cb in dictSeriesUse2ndYAxis.Values) {
-                cb.Checked = false;
-            }
-            foreach(var cb in dictDownSamplingCb.Values) {
-                cb.Checked = true;
+            // チェックボックスが外れた状態でクリアすると次回更新時該当グラフに適用されないためチェック状態にする
+            foreach(var v in dictTableRows.Values) {
+                v.cbSeriesEnable.Checked = true;
+                v.cbSeriesUse2ndYAxis.Checked = false;
+                v.cbDownSampling.Checked = true;
             }
             this.knownKeyList.Clear();
-            this.dictSeriesEnableCb.Clear();
-            this.dictSeriesUse2ndYAxis.Clear();
-            this.dictDownSamplingCb.Clear();
-            this.dictSeriesLatestValue.Clear();
+            this.dictTableRows.Clear();
         }
 
         private void btnDetectedSeriesAllCheck_Click(object sender, EventArgs e) {
-            foreach(var cb in dictSeriesEnableCb.Values) {
-                cb.Checked = true;
+            foreach(var v in dictTableRows.Values) {
+                v.cbSeriesEnable.Checked = true;
             }
         }
 
         private void btnDetectedSeriesAllUncheck_Click(object sender, EventArgs e) {
-            foreach(var cb in dictSeriesEnableCb.Values) {
-                cb.Checked = false;
+            foreach(var v in dictTableRows.Values) {
+                v.cbSeriesEnable.Checked = false;
             }
         }
     }

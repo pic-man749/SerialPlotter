@@ -103,8 +103,8 @@ namespace SerialPlotter {
                 Dictionary<string, double> chartKvs = new Dictionary<string, double>();
                 foreach(string key in kvs.Keys) {
                     // disable down sampling
-                    if(dictDownSamplingCb.ContainsKey(key)) {
-                        if(!dictDownSamplingCb[key].Checked || (DictDownSamplingCounter[key] >= downSampleNum)) {
+                    if(dictTableRows.ContainsKey(key)) {
+                        if(!dictTableRows[key].cbDownSampling.Checked || (DictDownSamplingCounter[key] >= downSampleNum)) {
                             chartKvs[key] = kvs[key];
                             DictDownSamplingCounter[key] = 0;
                         }
@@ -136,7 +136,7 @@ namespace SerialPlotter {
             } else {
                 // check key existance and update
                 foreach(string  key in kvs.Keys) {
-                    if(dictSeriesLatestValue.Keys.Contains(key)) dictSeriesLatestValue[key].Text = kvs[key];
+                    if(dictTableRows.Keys.Contains(key)) dictTableRows[key].lSeriesLatestValue.Text = kvs[key];
                 }
             }
         }
@@ -169,9 +169,9 @@ namespace SerialPlotter {
             if(this.InvokeRequired) {
                 this.BeginInvoke((MethodInvoker)delegate { AddNewSeries(key); });
             } else {
-                if(dictSeriesEnableCb.Keys.Contains(key)) {
-                    graphWindow.SetSeriesEnable(key, dictSeriesEnableCb[key].Checked);
-                    graphWindow.ChangePlotAxis(key, dictSeriesUse2ndYAxis[key].Checked);
+                if(dictTableRows.Keys.Contains(key)) {
+                    graphWindow.SetSeriesEnable(key, dictTableRows[key].cbSeriesEnable.Checked);
+                    graphWindow.ChangePlotAxis(key, dictTableRows[key].cbSeriesUse2ndYAxis.Checked);
                     return;
                 }
 
@@ -200,7 +200,6 @@ namespace SerialPlotter {
                 cbVisible.Dock = System.Windows.Forms.DockStyle.Fill;
                 cbVisible.CheckedChanged += ChangeSeriesVisibleCb;
                 cbVisible.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                dictSeriesEnableCb.Add(key, cbVisible);
                 tblSeries.Controls.Add(cbVisible, colCount++, nowRow);
 
                 // make 2ndAxis CheckBox and add Dict
@@ -210,7 +209,6 @@ namespace SerialPlotter {
                 cb2ndAxis.Dock = System.Windows.Forms.DockStyle.Fill;
                 cb2ndAxis.CheckedChanged += ChangeSeries2ndAxisCb;
                 cb2ndAxis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                dictSeriesUse2ndYAxis.Add(key, cb2ndAxis);
                 tblSeries.Controls.Add(cb2ndAxis, colCount++, nowRow);
 
                 // make down sampling CheckBox and add Dict
@@ -219,7 +217,6 @@ namespace SerialPlotter {
                 cbDownSampling.Name = key;
                 cbDownSampling.Dock = System.Windows.Forms.DockStyle.Fill;
                 cbDownSampling.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                dictDownSamplingCb.Add(key, cbDownSampling);
                 tblSeries.Controls.Add(cbDownSampling, colCount++, nowRow);
 
                 // make new latest value label
@@ -227,8 +224,15 @@ namespace SerialPlotter {
                 llv.Text = "0.0";
                 llv.Dock = System.Windows.Forms.DockStyle.Fill;
                 llv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                dictSeriesLatestValue.Add(key, llv);
                 tblSeries.Controls.Add(llv, colCount++, nowRow);
+
+                TableRow tr = new TableRow();
+                tr.cbSeriesEnable = cbVisible;
+                tr.cbSeriesUse2ndYAxis = cb2ndAxis;
+                tr.cbDownSampling = cbDownSampling;
+                tr.lSeriesLatestValue = llv;
+
+                dictTableRows.Add(key, tr);
             }
         }
     }
