@@ -142,6 +142,7 @@ namespace SerialPlotter {
 
                 graphWindow.ClearChart();
                 dataManager.ClearDataTable();
+                btnDetectedSeriesClear_Click(sender, e);
 
                 try {
                     serial.Open();
