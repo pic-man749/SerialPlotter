@@ -71,6 +71,14 @@ namespace SerialPlotter {
                     (string)port.GetPropertyValue("Caption")    // value
                 );
             }
+
+            // add com name that cannot got from Win32_SerialPort
+            foreach(string port in Serial.GetPortNames()) {
+                if(!comPorts.ContainsKey(port)) {
+                    comPorts.Add(port, port);
+                }
+            }
+
             return comPorts;
         }
     }
