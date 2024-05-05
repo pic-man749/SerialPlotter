@@ -35,6 +35,7 @@
             chartArea1.AxisX.IsStartedFromZero = false;
             chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            chartArea1.AxisX.LabelStyle.Format = "0.000";
             chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
             chartArea1.AxisX.Maximum = 0D;
             chartArea1.AxisX.MaximumAutoSize = 100F;
